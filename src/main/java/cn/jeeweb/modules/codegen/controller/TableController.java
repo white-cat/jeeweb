@@ -1,0 +1,256 @@
+package cn.jeeweb.modules.codegen.controller;
+
+import java.util.Arrays;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.alibaba.fastjson.JSONObject;
+import cn.jeeweb.core.controller.BaseCRUDController;
+import cn.jeeweb.core.mapper.JsonMapper;
+import cn.jeeweb.core.model.AjaxJson;
+import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
+import cn.jeeweb.core.utils.MyBeanUtils;
+import cn.jeeweb.core.utils.ObjectUtils;
+import cn.jeeweb.core.utils.PropertiesUtil;
+import cn.jeeweb.core.utils.ServletUtils;
+import cn.jeeweb.core.utils.StringUtils;
+import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
+import cn.jeeweb.modules.codegen.codegenerator.data.GeneratorInfo;
+import cn.jeeweb.modules.codegen.entity.ColumnEntity;
+import cn.jeeweb.modules.codegen.entity.SchemeEntity;
+import cn.jeeweb.modules.codegen.entity.TableEntity;
+import cn.jeeweb.modules.codegen.service.ISchemeService;
+import cn.jeeweb.modules.codegen.service.ITableService;
+import cn.jeeweb.modules.sys.entity.Menu;
+import cn.jeeweb.modules.sys.service.IMenuService;
+
+@Controller
+@RequestMapping("${admin.url.prefix}/codegen/table")
+@RequiresPathPermission("codegen:table")
+public class TableController extends BaseCRUDController<TableEntity, String> {
+	@Autowired
+	private ITableService tableService;
+	@Autowired
+	private ISchemeService schemeService;
+	@Autowired
+	private IMenuService menuService;
+
+	private String[] types = { "String", "Double", "Text", "Date", "Blob", "String", "Short", "Integer", "User",
+			"this" };
+
+	@Override
+	public void preEdit(TableEntity entity, Model model, HttpServletRequest request, HttpServletResponse response) {
+		// 查询表明
+		List<DbTableInfo> dbTableInfos = tableService.getTableNameList();
+		request.setAttribute("dbTableInfos", dbTableInfos);
+		List<ColumnEntity> columns = entity.getColumns();
+		String columnsJson=JsonMapper.toJsonString(columns);
+		//String columnsJson=JSON.toJSONString(columns);
+		request.setAttribute("columns", columnsJson);
+		List<String> javaTypes = Arrays.asList(types);
+		String extendTypes="";
+		
+		for (ColumnEntity column : columns) {
+			String javaType=column.getJavaType();
+			if (javaType.contains("|")) {
+				String[] innerJavaTypes=javaType.split("\\|");
+				if (!javaTypes.contains(innerJavaTypes[1])
+						&&!extendTypes.contains(innerJavaTypes[1])) {
+					extendTypes+=";";
+					extendTypes+=javaType+":"+innerJavaTypes[1];
+				}
+			}
+		}
+		request.setAttribute("extendTypes", extendTypes);
+		request.setAttribute("javaTypes", javaTypes);
+	}
+
+	@Override
+	public void preSave(TableEntity table, HttpServletRequest request, HttpServletResponse response) {
+		if (!StringUtils.isEmpty(table.getId())) {
+			TableEntity oldTable = commonService.get(table.getId());
+			String[] fields = { "tableName", "remarks" };
+			if (!ObjectUtils.isEquals(oldTable, table, fields)) {
+				table.setSyncDatabase(Boolean.FALSE);
+			}
+			List<ColumnEntity> oldColumnList = oldTable.getColumns();
+			// 字段
+			String columnListStr = StringEscapeUtils
+					.unescapeHtml4(ServletUtils.getRequest().getParameter("columnList"));
+			List<ColumnEntity> columnList = JSONObject.parseArray(columnListStr, ColumnEntity.class);
+			if (checkIsModify(oldColumnList, columnList)) {
+				table.setSyncDatabase(Boolean.FALSE);
+			}
+		}
+	}
+
+	public Boolean checkIsModify(List<ColumnEntity> oldColumnList, List<ColumnEntity> newColumnList) {
+		if (oldColumnList.size() != newColumnList.size()) {
+			return Boolean.TRUE;
+		}
+		for (ColumnEntity columnEntity : newColumnList) {
+			Boolean isUpdate = Boolean.FALSE;
+			for (ColumnEntity oldColumnEntity : oldColumnList) {
+				if (columnEntity.getId().equals(oldColumnEntity.getId())) {
+					String[] fields = { "remarks", "columnName", "typeName", "columnSize", "parmaryKey", "importedKey",
+							"importedKey", "nullable", "columnDef", "decimalDigits", "javaType" };
+					if (ObjectUtils.isEquals(columnEntity, oldColumnEntity, fields)) {
+						isUpdate = Boolean.FALSE;
+						break;
+					}
+				}
+				isUpdate = Boolean.TRUE;
+			}
+			if (isUpdate) {
+				return isUpdate;
+			}
+		}
+		return Boolean.FALSE;
+	}
+
+	@RequestMapping(value = "/generateCode", method = RequestMethod.GET)
+	public String generateCode(@RequestParam(required = false) String id, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		SchemeEntity scheme = schemeService.get("table.id", id);
+		if (scheme == null) {
+			TableEntity table = tableService.get(id);
+			String tableName = table.getTableName();
+			String remarks = table.getRemarks();
+			String entityName = StringUtils.toUpperCaseFirstOne(StringUtils.underlineToCamel(tableName));
+			String properiesName = "codegen.properties";
+			PropertiesUtil propertiesUtil = new PropertiesUtil(properiesName);
+			String pathName = propertiesUtil.getString("default.path.name");
+			String packageName = propertiesUtil.getString("default.package.name");
+			String functionAuthor = propertiesUtil.getString("default.function.author");
+			scheme = new SchemeEntity();
+			scheme.setPathName(pathName);
+			scheme.setPackageName(packageName);
+			scheme.setEntityName(entityName);
+			scheme.setTableName(tableName);
+			scheme.setFunctionAuthor(functionAuthor);
+			scheme.setFunctionDesc(remarks);
+			scheme.setFunctionName(remarks);
+			scheme.setTable(table);
+			schemeService.save(scheme);
+		}
+		request.setAttribute("scheme", scheme);
+		request.setAttribute("tableid", id);
+		return display("generate_code");
+	}
+
+	@RequestMapping(value = "/generateCode", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson generateCode(SchemeEntity scheme, GeneratorInfo generatorInfo, HttpServletRequest request,
+			HttpServletResponse response) {
+		AjaxJson ajaxJson = new AjaxJson();
+		ajaxJson.success("代码生成成功");
+		try {
+			String tableid = request.getParameter("tableid");
+			TableEntity table = tableService.get(tableid);
+			scheme.setTableType(table.getTableType());
+			// FORM NULL不更新
+			SchemeEntity oldEntity = schemeService.get(scheme.getId());
+			MyBeanUtils.copyBeanNotNull2Bean(scheme, oldEntity);
+			schemeService.update(oldEntity);
+			tableService.generateCode(table, generatorInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson.fail("代码生成失败");
+		}
+		return ajaxJson;
+	}
+
+	@RequestMapping(value = "/importDatabase", method = RequestMethod.GET)
+	public String importDatabase(HttpServletRequest request, HttpServletResponse response) {
+		// 查询表明
+		List<DbTableInfo> dbTableInfos = tableService.getTableNameList();
+		request.setAttribute("dbTableInfos", dbTableInfos);
+		request.setAttribute("data", new TableEntity());
+		return display("import_database");
+	}
+
+	@RequestMapping(value = "/importDatabase", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson importDatabase(HttpServletRequest request, TableEntity table, HttpServletResponse response) {
+		AjaxJson ajaxJson = new AjaxJson();
+		ajaxJson.success("数据库导入成功");
+		try {
+			tableService.importDatabase(table);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson.fail("数据库导入失败");
+		}
+		return ajaxJson;
+	}
+
+	@RequestMapping(value = "/syncDatabase", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson syncDatabase(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("id") String id) {
+		AjaxJson ajaxJson = new AjaxJson();
+		ajaxJson.success("数据库同步成功");
+		try {
+			tableService.syncDatabase(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson.fail(e.getMessage());
+		}
+		return ajaxJson;
+	}
+
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson remove(@RequestParam("id") String id) {
+		AjaxJson ajaxJson = new AjaxJson();
+		ajaxJson.success("移除成功");
+		try {
+			tableService.removeById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson.fail("移除失败");
+		}
+		return ajaxJson;
+	}
+
+	@RequestMapping(value = "/createMenu", method = RequestMethod.GET)
+	public String createMenu(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("tableid", request.getParameter("id"));
+		SchemeEntity scheme = schemeService.get("table.id", request.getParameter("id"));
+		if (scheme == null || StringUtils.isEmpty(scheme.getModuleName())) {
+			return display("un_generate_code");
+		}
+		Menu menu = new Menu();
+		String moduleName = scheme.getModuleName();
+		String entityName = scheme.getEntityName();
+		String url = moduleName.toLowerCase() + "/" + entityName.toLowerCase();
+		String permission = moduleName.toLowerCase() + ":" + entityName.toLowerCase();
+		menu.setUrl(url);
+		menu.setPermission(permission);
+		menu.setName(scheme.getFunctionName());
+		menu.setIsshow((short) 1);
+		request.setAttribute("data", menu);
+		return display("create_menu");
+	}
+
+	@RequestMapping(value = "/saveMenu", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson saveMenu(Menu menu, HttpServletRequest request, HttpServletResponse response) {
+		AjaxJson ajaxJson = new AjaxJson();
+		ajaxJson.success("菜单生成成功");
+		try {
+			menuService.save(menu);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson.fail("菜单生成失败");
+		}
+		return ajaxJson;
+	}
+}

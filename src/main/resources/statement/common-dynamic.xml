@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!DOCTYPE mapper SYSTEM "http://www.jeeweb.cn/dtd/dynamic-hibernate-statement-1.0.dtd">  
+<mapper namespace="xxxx">  
+    <!-- 查询某个资源下的直接子节点 -->  
+    <hql id="resource.getChildren">  
+    <![CDATA[ 
+        from Resource where parent.id=${parentId} and parent.id != id 
+    ]]>   
+    </hql>  
+    <!-- 查询系统中所有的root资源 -->  
+    <hql id="resource.getRoots">  
+    <![CDATA[ 
+        from Resource where parent.id = id order by orderIndex 
+    ]]>   
+    </hql>  
+    <!-- 获取某个用户可访问的某个资源下的所有子资源 -->  
+    <sql id="resource.getDescendants">  
+    <![CDATA[ 
+        select distinct t.id, 
+                        t.name, 
+                        t.description, 
+                        t.url, 
+                        t.type, 
+                        t.status, 
+                        t.code, 
+                        t.configuration, 
+                        t.module_name, 
+                        t.gmt_create, 
+                        t.gmt_modified, 
+                        t.create_by, 
+                        t.last_modified_by, 
+                        t.order_index, 
+                        t.parent_id 
+          from resource_info t 
+         inner join role_resource rr 
+            on t.id = rr.resource_id 
+         inner join user_role ur 
+            on rr.role_id = ur.role_id 
+         where ur.user_id = ${userId} 
+         <#if type == '1'> 
+            and t.type=1 
+            <#else> 
+            and t.type=0 
+         </#if> 
+           and t.type =  ${type} 
+           and t.status =  ${status} 
+         start with t.code = '${code}' 
+        connect by nocycle prior t.id = t.parent_id 
+    ]]>   
+    </sql>  
+</mapper>  

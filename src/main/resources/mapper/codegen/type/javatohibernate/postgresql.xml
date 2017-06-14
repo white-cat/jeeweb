@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- 名称 -->
+	<name>类型参数配置</name>
+	<!-- 描述 -->
+	<description>类型参数配置</description>
+	<types>
+		<type>
+			<!-- JAVA类型 -->
+			<simple-name>String</simple-name>
+			<!-- hibernate -->
+			<db-type>java.lang.String</db-type>
+		</type>
+		<type>
+			<simple-name>Text</simple-name>
+			<db-type>text</db-type>
+		</type>
+		<type>
+			<simple-name>Integer</simple-name>
+			<db-type>java.lang.Integer</db-type>
+		</type>
+		<type>
+			<simple-name>Short</simple-name>
+			<db-type>java.lang.Short</db-type>
+		</type>
+		<type>
+			<simple-name>Double</simple-name>
+			<db-type>java.math.BigDecimal</db-type>
+		</type>
+		<type>
+			<simple-name>Date</simple-name>
+			<db-type>java.util.Date</db-type>
+		</type>
+		<type>
+			<simple-name>Blob</simple-name>
+			<db-type>binary</db-type>
+		</type>
+	</types>
+</config>

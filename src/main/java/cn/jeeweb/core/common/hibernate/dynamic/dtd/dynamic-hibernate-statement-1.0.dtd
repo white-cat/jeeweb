@@ -1,0 +1,14 @@
+<!--学文章 http://www.phpstudy.net/e/dtd/dtd_intro.html  http://mybatis.org/dtd/mybatis-3-mapper.dtd-->
+<!--根节点-->  
+<!ELEMENT mapper ((hql|sql)*)>  
+<!ATTLIST mapper
+namespace CDATA #IMPLIED
+>
+
+<!-- HQL片段 -->  
+<!ELEMENT hql (#PCDATA)>  
+    <!ATTLIST hql id CDATA #REQUIRED>  
+  
+<!-- SQL片段 -->  
+<!ELEMENT sql (#PCDATA)>  
+    <!ATTLIST sql id CDATA #REQUIRED>  
