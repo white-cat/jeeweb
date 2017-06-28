@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.sys.controller;
 
-import cn.jeeweb.core.controller.BaseCRUDController;
+import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.core.utils.MyBeanUtils;

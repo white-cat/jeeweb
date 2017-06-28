@@ -21,7 +21,7 @@
     <grid:column label="SpringBean"  name="springBean"  />
     <grid:column label="cron表达式"  name="cronExpression" formatter="image" imageWidth="100" imageHeight="100" />
     <grid:column label="是否启动任务"  name="jobStatus" formatter="currency" formatoptions="{ decimalSeparator: '.', decimalPlaces: 1, suffix: ' USD', thousandsSeparator: ',', prefix: '$' }" width="60"/>
-    <grid:column label="是否同步"  name="isConcurrent"  dict="sf"  prefix="Us" suffix="Uds" formatterValue="0:是;1:否"  formatterColor="0:green;1:red" width="60" />
+    <grid:column label="是否同步"  name="isConcurrent"  dict="sf"  prefix="Us" suffix="Uds" formatterValue="0:是;1:否"  formatterClass="0:label label-success;1:label label-success" width="60" />
     <grid:column label="创建时间"  name="createDate" />
 	<grid:toolbar title="sys.common.add" icon="fa-plus" function="add" url="${adminPath}/task/schedulejob/edit"  />
 	<grid:toolbar title="sys.common.update" icon="fa-file-text-o" function="update" url="${adminPath}/task/schedulejob/edit"  />

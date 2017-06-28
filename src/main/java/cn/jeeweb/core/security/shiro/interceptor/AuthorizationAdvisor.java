@@ -12,7 +12,7 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.jeeweb.core.controller.BaseController;
+import cn.jeeweb.core.common.controller.BaseController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RolesAllowed;
 
 /**

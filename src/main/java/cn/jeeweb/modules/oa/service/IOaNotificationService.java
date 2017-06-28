@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.oa.service;
 
-import cn.jeeweb.core.service.ICommonService;
+import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
 
 /**   

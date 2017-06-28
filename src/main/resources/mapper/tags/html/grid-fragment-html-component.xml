@@ -11,12 +11,15 @@
 			 	<div class="form-inline">
 			 	   <#list queryList as queryItem>
 			 	     <div class="form-group">
-			 	          <span>${queryItem.label}：</span>
+			 	          <#if showQueryLabel??&&showQueryLabel>
+			 	          <label class="control-label">${queryItem.label}：</label>
+			 	          </#if>
 			 	          <#if queryItem.queryMode=='input'>
-			 	          <${queryItem.queryMode}   <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>/>
+			 	          <${queryItem.queryMode}  placeholder="${queryItem.label}"  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>/>
 			 	          </#if>
 			 	          <#if queryItem.queryMode=='select'>
-			 	          <${queryItem.queryMode} <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>>
+			 	          <${queryItem.queryMode} <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>>
+			 	               <option value ="">请选择</option>
 			 	               <#list columnDictMap[queryItem.dict] as dict>
 					             <option value ="${dict.value!}">${dict.label!}</option>
 					           </#list>
@@ -24,25 +27,25 @@
 			 	          </#if>
 			 	          <#if queryItem.queryMode=='radio'>
 			 	            <#list columnDictMap[queryItem.dict] as dict>
-			 	               <label><input  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>  type="radio" value="${dict.value!}" />${dict.label!} </label> 
+			 	               <label><input  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>  type="radio" value="${dict.value!}" />${dict.label!} </label> 
 							</#list>
 			 	          </#if>
 			 	          <#if queryItem.queryMode=='checkbox'>
 			 	            <#list columnDictMap[queryItem.dict] as dict>
-			 	               <label><input  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>  type="checkbox" value="${dict.value!}" />${dict.label!} </label> 
+			 	               <label><input  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>  type="checkbox" value="${dict.value!}" />${dict.label!} </label> 
 							</#list>
 			 	          </#if>
 			 	          <#if queryItem.queryMode=='date'>
 			 	             <#if queryItem.condition=='between'>
 			 	             <div id="${queryItem.name!?replace(".","_")}_date"  class="input-daterange input-group">
-	                                <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list> />
+	                                <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list> />
 	                                <span class="input-group-addon">到</span>
-	                                <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list> />
+	                                <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list> />
 	                         </div>
 			 	             <#else> 
 			 	             <div id="${queryItem.name!?replace(".","_")}_date" class="input-group date">
 	                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-	                               <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!='condition'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>>
+	                               <input <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>>
 	                         </div>
 	                          </#if>
 			 	          </#if>

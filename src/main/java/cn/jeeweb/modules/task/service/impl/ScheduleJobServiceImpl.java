@@ -1,8 +1,8 @@
 package cn.jeeweb.modules.task.service.impl;
 
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.quartz.QuartzManager;
 import cn.jeeweb.core.quartz.data.ScheduleJob;
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
 import cn.jeeweb.modules.task.service.IScheduleJobService;
 import cn.jeeweb.modules.task.utils.ScheduleJobUtils;

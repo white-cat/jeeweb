@@ -162,8 +162,6 @@ public abstract class CharacterDecoder
 			throws IOException
 	{
 		int i;
-		int totalBytes = 0;
-
 		PushbackInputStream ps = new PushbackInputStream(aStream);
 		decodeBufferPrefix(ps, bStream);
 		while (true)
@@ -176,16 +174,13 @@ public abstract class CharacterDecoder
 				for (i = 0; (i + bytesPerAtom()) < length; i += bytesPerAtom())
 				{
 					decodeAtom(ps, bStream, bytesPerAtom());
-					totalBytes += bytesPerAtom();
 				}
 				if ((i + bytesPerAtom()) == length)
 				{
 					decodeAtom(ps, bStream, bytesPerAtom());
-					totalBytes += bytesPerAtom();
 				} else
 				{
 					decodeAtom(ps, bStream, length - i);
-					totalBytes += (length - i);
 				}
 				decodeLineSuffix(ps, bStream);
 			} catch (CEStreamExhausted e)
@@ -201,6 +196,7 @@ public abstract class CharacterDecoder
 	 * encoded 183 * buffer and returns a byte array containing the data. 184 * @exception
 	 * CEFormatException An error has occured while decoding 185
 	 */
+	@SuppressWarnings("deprecation")
 	public byte decodeBuffer(String inputString)[] throws IOException
 	{
 		byte inputBuffer[] = new byte[inputString.length()];

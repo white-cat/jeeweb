@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import cn.jeeweb.core.dao.ICommonDao;
+import cn.jeeweb.core.common.dao.ICommonDao;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbColumnInfo;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
 

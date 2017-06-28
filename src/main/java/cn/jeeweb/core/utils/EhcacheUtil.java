@@ -57,6 +57,17 @@ public class EhcacheUtil extends ObjectSwitchHelper {
 		}
 		return false;
 	}
+    /**
+     * 
+     * @title: removeAll   
+     * @description: 清楚所有緩存    
+     * @return: void
+     */
+	public void removeAll() {
+		if (cache != null) {
+			cache.removeAll();
+		}
+	}
 
 	public static void main(String[] args) {
 		String key = "key";

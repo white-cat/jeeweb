@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import cn.jeeweb.core.utils.DateUtils;
-import cn.jeeweb.modules.sys.utils.LogUtils;
 
 /**
  * 日志拦截器

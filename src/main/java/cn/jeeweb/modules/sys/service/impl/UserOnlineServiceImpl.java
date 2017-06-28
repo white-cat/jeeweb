@@ -2,11 +2,11 @@ package cn.jeeweb.modules.sys.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.query.data.Page;
 import cn.jeeweb.core.query.data.PageImpl;
 import cn.jeeweb.core.query.data.PageRequest;
 import cn.jeeweb.core.query.data.Pageable;
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.utils.IpUtils;
 import cn.jeeweb.core.utils.ServletUtils;
 import cn.jeeweb.core.utils.StringUtils;

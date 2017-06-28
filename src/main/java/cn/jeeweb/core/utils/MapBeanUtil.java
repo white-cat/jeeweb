@@ -139,44 +139,44 @@ public class MapBeanUtil {
 			if (value.indexOf("Z") != -1 && value.indexOf("T") != -1) {
 				returnValue = value;
 			} else {
-				returnValue = Utils.parseDate(value);
+				returnValue = DateUtils.parseDate(value);
 			}
 		} else if (type.getName().equals("java.sql.Timestamp")) {
 			if (value.indexOf("Z") != -1 && value.indexOf("T") != -1) {
 				value = value.replace("Z", "");
 				value = value.replace("T", " ");
-				Date d = Utils.parseDate(value);
+				Date d = DateUtils.parseDate(value);
 				Timestamp t = new Timestamp(d.getTime());
 				returnValue = t;
 			} else {
-				Date d = Utils.parseDate(value);
+				Date d = DateUtils.parseDate(value);
 				Timestamp t = new Timestamp(d.getTime());
 				returnValue = t;
 			}
 		} else if (type.getName().endsWith("Long")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Long.valueOf(value);
 		} else if (type.getName().endsWith("Integer")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Integer.valueOf(value);
 		} else if (type.getName().endsWith("int")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Integer.valueOf(value);
 			else
 				returnValue = 0;
 		} else if (type.getName().endsWith("Double")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Double.valueOf(value);
 		} else if (type.getName().endsWith("double")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Double.valueOf(value);
 			else
 				returnValue = 0.0;
 		} else if (type.getName().endsWith("Byte")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Byte.valueOf(value);
 		} else if (type.getName().endsWith("byte")) {
-			if (Utils.isNumeric(value))
+			if (StringUtils.isNumericAndDot(value))
 				returnValue = Byte.valueOf(value);
 			else
 				returnValue = 0;

@@ -2,11 +2,11 @@
 <!DOCTYPE mapper SYSTEM "http://www.jeeweb.cn/dtd/dynamic-hibernate-statement-1.0.dtd">  
 <mapper namespace="xxxx">  
     <!-- 查询某个资源下的直接子节点 -->  
-    <hql id="resource.getChildren">  
+    <sql id="userfield">  
     <![CDATA[ 
-        from Resource where parent.id=${parentId} and parent.id != id 
+         id
     ]]>   
-    </hql>  
+    </sql>
     <!-- 查询系统中所有的root资源 -->  
     <hql id="resource.getRoots">  
     <![CDATA[ 
@@ -47,5 +47,26 @@
          start with t.code = '${code}' 
         connect by nocycle prior t.id = t.parent_id 
     ]]>   
-    </sql>  
+    </sql>
+    <hql-query id="testsdfsdfsdf">
+     <![CDATA[ 
+        <@include_hql  />
+     ]]>
+    </hql-query>
+    <sql-query id="sys.user">
+     <![CDATA[ 
+        select * from sys_user where id=?
+     ]]>
+    </sql-query>
+     <sql-query id="sys.two">
+     <![CDATA[ 
+        select<@include_sql refid="userfield" />from sys_user where id='${id}'
+     ]]>
+    </sql-query>
+    
+    <sql-query id="sys.three">
+     <![CDATA[ 
+        select  from sys_user
+     ]]>
+    </sql-query>
 </mapper>  

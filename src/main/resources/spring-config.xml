@@ -18,8 +18,8 @@
 		location="classpath:dbconfig.properties,classpath:jeeweb.properties,classpath:shiro.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="cn.jeeweb.core.dao.*" />
-		<context:component-scan base-package="cn.jeeweb.core.service.*" />
+	<context:component-scan base-package="cn.jeeweb.core.common.dao.*" />
+	<context:component-scan base-package="cn.jeeweb.core.common.service.*" />
 	<context:component-scan base-package="cn.jeeweb.modules.codegen.dao.*" />
 	<context:component-scan base-package="cn.jeeweb.modules.common.jcaptcha.*" />
 	
@@ -36,6 +36,6 @@
 	<import resource="spring-config-hibernate.xml" />
 	<import resource="spring-config-cache.xml" />
 	<import resource="spring-config-shiro.xml" />
-	<import resource="spring-config-sms.xml" />
+	<import resource="spring-config-extend.xml" />
 
 </beans>

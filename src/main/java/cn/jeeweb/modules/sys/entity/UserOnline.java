@@ -3,7 +3,8 @@ package cn.jeeweb.modules.sys.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
-import cn.jeeweb.core.entity.AbstractEntity;
+
+import cn.jeeweb.core.common.entity.AbstractEntity;
 import cn.jeeweb.modules.sys.security.shiro.session.mgt.OnlineSession;
 
 import javax.persistence.*;

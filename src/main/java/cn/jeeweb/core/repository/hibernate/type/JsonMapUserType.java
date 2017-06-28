@@ -14,14 +14,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Json字符串---->Map
- * Map----->Json字符串
- * 参考http://jinnianshilongnian.iteye.com/blog/1497791
- * User: Zhang Kaitao
- * Date: 11-7-16
- * Time: 下午5:45
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  JsonMapUserType.java   
+ * @package cn.jeeweb.core.repository.hibernate.type   
+ * @description:     Json字符串---->Map  Map----->Json字符串 
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午6:07:26   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({ "unchecked", "rawtypes", "serial" })
 public class JsonMapUserType implements UserType, Serializable {
 
 //    private static ObjectMapper objectMapper = new ObjectMapper();

@@ -5,10 +5,16 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 /**
- * Cache工具类
  * 
- * @author jeeplus
- * @version 2013-5-29
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  CacheUtils.java   
+ * @package cn.jeeweb.core.utils   
+ * @description: Cache工具类 
+ * @author: 王存见   
+ * @date:   2017年6月27日 下午10:41:03   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class CacheUtils {
 

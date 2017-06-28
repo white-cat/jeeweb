@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.sys.service.impl;
 
-import cn.jeeweb.core.service.impl.TreeCommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.TreeCommonServiceImpl;
 import cn.jeeweb.modules.sys.entity.Menu;
 import cn.jeeweb.modules.sys.service.IMenuService;
 

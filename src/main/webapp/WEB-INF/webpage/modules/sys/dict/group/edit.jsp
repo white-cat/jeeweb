@@ -31,6 +31,7 @@
 		         <td  class="width-15 active"><label class="pull-right">备注:</label></td>
 		         <td class="width-35" colspan="3" ><form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="200" class="form-control "/></td>
 		      </tr>
+		      <form:gridselect gridId="userGridId" title="请选择用户" path="organizationIds"  nested="false"  gridUrl="${adminPath}/sys/user" labelName="parentname"  bindLabelField="realname" formField="code" gridField="realname" labelValue="${organizationNames}" multiselect="true" />	   
 		   </tbody>
 		</table>   
 	</form:form>

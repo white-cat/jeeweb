@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.codegen.service.impl;
 
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.codegen.entity.SchemeEntity;
 import cn.jeeweb.modules.codegen.service.ISchemeService;
 import org.springframework.stereotype.Service;

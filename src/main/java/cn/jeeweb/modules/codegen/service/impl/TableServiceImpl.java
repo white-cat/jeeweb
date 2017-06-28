@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONObject;
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.utils.FreeMarkerUtils;
 import cn.jeeweb.core.utils.ServletUtils;
 import cn.jeeweb.core.utils.StringUtils;
@@ -160,6 +161,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	@Override
 	public void generateCode(TableEntity table, GeneratorInfo generatorInfo) throws IOException, GenerationException {
 		generatorInfo.setTableName(table.getTableName());
+		table.setClassName(generatorInfo.getEntityName());
 		// generatorInfo.setGeneratorType(table.getTablePKType());
 		List<ColumnEntity> oldColumnList = table.getColumns();
 		List<AttributeInfo> attributeInfos = new ArrayList<AttributeInfo>();
@@ -169,7 +171,55 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		generatorInfo.setType(table.getTableType());
 		generatorInfo.setColumns(oldColumnList);
 		generatorInfo.setAttributeInfos(attributeInfos);
+		// 查询附表
+		List<TableEntity> schedules = null;
+		if (table.getTableType().equals("2")) {
+			// 获得附表
+			schedules = findSubTable(table.getTableName());
+			for (TableEntity tableEntity : schedules) {
+				List<ColumnEntity> oldSubColumnList = tableEntity.getColumns();
+				for (ColumnEntity column : oldSubColumnList) {
+					if (!StringUtils.isEmpty(column.getForeignTable())
+							&&column.getForeignTable().equals(table.getTableName())) {
+						tableEntity.setParentField(column.getJavaField());
+					}
+				}
+			}
+			generatorInfo.setSchedules(schedules);
+			// 生成附表实体
+
+		}
 		generatorManagor.process(generatorInfo);
+		// 查询附表
+		if (table.getTableType().equals("2")) {
+			for (TableEntity tableEntity : schedules) {
+				generatorInfo.setTableName(tableEntity.getTableName());
+				generatorInfo.setFunctionDesc(tableEntity.getRemarks());
+				generatorInfo.setEntityName(tableEntity.getClassName());
+				generatorInfo.setFunctionName(tableEntity.getRemarks());
+				List<ColumnEntity> oldSubColumnList = tableEntity.getColumns();
+				List<AttributeInfo> subAttributeInfos = new ArrayList<AttributeInfo>();
+				for (ColumnEntity column : oldSubColumnList) {
+					if (!StringUtils.isEmpty(column.getForeignTable())
+							&&column.getForeignTable().equals(table.getTableName())) {
+						column.setJavaType(table.getClassName()+"Entity");
+						tableEntity.setParentField(column.getJavaField());
+						column.setImportedKey(Boolean.TRUE);
+					}
+					AttributeInfo attributeInfo=new AttributeInfo(column);
+					subAttributeInfos.add(attributeInfo);
+				}
+				generatorInfo.setType(tableEntity.getTableType());
+				generatorInfo.setColumns(oldSubColumnList);
+				generatorInfo.setAttributeInfos(subAttributeInfos);
+				List<String> generatorKeys=new ArrayList<String>();
+				generatorKeys.add("Entity");
+				generatorKeys.add("IService");
+				generatorKeys.add("ServiceImpl");
+				generatorInfo.setGeneratorKeys(generatorKeys);
+				generatorManagor.process(generatorInfo);
+			}
+		}
 	}
 
 	@Override
@@ -219,6 +269,13 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		menu.setPermission(permission);
 		menu.setRemarks(table.getRemarks());
 		menuService.save(menu);
+	}
+
+	@Override
+	public List<TableEntity> findSubTable(String tablename) {
+		return listByHql(
+				"from TableEntity t  WHERE t.id in (SELECT table.id from ColumnEntity c WHERE c.foreignTable=?) and t.tableType='3'",
+				tablename);
 	}
 
 }

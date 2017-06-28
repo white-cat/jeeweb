@@ -14,10 +14,10 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.InvalidPropertyException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.util.CollectionUtils;
-
 import java.util.Collection;
 import java.util.List;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public final class QueryableConvertUtils {
 
 	private static volatile ConversionService conversionService;
@@ -63,29 +63,13 @@ public final class QueryableConvertUtils {
 		beanWrapper.setConversionService(getConversionService());
 		if (condition != null) {
 			for (Filter filter : condition) {
-				// convertQueryValueToEntityValue(beanWrapper, filter);
 				convert(beanWrapper, filter);
 			}
 		}
 
 	}
 
-	private static void convertQueryValueToEntityValue(BeanWrapperImpl beanWrapper, Filter filter) {
-		/*
-		 * if (filter instanceof Condition) { Condition condition = (Condition)
-		 * filter; convert(beanWrapper, condition); return; }
-		 * 
-		 * if (filter instanceof OrCondition) { for (Filter orFilter :
-		 * ((OrCondition) filter).getOrFilters()) {
-		 * convertQueryValueToEntityValue(beanWrapper, orFilter); } return; }
-		 * 
-		 * if (filter instanceof AndCondition) { for (Filter andFilter :
-		 * ((AndCondition) filter).getAndFilters()) {
-		 * convertQueryValueToEntityValue(beanWrapper, andFilter); } return; }
-		 */
-
-	}
-
+	
 	private static void convert(BeanWrapperImpl beanWrapper, Filter filter) {
 		String property = filter.getProperty();
 
@@ -98,8 +82,6 @@ public final class QueryableConvertUtils {
 		if (filter.isUnaryFilter()) {
 			return;
 		}
-
-		// String entityProperty = condition.getEntityProperty();
 
 		Object value = filter.getValue();
 

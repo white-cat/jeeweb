@@ -3,16 +3,16 @@ package cn.jeeweb.core.utils;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import com.alibaba.fastjson.JSONObject;
 
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
+
+	// 首字母转小写
 	public static String toLowerCaseFirstOne(String s) {
 		if (Character.isLowerCase(s.charAt(0)))
 			return s;
@@ -210,6 +210,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static String randomUUID() {
 		UUID uuid = UUID.randomUUID();
 		return uuid.toString().replace("-", "");
+	}
+
+	public static boolean isNumericAndDot(String str) {
+		if (str == null || str.trim().equals("")) {
+			return false;
+		}
+		Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]*([Ee]{1}[0-9]+)?");
+		Matcher isNum = pattern.matcher(str);
+		if (!isNum.matches()) {
+			return false;
+		}
+		return true;
 	}
 
 	public static void main(String[] args) {

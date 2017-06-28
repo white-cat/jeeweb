@@ -6,7 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import cn.jeeweb.core.controller.BaseController;
+
+import cn.jeeweb.core.common.controller.BaseController;
 import cn.jeeweb.core.utils.StringUtils;
 
 /**

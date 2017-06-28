@@ -86,6 +86,12 @@
 	   <script src="${staticPath}/vendors/datepicker/bootstrap-datepicker.js"></script>
     ]]>   
     </js>
+    <js name="datetimepicker">  
+    <![CDATA[ 
+       <!-- 时间控件 -->
+	   <script src="${staticPath}/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    ]]>   
+    </js>
     <js name="Validform">  
     <![CDATA[ 
       <!-- Validform -->
@@ -201,6 +207,12 @@
     <![CDATA[ 
 	    <!-- typeahead -->
 	    <script src="${staticPath}/vendors/typeahead/bootstrap3-typeahead.js"></script>
+	]]>   
+    </js>
+    <js name="bootstrap-treeview">  
+    <![CDATA[ 
+	    <!-- bootstrap-treeview -->
+	    <script src="${staticPath}/vendors/bootstrap-treeview/bootstrap-treeview.js"></script>
 	]]>   
     </js>
 </html-component>  

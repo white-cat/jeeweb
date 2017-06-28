@@ -31,6 +31,14 @@
 		               <form:input path="tableName" class="form-control " datatype="*" nullmsg="请输入表名称！" htmlEscape="false" />
 		             <label class="Validform_checktip"></label>
 		         </td>
+		         <td  class="width-15 active text-right">	
+		              <label><font color="red">*</font>类名:</label>
+		         </td>
+		         <td class="width-35">
+		               <form:input path="className" class="form-control " datatype="*" nullmsg="请输入表类名！" htmlEscape="false" />
+		               <label class="Validform_checktip"></label>
+		               <span class="help-block m-b-none">请输入类名</span>
+		         </td>
 		      </tr>
 		      <tr>
 		         <td  class="width-15 active text-right">	<label><font color="red">*</font>表类型:</label></td>
@@ -192,7 +200,7 @@
 	    	 var extendTypes="${extendTypes};other:自定义JAVA类型";
 	    	 var javaTypeConf=baseJavaType+extendTypes;
 	    	 var attributeColModel=[
-			    					{ label: '字段名称', name: 'columnName', width: 120,  editable: true,editrules: {
+			    					{ label: '字段名称', name: 'columnName', width: 100,  editable: true,editrules: {
 			                            required: true
 			                        }},
 			    					{ label: '字段备注', name: 'remarks', width: 120, editable: true,editrules: {
@@ -287,6 +295,7 @@
 									{ label: 'JAVA属性名称', name: 'javaField', width: 120, editable: true,editrules: {
 			                            required: true
 			                        }},
+			                        { label: '主表', name: 'foreignTable', width: 120, editable: true},
 			                        { label: '主键', name: 'parmaryKey', width: 50, editable: true,
 				                            edittype: "checkbox",
 				                            editoptions: {

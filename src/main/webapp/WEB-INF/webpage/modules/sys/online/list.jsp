@@ -12,10 +12,10 @@
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
 	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${adminPath}/sys/online/delete" />
     <grid:column label="用户"  name="username"  query="true"  />
-    <grid:column label="用户主机IP"  name="host" />
-    <grid:column label="系统主机IP"  name="systemHost" />
-    <grid:column label="登录时间"  name="startTimestamp" dateformat='yyyy-MM-dd'/>
-    <grid:column label="最后访问时间"  name="lastAccessTime"  dateformat='yyyy-MM-dd' />
+    <grid:column label="用户主机IP"  name="host" query="true" />
+    <grid:column label="系统主机IP"  name="systemHost"  />
+    <grid:column label="登录时间"  name="startTimestamp"   dateformat='yyyy-MM-dd'/>
+    <grid:column label="最后访问时间"  name="lastAccessTime"    dateformat='yyyy-MM-dd' />
     <grid:column label="状态"  name="status" dict="onlinestatus" />
     <grid:column label="User-Agent"  name="userAgent"  />
     <grid:column label="用户会话ID"  name="id"  />

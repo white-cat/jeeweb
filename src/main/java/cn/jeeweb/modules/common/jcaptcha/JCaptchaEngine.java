@@ -18,8 +18,19 @@ import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
 /**
- * 生成验证码图片
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: JCaptchaEngine.java
+ * @package cn.jeeweb.modules.common.jcaptcha
+ * @description: 生成验证码图片
+ * @author: 王存见
+ * @date: 2017年6月26日 下午6:02:46
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
+ *
  */
+@SuppressWarnings("deprecation")
 public class JCaptchaEngine extends ListImageCaptchaEngine {
 	public static final String IMAGE_CAPTCHA_KEY = "imageCaptcha";// ImageCaptcha对象存放在Session中的key
 	public static final String CAPTCHA_INPUT_NAME = "j_captcha";// 验证码输入表单名称

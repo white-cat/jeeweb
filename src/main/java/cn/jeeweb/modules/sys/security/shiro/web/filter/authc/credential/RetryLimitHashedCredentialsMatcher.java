@@ -13,7 +13,18 @@ import cn.jeeweb.modules.sys.security.shiro.web.filter.authc.UsernamePasswordTok
 import cn.jeeweb.modules.sys.security.shiro.web.filter.jcaptcha.JCaptchaValidateFilter;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  RetryLimitHashedCredentialsMatcher.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.web.filter.authc.credential   
+ * @description:   密码重试次数限制  
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:55:43   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
+ */
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
 	private Cache<String, AtomicInteger> passwordRetryCache;

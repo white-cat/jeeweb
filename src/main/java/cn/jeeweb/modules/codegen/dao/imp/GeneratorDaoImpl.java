@@ -9,7 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.sql.DataSource;
-import cn.jeeweb.core.dao.impl.CommonDaoImpl;
+
+import cn.jeeweb.core.common.dao.impl.CommonDaoImpl;
 import cn.jeeweb.core.utils.SpringContextHolder;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbColumnInfo;

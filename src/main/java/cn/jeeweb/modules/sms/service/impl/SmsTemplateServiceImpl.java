@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.sms.service.impl;
 
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
 import cn.jeeweb.modules.sms.service.ISmsTemplateService;
 import org.springframework.stereotype.Service;

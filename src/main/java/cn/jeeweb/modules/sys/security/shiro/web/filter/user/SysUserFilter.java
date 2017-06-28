@@ -5,28 +5,26 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cn.jeeweb.modules.sys.Constants;
 import cn.jeeweb.modules.sys.entity.User;
-import cn.jeeweb.modules.sys.service.IUserService;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- * 验证用户过滤器 1、用户是否删除 2、用户是否锁定
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 13-3-19 下午3:09
- * <p>
- * Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: SysUserFilter.java
+ * @package cn.jeeweb.modules.sys.security.shiro.web.filter.user
+ * @description: 验证用户过滤器 1、用户是否删除 2、用户是否锁定
+ * @author: 王存见
+ * @date: 2017年6月26日 下午5:55:03
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
+ *
  */
 public class SysUserFilter extends AccessControlFilter {
-
-	@Autowired
-	private IUserService userService;
 
 	/**
 	 * 用户删除了后重定向的地址
@@ -71,18 +69,6 @@ public class SysUserFilter extends AccessControlFilter {
 		if (subject == null) {
 			return true;
 		}
-		
-		/*//这里会出会很卡的情况
-		Principal principal = (Principal) subject.getPrincipal();
-		if (principal != null) {
-			// 此处注意缓存 防止大量的查询db
-			User user = userService.findByUsername(principal.getUsername());
-			// 把当前用户放到session中
-			request.setAttribute(Constants.CURRENT_USER, user);
-			// druid监控需要
-			((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USERNAME, principal);
-		}
-		*/
 		return true;
 	}
 

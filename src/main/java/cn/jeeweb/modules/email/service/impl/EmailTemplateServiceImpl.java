@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.email.service.impl;
 
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.email.entity.EmailTemplateEntity;
 import cn.jeeweb.modules.email.service.IEmailTemplateService;
 import org.springframework.stereotype.Service;

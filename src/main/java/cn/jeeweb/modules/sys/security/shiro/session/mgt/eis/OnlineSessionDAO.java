@@ -15,14 +15,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 对于db的操作 考虑使用 异步+队列机制
- * <p/>
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 13-3-19 下午4:49
- * <p>
- * Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  OnlineSessionDAO.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.session.mgt.eis   
+ * @description:    对于db的操作 考虑使用 异步+队列机制
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:58:29   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {
 	/**

@@ -2,7 +2,7 @@ package cn.jeeweb.modules.task.service;
 
 import org.quartz.SchedulerException;
 
-import cn.jeeweb.core.service.ICommonService;
+import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
 
 /**

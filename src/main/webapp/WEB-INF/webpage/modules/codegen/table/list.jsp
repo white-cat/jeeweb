@@ -12,7 +12,7 @@
     <grid:column label="codegen.table.tabletype"   width="60" name="tableType"   dict="tabletype"  query="true" queryMode="select"  />
     <grid:column label="codegen.table.table.name"   width="120"  name="tableName"  query="true" />
 	<grid:column label="codegen.table.remarks"  name="remarks" />
-	<grid:column label="codegen.table.sync.database"  dict="sf" name="syncDatabase" />
+	<grid:column label="codegen.table.sync.database"  width="80" dict="sf" formatterClass="0:label label-danger;1:label label-success" name="syncDatabase" />
 	
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="300"/>
 	<grid:button title="sys.common.remove"  groupname="opt" function="delObj" outclass="btn-warning" innerclass="fa-remove" url="${adminPath}/codegen/table/remove" />
@@ -29,7 +29,6 @@
 </grid:grid>
 
 <script>
-
 /**
  * 多记录刪除請求
  * @param title

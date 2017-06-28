@@ -8,11 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import cn.jeeweb.core.entity.DataEntity;
+
+import cn.jeeweb.core.common.entity.DataEntity;
+
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +42,15 @@ public class TableEntity extends DataEntity<String> implements java.io.Serializa
 
 	private String tableName;
 
+	private String className;
+
 	private String tableType;
 
 	private String tablePKType;
-	
+
 	private Boolean syncDatabase;
+	
+	private String parentField;
 
 	@JsonIgnore
 	private List<ColumnEntity> columns = new ArrayList<ColumnEntity>();
@@ -78,6 +86,15 @@ public class TableEntity extends DataEntity<String> implements java.io.Serializa
 		this.tableName = tableName;
 	}
 
+	@Column(name = "class_name", nullable = true, length = 200)
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	@Column(name = "table_type", nullable = true, length = 200)
 	public String getTableType() {
 		return tableType;
@@ -107,7 +124,7 @@ public class TableEntity extends DataEntity<String> implements java.io.Serializa
 	public void setTablePKType(String tablePKType) {
 		this.tablePKType = tablePKType;
 	}
-	
+
 	@Column(name = "sync_database", nullable = true, length = 1)
 	public Boolean getSyncDatabase() {
 		return syncDatabase;
@@ -116,7 +133,14 @@ public class TableEntity extends DataEntity<String> implements java.io.Serializa
 	public void setSyncDatabase(Boolean syncDatabase) {
 		this.syncDatabase = syncDatabase;
 	}
-	
-	
-	 
+
+	@Transient
+	public String getParentField() {
+		return parentField;
+	}
+
+	public void setParentField(String parentField) {
+		this.parentField = parentField;
+	}
+
 }

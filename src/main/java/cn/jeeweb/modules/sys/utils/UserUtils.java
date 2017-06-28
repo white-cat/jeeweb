@@ -23,12 +23,20 @@ import cn.jeeweb.modules.sys.service.IUserService;
 
 /**
  * 
- * @author 用户工具类
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: UserUtils.java
+ * @package cn.jeeweb.modules.sys.utils
+ * @description: 用户工具类
+ * @author: 王存见
+ * @date: 2017年6月26日 下午6:00:39
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
  *
  */
 @SuppressWarnings("unchecked")
 public class UserUtils {
-	
+
 	private static IUserService userService = SpringContextHolder.getBean(IUserService.class);
 	private static IRoleService roleService = SpringContextHolder.getBean(IRoleService.class);
 	private static IMenuService menuService = SpringContextHolder.getBean(IMenuService.class);
@@ -119,7 +127,6 @@ public class UserUtils {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static List<Role> getRoleList() {
 		List<Role> roleList = (List<Role>) getCache(CACHE_ROLE_LIST);
 		if (roleList == null) {
@@ -146,8 +153,8 @@ public class UserUtils {
 	 * @return
 	 */
 	public static List<Menu> getMenuList() {
-		//List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-		List<Menu> menuList =null;
+		// List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+		List<Menu> menuList = null;
 		if (menuList == null) {
 			User user = getUser();
 			menuList = menuService.findMenuByUserId(user.getId());

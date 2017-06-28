@@ -9,7 +9,7 @@
 <body title="${functionName}">
 <grid:grid id="${entityName?uncap_first}GridId" url="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/ajaxList">
 	<grid:column label="sys.common.key" hidden="true"   name="id" width="100"/>
-	<grid:column label="sys.common.opt"  name="opt" type="button" width="100"/>
+	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
 	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/delete" />
 <#list columns as column>
    <#if column.isList>

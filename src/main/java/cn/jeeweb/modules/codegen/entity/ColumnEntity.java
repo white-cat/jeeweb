@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import cn.jeeweb.core.entity.DataEntity;
+import cn.jeeweb.core.common.entity.DataEntity;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbColumnInfo;
 import cn.jeeweb.modules.codegen.codegenerator.utils.type.DbTypeConvert;
@@ -94,6 +94,8 @@ public class ColumnEntity extends DataEntity<String> implements java.io.Serializ
 	private String nullmsg;
 
 	private String hibernateType;
+	// 关联表
+	private String foreignTable;
 
 	public ColumnEntity() {
 
@@ -395,6 +397,15 @@ public class ColumnEntity extends DataEntity<String> implements java.io.Serializ
 			hibernateType = "java.lang.String";
 		}
 		return hibernateType;
+	}
+
+	@Column(name = "foreign_table")
+	public String getForeignTable() {
+		return foreignTable;
+	}
+
+	public void setForeignTable(String foreignTable) {
+		this.foreignTable = foreignTable;
 	}
 
 }

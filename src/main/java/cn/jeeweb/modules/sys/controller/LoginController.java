@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import cn.jeeweb.core.controller.BaseController;
+
+import cn.jeeweb.core.common.controller.BaseController;
 import cn.jeeweb.modules.sys.security.shiro.exception.RepeatAuthenticationException;
 import cn.jeeweb.modules.sys.security.shiro.realm.UserRealm.Principal;
 import cn.jeeweb.modules.sys.security.shiro.web.filter.authc.FormAuthenticationFilter;

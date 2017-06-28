@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.oa.service.impl;
 
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
 import cn.jeeweb.modules.oa.service.IOaNotificationService;
 import org.springframework.stereotype.Service;

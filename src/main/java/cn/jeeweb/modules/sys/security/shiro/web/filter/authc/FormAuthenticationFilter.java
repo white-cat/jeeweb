@@ -18,7 +18,18 @@ import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.security.shiro.exception.RepeatAuthenticationException;
 import cn.jeeweb.modules.sys.security.shiro.realm.UserRealm.Principal;
 import cn.jeeweb.modules.sys.utils.UserUtils;
-
+/**
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  FormAuthenticationFilter.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.web.filter.authc   
+ * @description:   表单验证  
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:56:03   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
+ */
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
 	public static final String DEFAULT_CAPTCHA_PARAM = "captcha";

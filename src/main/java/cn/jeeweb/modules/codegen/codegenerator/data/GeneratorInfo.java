@@ -7,6 +7,7 @@ import java.util.List;
 
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.entity.ColumnEntity;
+import cn.jeeweb.modules.codegen.entity.TableEntity;
 
 public class GeneratorInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,7 @@ public class GeneratorInfo implements Serializable {
 	private List<AttributeInfo> attributeInfos;
 	private List<ColumnEntity> columns;
 	private List<String> importTypes;
+	private List<TableEntity> schedules;
 
 	public String getPathName() {
 		return pathName;
@@ -164,6 +166,14 @@ public class GeneratorInfo implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public List<TableEntity> getSchedules() {
+		return schedules;
+	}
+
+	public void setSchedules(List<TableEntity> schedules) {
+		this.schedules = schedules;
 	}
 
 }

@@ -5,16 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import cn.jeeweb.core.entity.AbstractEntity;
 import java.util.Date;
-import cn.jeeweb.modules.sys.entity.User;
+import cn.jeeweb.core.common.entity.AbstractEntity;
 
 /**
  * @Title: 短信发送日志

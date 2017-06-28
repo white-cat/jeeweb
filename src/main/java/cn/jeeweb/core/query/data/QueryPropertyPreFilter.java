@@ -3,7 +3,6 @@ package cn.jeeweb.core.query.data;
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.apache.commons.lang3.StringUtils;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import cn.jeeweb.core.utils.ComplexPropertyPreFilter;
@@ -28,9 +27,17 @@ public class QueryPropertyPreFilter implements PropertyPreFilterable {
 	private Set<String> queryPropertys;
 	private ComplexPropertyPreFilter complexPropertyPreFilter;
 
+	public QueryPropertyPreFilter() {
+		init("");
+	}
+
 	public QueryPropertyPreFilter(String queryPropertyStr) {
+		init(queryPropertyStr);
+	}
+	
+	public void init(String queryPropertyStr){
 		this.queryPropertyStr = queryPropertyStr;
-		this.queryPropertys=new HashSet<String>();
+		this.queryPropertys = new HashSet<String>();
 		if (!StringUtils.isEmpty(this.queryPropertyStr)) {
 			this.queryPropertyStr = this.queryPropertyStr.substring(0, this.queryPropertyStr.length() - 1);
 			String[] queryPropertys = this.queryPropertyStr.split(",");
@@ -45,7 +52,7 @@ public class QueryPropertyPreFilter implements PropertyPreFilterable {
 
 	@Override
 	public SerializeFilter constructFilter(Class<?> clazz) {
-	 	for (String queryProperty : queryPropertys) {
+		for (String queryProperty : queryPropertys) {
 			if (!queryProperty.contains(".")) {
 				complexPropertyPreFilter.addIncludeFilter(clazz, queryProperty);
 			} else {

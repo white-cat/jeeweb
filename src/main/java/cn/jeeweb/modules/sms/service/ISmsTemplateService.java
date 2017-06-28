@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.sms.service;
 
-import cn.jeeweb.core.service.ICommonService;
+import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
 
 /**

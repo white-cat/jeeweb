@@ -31,6 +31,11 @@
 		<link href="${staticPath}/vendors/datepicker/datepicker3.css" rel="stylesheet">
     ]]>   
     </css>
+    <css name="datetimepicker">  
+    <![CDATA[ 
+		<link href="${staticPath}/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    ]]>   
+    </css>
     <css name="jqgrid">  
     <![CDATA[ 
 		<!-- jqgrid-->
@@ -115,6 +120,12 @@
 		<!-- SYNTAXHIGHLIGHTER -->
 		<link type="text/css" rel="stylesheet" href="${staticPath}/vendors/syntaxhighlighter/styles/shCore.css"/>
 		<link type="text/css" rel="stylesheet" href="${staticPath}/vendors/syntaxhighlighter/styles/shThemeDefault.css"/>
+    ]]>   
+    </css>
+    <css name="bootstrap-treeview">  
+    <![CDATA[ 
+		<!-- bootstrap-treeview -->
+		<link type="text/css" rel="stylesheet" href="${staticPath}/vendors/bootstrap-treeview/bootstrap-treeview.css"/>
     ]]>   
     </css>
 </html-component>  

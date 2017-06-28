@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import cn.jeeweb.core.entity.AbstractEntity;
+
+import cn.jeeweb.core.common.entity.AbstractEntity;
+
 import java.lang.String;
 
 /**

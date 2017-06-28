@@ -9,5 +9,5 @@ import net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter;
  * @version 2017-2-13
  */
 public class PageCachingFilter extends SimplePageCachingFilter {
-
+	
 }

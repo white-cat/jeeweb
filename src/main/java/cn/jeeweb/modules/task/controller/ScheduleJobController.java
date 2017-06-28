@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import cn.jeeweb.core.controller.BaseCRUDController;
+
+import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.core.utils.MyBeanUtils;

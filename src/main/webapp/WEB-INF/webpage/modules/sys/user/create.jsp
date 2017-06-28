@@ -65,7 +65,12 @@
 		          
 		         </td>
 		      </tr>
-		      
+		      <tr>
+				<td class="width-15 active"><label class="pull-right">组织机构:</label></td>
+				<td colspan="3">
+				   <form:treeselect title="请选择组织机构" path="organizationIds"  nested="false"  dataUrl="${adminPath}/sys/organization/treeData" labelName="parentname" labelValue="${organizationNames}" multiselect="true" />	   
+				</td>
+		      </tr>
 		     
 		   </tbody>
 		   </table>   

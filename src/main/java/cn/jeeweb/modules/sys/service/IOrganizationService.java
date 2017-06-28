@@ -1,7 +1,8 @@
 package cn.jeeweb.modules.sys.service;
 
 import java.util.List;
-import cn.jeeweb.core.service.ITreeCommonService;
+
+import cn.jeeweb.core.common.service.ITreeCommonService;
 import cn.jeeweb.modules.sys.entity.Organization;
 
 /**

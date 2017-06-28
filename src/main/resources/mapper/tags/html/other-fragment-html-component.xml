@@ -149,4 +149,39 @@
 		 </script>
     ]]>
 	</fragment>
+	<fragment name="bootstrap-treeview">  
+    <![CDATA[ 
+        <div id="${id}"></div>
+        <script type="text/javascript">
+        var  ${id}settings={
+          <#if onNodeSelected??&&onNodeSelected!=''>
+	        onNodeSelected: function (event, node) {
+	             ${onNodeSelected}(event,node);
+	        }
+	      </#if>
+        };
+        <#if treeviewSettingCallback??&&treeviewSettingCallback!=''>
+        $.extend(${id}settings, typeof ${treeviewSettingCallback} == "function" &&${treeviewSettingCallback}());
+        </#if>
+        $(document).ready(function(){
+            <#if initDatas??&&initDatas!=''>
+            initTree(setting,${initDatas});
+            <#else>
+		 	$.ajax({  
+			       type : "post",  
+			       url : "${dataUrl!}",  
+			       dataType : "json",
+			       success : function(nodes) { 
+			    	   init${id}Tree(${id}settings,nodes);
+			       }
+			});
+			</#if>
+		});
+		function init${id}Tree(setting,nodes){
+		   setting['data']=nodes;
+		   $('#${id}').treeview(setting);
+		}
+		</script>
+    ]]>
+	</fragment>
 </html-component>  

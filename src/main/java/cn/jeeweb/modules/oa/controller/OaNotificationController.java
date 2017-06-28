@@ -3,7 +3,8 @@ package cn.jeeweb.modules.oa.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import cn.jeeweb.core.controller.BaseCRUDController;
+
+import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
 

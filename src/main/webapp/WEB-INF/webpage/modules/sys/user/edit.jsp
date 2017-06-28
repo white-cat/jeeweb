@@ -42,17 +42,19 @@
 				<tr>
 					<td class="active"><label class="pull-right"><font
 							color="red">*</font>用户角色:</label></td>
-					<td colspan="3"><form:checkboxes path="roleIdList" nested="false"
+					<td colspan="3">
+					  <form:checkboxes path="roleIdList" nested="false"
 							items="${allRoles}" defaultvalue="${roleIdList}"
 							itemLabel="name" itemValue="id" htmlEscape="false"
-							cssClass="i-checks required" /></td>
+							cssClass="i-checks required" />
+					</td>
 				</tr>
 				<tr>
 					<td class="width-15 active"><label class="pull-right">组织机构:</label></td>
 					<td colspan="3">
 					   <form:treeselect title="请选择组织机构" path="organizationIds"  nested="false"  dataUrl="${adminPath}/sys/organization/treeData" labelName="parentname" labelValue="${organizationNames}" multiselect="true" />	   
 					</td>
-		      </tr>
+		        </tr>
 			 
 			 
 			</tbody>

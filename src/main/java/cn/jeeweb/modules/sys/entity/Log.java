@@ -15,7 +15,8 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import cn.jeeweb.core.entity.AbstractEntity;
+import cn.jeeweb.core.common.entity.AbstractEntity;
+
 import java.lang.String;
 import java.util.Date;
 import java.util.Map;

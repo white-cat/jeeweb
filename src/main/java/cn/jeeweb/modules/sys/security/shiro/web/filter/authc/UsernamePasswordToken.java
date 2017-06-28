@@ -1,10 +1,16 @@
 package cn.jeeweb.modules.sys.security.shiro.web.filter.authc;
 
 /**
- * 用户和密码（包含验证码）令牌类
  * 
- * @author jeeplus
- * @version 2013-5-19
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  UsernamePasswordToken.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.web.filter.authc   
+ * @description:  用户和密码（包含验证码）令牌类   
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:56:18   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswordToken {
 

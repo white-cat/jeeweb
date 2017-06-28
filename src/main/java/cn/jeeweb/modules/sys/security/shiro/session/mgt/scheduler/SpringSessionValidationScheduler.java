@@ -16,11 +16,16 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 使用spring的任务调度器完成 session验证
- * 功能直接复制了{@link org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler}
- * <p>User: Zhang Kaitao
- * <p>Date: 13-7-2 下午5:33
- * <p>Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  SpringSessionValidationScheduler.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.session.mgt.scheduler   
+ * @description:   使用spring的任务调度器完成 session验证
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:58:19   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class SpringSessionValidationScheduler implements SessionValidationScheduler {
 

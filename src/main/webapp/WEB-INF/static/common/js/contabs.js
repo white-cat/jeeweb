@@ -178,7 +178,7 @@ function menuItem() {
         $('.J_mainContent').find('iframe.J_iframe').hide().parents('.J_mainContent').append(str1);
 
         //显示loading提示
-        var loading = layer.load();
+        var loading = layer.load(0, {shade: false});
 
         $('.J_mainContent iframe:visible').load(function () {
             //iframe加载完成后隐藏loading提示

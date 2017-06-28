@@ -3,7 +3,8 @@ package cn.jeeweb.modules.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import cn.jeeweb.core.controller.BaseController;
+
+import cn.jeeweb.core.common.controller.BaseController;
 
 /**
  * 

@@ -22,10 +22,19 @@ import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
 /**
- * 仿照JCaptcha2.0编写GMail验证码样式的图片引擎.
  * 
- * @author Administrator
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: GMailEngine.java
+ * @package cn.jeeweb.modules.common.jcaptcha
+ * @description: 仿照JCaptcha2.0编写GMail验证码样式的图片引擎.
+ * @author: 王存见
+ * @date: 2017年6月26日 下午6:02:25
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
+ *
  */
+@SuppressWarnings("deprecation")
 public class GMailEngine extends ListImageCaptchaEngine {
 	@Override
 	protected void buildInitialFactories() {

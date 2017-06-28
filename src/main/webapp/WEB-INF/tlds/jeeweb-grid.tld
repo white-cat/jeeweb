@@ -34,6 +34,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>是否显示Label</description>
+			<name>showQueryLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<description>请求的地址</description>
 			<name>url</name>
 			<required>false</required>

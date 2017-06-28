@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
+
+import cn.jeeweb.core.utils.CacheUtils;
 import cn.jeeweb.core.utils.SpringContextHolder;
-import cn.jeeweb.core.utils.SystemCacheUtil;
 import cn.jeeweb.modules.sys.Constants;
 import cn.jeeweb.modules.sys.entity.DictEntity;
 import cn.jeeweb.modules.sys.service.IDictService;
@@ -57,7 +58,7 @@ public class DictUtils {
 	}
 
 	public static List<DictEntity> getDictList(String code) {
-		Map<String, List<DictEntity>> dictMap = (Map<String, List<DictEntity>>) SystemCacheUtil.create()
+		Map<String, List<DictEntity>> dictMap = (Map<String, List<DictEntity>>) CacheUtils
 				.get(Constants.CACHE_DICT_MAP);
 		if (dictMap == null) {
 			dictMap = new HashMap<String, List<DictEntity>>();
@@ -69,7 +70,7 @@ public class DictUtils {
 					dictMap.put(dict.getCode(), Lists.newArrayList(dict));
 				}
 			}
-			SystemCacheUtil.create().set(Constants.CACHE_DICT_MAP, dictMap);
+			CacheUtils.put(Constants.CACHE_DICT_MAP, dictMap);
 		}
 		List<DictEntity> dictList = dictMap.get(code);
 		if (dictList == null) {
@@ -82,7 +83,7 @@ public class DictUtils {
 	 * 清除换成
 	 */
 	public static void clear() {
-		SystemCacheUtil.create().remove(Constants.CACHE_DICT_MAP);
+		CacheUtils.remove(Constants.CACHE_DICT_MAP);
 	}
 
 }

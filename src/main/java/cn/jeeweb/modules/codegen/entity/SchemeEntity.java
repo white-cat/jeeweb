@@ -11,7 +11,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import cn.jeeweb.core.entity.DataEntity;
+
+import cn.jeeweb.core.common.entity.DataEntity;
 
 /**
  * @Title: 生成方案

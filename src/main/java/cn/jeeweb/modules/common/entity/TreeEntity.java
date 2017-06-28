@@ -8,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import cn.jeeweb.core.entity.AbstractEntity;
-import cn.jeeweb.core.entity.tree.TreeNode;
+
+import cn.jeeweb.core.common.entity.AbstractEntity;
+import cn.jeeweb.core.common.entity.tree.TreeNode;
 import cn.jeeweb.core.utils.StringUtils;
 
 /**

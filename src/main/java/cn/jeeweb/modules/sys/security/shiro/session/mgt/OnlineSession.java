@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package cn.jeeweb.modules.sys.security.shiro.session.mgt;
 
 import java.io.IOException;
@@ -12,12 +7,16 @@ import java.io.ObjectOutputStream;
 import org.apache.shiro.session.mgt.SimpleSession;
 
 /**
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 13-3-20 下午2:29
- * <p>
- * Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  OnlineSession.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.session.mgt   
+ * @description:    
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:57:27   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class OnlineSession extends SimpleSession {
 
@@ -33,7 +32,7 @@ public class OnlineSession extends SimpleSession {
 	private static final int USER_AGENT_BIT_MASK = 1 << bitIndexCounter++;
 	private static final int STATUS_BIT_MASK = 1 << bitIndexCounter++;
 	private static final int USERNAME_BIT_MASK = 1 << bitIndexCounter++;
-	private static final int REMEMBER_ME_BIT_MASK = 1 << bitIndexCounter++;
+	//private static final int REMEMBER_ME_BIT_MASK = 1 << bitIndexCounter++;
 
 	public static enum OnlineStatus {
 		on_line("在线"), hidden("隐身"), force_logout("强制退出");
@@ -187,7 +186,6 @@ public class OnlineSession extends SimpleSession {
 	 *             in the present JVM
 	 * @since 1.0
 	 */
-	@SuppressWarnings({ "unchecked" })
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
 		short bitMask = in.readShort();

@@ -1,7 +1,6 @@
 package cn.jeeweb.core.common.hibernate.dynamic.builder;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * 动态sql/hql语句组装器
@@ -10,19 +9,6 @@ import java.util.Map;
  * 
  */
 public interface DynamicHibernateStatementBuilder {
-	/**
-	 * hql语句map
-	 * 
-	 * @return
-	 */
-	public Map<String, String> getNamedHQLQueries();
-
-	/**
-	 * sql语句map
-	 * 
-	 * @return
-	 */
-	public Map<String, String> getNamedSQLQueries();
 
 	/**
 	 * 初始化

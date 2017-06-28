@@ -1,6 +1,6 @@
 package cn.jeeweb.modules.sys.service.impl;
 
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.modules.sys.entity.DataSourceEntity;
 import cn.jeeweb.modules.sys.service.IDataSourceService;
 import org.springframework.stereotype.Service;

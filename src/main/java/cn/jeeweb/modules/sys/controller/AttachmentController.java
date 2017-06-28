@@ -23,7 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 
-import cn.jeeweb.core.controller.BaseController;
+import cn.jeeweb.core.common.controller.BaseController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.model.PageJson;
 import cn.jeeweb.core.query.data.PropertyPreFilterable;

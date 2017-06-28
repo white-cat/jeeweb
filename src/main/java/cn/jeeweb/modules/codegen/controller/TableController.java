@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
-import cn.jeeweb.core.controller.BaseCRUDController;
+
+import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.mapper.JsonMapper;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
@@ -48,24 +49,27 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 
 	@Override
 	public void preEdit(TableEntity entity, Model model, HttpServletRequest request, HttpServletResponse response) {
+		if (entity != null && !StringUtils.isEmpty(entity.getId()) && StringUtils.isEmpty(entity.getClassName())) {
+			String entityName = StringUtils.toUpperCaseFirstOne(StringUtils.underlineToCamel(entity.getTableName()));
+			entity.setClassName(entityName);
+		}
 		// 查询表明
 		List<DbTableInfo> dbTableInfos = tableService.getTableNameList();
 		request.setAttribute("dbTableInfos", dbTableInfos);
 		List<ColumnEntity> columns = entity.getColumns();
-		String columnsJson=JsonMapper.toJsonString(columns);
-		//String columnsJson=JSON.toJSONString(columns);
+		String columnsJson = JsonMapper.toJsonString(columns);
+		// String columnsJson=JSON.toJSONString(columns);
 		request.setAttribute("columns", columnsJson);
 		List<String> javaTypes = Arrays.asList(types);
-		String extendTypes="";
-		
+		String extendTypes = "";
+
 		for (ColumnEntity column : columns) {
-			String javaType=column.getJavaType();
+			String javaType = column.getJavaType();
 			if (javaType.contains("|")) {
-				String[] innerJavaTypes=javaType.split("\\|");
-				if (!javaTypes.contains(innerJavaTypes[1])
-						&&!extendTypes.contains(innerJavaTypes[1])) {
-					extendTypes+=";";
-					extendTypes+=javaType+":"+innerJavaTypes[1];
+				String[] innerJavaTypes = javaType.split("\\|");
+				if (!javaTypes.contains(innerJavaTypes[1]) && !extendTypes.contains(innerJavaTypes[1])) {
+					extendTypes += ";";
+					extendTypes += javaType + ":" + innerJavaTypes[1];
 				}
 			}
 		}
@@ -119,9 +123,12 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 	@RequestMapping(value = "/generateCode", method = RequestMethod.GET)
 	public String generateCode(@RequestParam(required = false) String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
+		TableEntity table = tableService.get(id);
+		if (!table.getSyncDatabase()) {
+			return display("un_sync_database");
+		}
 		SchemeEntity scheme = schemeService.get("table.id", id);
 		if (scheme == null) {
-			TableEntity table = tableService.get(id);
 			String tableName = table.getTableName();
 			String remarks = table.getRemarks();
 			String entityName = StringUtils.toUpperCaseFirstOne(StringUtils.underlineToCamel(tableName));

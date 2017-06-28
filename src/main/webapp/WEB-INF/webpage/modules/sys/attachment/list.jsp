@@ -9,7 +9,7 @@
 <body title="附件信息">
 <grid:grid id="attachmentId" url="${adminPath}/sys/attachment/ajaxList">
 	<grid:column label="sys.common.key" hidden="true"   name="id" width="100"/>
-	<grid:column label="sys.common.opt"  name="opt" type="button" width="100"/>
+	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
 	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${adminPath}/sys/attachment/delete" />
     <grid:column label="附件名称"  name="filename" width="200"  />
     <grid:column label="文件路径"  name="filepath"  width="200" />

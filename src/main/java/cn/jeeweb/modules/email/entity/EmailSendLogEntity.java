@@ -8,7 +8,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import cn.jeeweb.core.entity.AbstractEntity;
+
+import cn.jeeweb.core.common.entity.AbstractEntity;
+
 import java.util.Date;
 
 /**   

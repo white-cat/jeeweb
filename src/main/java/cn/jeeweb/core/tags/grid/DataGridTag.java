@@ -2,14 +2,16 @@ package cn.jeeweb.core.tags.grid;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import cn.jeeweb.core.mapper.JsonMapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializeFilter;
+import cn.jeeweb.core.query.data.PropertyPreFilterable;
+import cn.jeeweb.core.query.data.QueryPropertyPreFilter;
 import cn.jeeweb.core.tags.common.tag.AbstractGridHtmlTag;
 import cn.jeeweb.core.tags.form.support.FreemarkerFormTagHelper;
 import cn.jeeweb.core.tags.html.manager.HtmlComponentManager;
@@ -48,6 +50,7 @@ public class DataGridTag extends AbstractGridHtmlTag {
 	private Boolean sortable = Boolean.TRUE;
 	private String sortname = "id";
 	private String sortorder = "asc";
+	private Boolean showQueryLabel = Boolean.TRUE;
 
 	private int page = 1;// 页码开始
 	private int rowNum = 10; // 这个参数是要被传递到后台，树结构时候，rowNum无效
@@ -299,16 +302,16 @@ public class DataGridTag extends AbstractGridHtmlTag {
 		return EVAL_PAGE;
 	}
 
+	public Boolean getShowQueryLabel() {
+		return showQueryLabel;
+	}
+
+	public void setShowQueryLabel(Boolean showQueryLabel) {
+		this.showQueryLabel = showQueryLabel;
+	}
+
 	public int doEndTag() throws JspTagException {
 		try {
-			/*
-			 * JspWriter out = this.pageContext.getOut(); // 取得标签体对象 //
-			 * BodyContent body = getBodyContent(); // 取得标签体的字符串内容 // String
-			 * dcontent = body.getString(); //这我们可以自定义标签提的内容... //
-			 * System.out.println(dcontent); //哈哈原来一直没实现，居然意外的能运行了。 // TagHelper
-			 * tagHelper = new DefaultDataGridTagHelper(pageContext, // this);
-			 * String content = ""; out.print(content); out.flush();
-			 */
 			writeFragment();
 		} catch (JspException e) {
 			e.printStackTrace();
@@ -316,6 +319,7 @@ public class DataGridTag extends AbstractGridHtmlTag {
 		return EVAL_PAGE;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void writeFragment() throws JspException {
 		try {
 			htmlComponentManager.init();
@@ -341,16 +345,25 @@ public class DataGridTag extends AbstractGridHtmlTag {
 		rootMap.put("staticPath", staticPath);
 		rootMap.put("staticPath", staticPath);
 		if (datas != null) {
-			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			JsonMapper jsonMapper= JsonMapper.getInstance();
-			jsonMapper.setDateFormat(dateFormat);
-			String initDatas=jsonMapper.toJson(datas);
+			String initDatas = "";
+			List dataList = (List) datas;
+			if (dataList != null && dataList.size() > 0) {
+				Class<?> clazz = dataList.get(0).getClass();
+				PropertyPreFilterable propertyPreFilterable = new QueryPropertyPreFilter();
+				for (Map<String, Object> columnItem : columnList) {
+					String name = (String) columnItem.get("name");
+					propertyPreFilterable.addQueryProperty(name);
+				}
+				propertyPreFilterable.addQueryProperty("id");
+				SerializeFilter filter = propertyPreFilterable.constructFilter(clazz);
+				initDatas = JSON.toJSONString(datas, filter);
+			}
 			if (StringUtils.isEmpty(initDatas)) {
 				initDatas = "[]";
 			}
 			rootMap.put("initDatas", initDatas);
 			this.datatype = "local";
-			this.sortable=Boolean.FALSE;//本地访问不能进行排序
+			this.sortable = Boolean.FALSE;// 本地访问不能进行排序
 		}
 		rootMap.put("columnList", columnList);
 		rootMap.put("columnDictMap", columnDictMap);

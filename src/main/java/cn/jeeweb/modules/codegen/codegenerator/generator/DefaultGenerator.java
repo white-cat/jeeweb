@@ -93,9 +93,10 @@ public class DefaultGenerator implements IGenerator {
 	public void generate(GeneratorInfo generatorInfo, Map<String, Object> dataMap)
 			throws IOException, GenerationException {
 		String ftl = "/codegen/code/" + config.getTemplateFile();
-		if (generatorInfo.getType()!=null
-				&&generatorInfo.getType().equals("4")) {
+		if (generatorInfo.getType() != null && generatorInfo.getType().equals("4")) {
 			ftl = "/codegen/code/tree/" + config.getTemplateFile();
+		} else if (generatorInfo.getType() != null && generatorInfo.getType().equals("2")) {
+			ftl = "/codegen/code/onetomany/" + config.getTemplateFile();
 		}
 		String outPath = generatorInfo.getPathName() + "/" + getOutPath(generatorInfo) + "/";
 		File outPathFile = new File(outPath);

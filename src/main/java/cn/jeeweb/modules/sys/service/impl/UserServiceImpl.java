@@ -1,7 +1,8 @@
 package cn.jeeweb.modules.sys.service.impl;
 
 import java.util.Set;
-import cn.jeeweb.core.service.impl.CommonServiceImpl;
+
+import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.entity.User;
 import cn.jeeweb.modules.sys.service.IUserService;

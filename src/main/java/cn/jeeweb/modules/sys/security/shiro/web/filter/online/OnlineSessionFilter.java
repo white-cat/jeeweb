@@ -18,12 +18,16 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 13-3-20 下午3:17
- * <p>
- * Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * @title:  OnlineSessionFilter.java   
+ * @package cn.jeeweb.modules.sys.security.shiro.web.filter.online   
+ * @description:   在线
+ * @author: 王存见   
+ * @date:   2017年6月26日 下午5:55:19   
+ * @version V1.0 
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved. 
+ *
  */
 public class OnlineSessionFilter extends AccessControlFilter {
 

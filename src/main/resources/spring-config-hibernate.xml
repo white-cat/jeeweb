@@ -74,13 +74,21 @@
 			</list>
 		</property>
 	</bean>
-
+   
 	<!-- 配置一个事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- 动态SQLDao 
+	<bean id="sqlDao" class="cn.jeeweb.core.common.dao.impl.SqlDaoImpl" >
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>-->
+	<!-- 动态SQL/HQL -->
+	<bean id="dynamicHibernateAdapter" class="cn.jeeweb.core.common.hibernate.dynamic.adapter.DynamicHibernateAdapter" >
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	
