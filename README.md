@@ -1,6 +1,9 @@
 JeeWeb敏捷开发系统平台
 ===============
-交流QQ群：******
+* 	QQ交流群： ******
+* 	官方论坛： [http://bbs.jeeweb.cn](http://bbs.jeeweb.cn)
+* 	官方网站： [http://www.jeeweb.cn](http://www.jeeweb.cn)
+* 	项目演示： [http://demo.jeeweb.cn](http://demo.jeeweb.cn)
 
 简介
 -----------------------------------
@@ -12,34 +15,23 @@ JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完
 
 技术文档
 -----------------------------------
-* [JEECG 开发环境搭建入门](http://blog.csdn.net/zhangdaiscott/article/details/50915206)
-* [JEECG 开发手册](http://git.oschina.net/jeecg/jeecg/attach_files)
-* [JEECG 常见问题贴](http://www.jeecg.org/forum.php?mod=viewthread&tid=1830&extra=page%3D1)
-* [JEECG 视频教程](http://www.jeecg.org/forum.php?mod=viewthread&tid=197&extra=page%3D1)
-* [JEECG 官方百度网盘](https://pan.baidu.com/share/home?uk=2668473880#category/type=0)
-* [JEECG 版本更新日志](http://www.jeecg.org/forum.php?mod=viewthread&tid=365&extra=page%3D1)
-* JEECG官方Maven镜像配置 : [http://t.cn/RJCp7wO](http://t.cn/RJCp7wO)
-* 在线演示地址：[http://demo.jeecg.org](http://demo.jeecg.org)
-    
-技术交流
------------------------------------
-* 	QQ交流群： ③289782002、②106838471(满)、①106259349(满)、④176031980(满)</br>
-* 	官方论坛： [http://www.jeecg.org](http://www.jeecg.org)
-* 	官方网站： [http://www.guojusoft.com](http://www.guojusoft.com)
-* 	官方博客： [http://blog.csdn.net/zhangdaiscott](http://blog.csdn.net/zhangdaiscott)
-* 	技术支持： [JEECG社区官方支持QQ群汇总](http://www.jeecg.org/forum.php?mod=viewthread&tid=1249&extra=page%3D1)
-
+* [JEEWEB 开发环境搭建入门](完善中...)
+* [JEEWEB 开发手册](完善中...)
+* [JEEWEB  常见问题贴](完善中...)
+* [JEEWEB 视频教程](完善中...)
+* [JEEWEB 官方百度网盘](完善中...)
 
 系统演示
 -----------------------------------
 ###  [1].多套首页风格，支持自定义（Inspinia风格|ACE风格）
-
-
+![Inspinia风格](https://git.oschina.net/uploads/images/2017/0630/210146_0479a2c1_1394985.png "Inspinia风格")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0630/210630_88f71c81_1394985.png "在这里输入图片标题")
+![ACE风格](https://git.oschina.net/uploads/images/2017/0630/210406_46110a2a_1394985.png "ACE风格")
 
 ###  [2].强大的代码生成功能
-
-
-###  [3].完善的权限体系
+![JEEWEB](https://git.oschina.net/uploads/images/2017/0630/210644_096f8b47_1394985.png "JEEWEB")
+![JEEWEB](https://git.oschina.net/uploads/images/2017/0630/210653_55f01447_1394985.png "JEEWEB题")
+![JEEWEB](https://git.oschina.net/uploads/images/2017/0630/210702_bca112b0_1394985.png "JEEWEB")
 
 
 代码示例
