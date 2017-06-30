@@ -1,8 +1,8 @@
 JeeWeb敏捷开发系统平台
 ===============
 * 	QQ交流群： ******
-* 	官方论坛： [http://bbs.jeeweb.cn](http://bbs.jeeweb.cn)
 * 	官方网站： [http://www.jeeweb.cn](http://www.jeeweb.cn)
+* 	官方论坛： [http://bbs.jeeweb.cn](http://bbs.jeeweb.cn)
 * 	项目演示： [http://demo.jeeweb.cn](http://demo.jeeweb.cn)
 
 简介
@@ -16,6 +16,7 @@ JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完
 JEEWEB 技术特点
 -----------------------------------
 JEEWEB使用目前流程的WEB开发架构技术，如SpringMVC, Hibernate,Apache Shiro,Disruptor, ehcache, Jquery ,BootStrap等等，支持多种数据库MySQL, Oracle, sqlserver等。 分层设计：使用分层设计，分为dao，service，Controller，view层，层次清楚，低耦合，高内聚。 
+
 安全考虑：严格遵循了web安全的规范，前后台双重验证，参数编码传输，密码md5加密存储，shiro权限验证，从根本上避免了SQL注入，XSS攻击，CSRF攻击等常见的web攻击手段。
 
 JEEWEB 功能特点
@@ -31,7 +32,8 @@ JEEWEB 功能特点
 * 	查询过滤器：只需前端配置，后台动态拼SQL追加查询条件；支持多种匹配方式（全匹配/模糊查询/包含查询/不匹配查询）
 * 	移动平台支持，对Bootstrap(兼容Html5)进行标准封装
 * 	数据权限：整合Shiro权限
-*       国际化（支持多语言，国际化的封装为多语言做了便捷支持）
+
+* 	国际化（支持多语言，国际化的封装为多语言做了便捷支持）
 *       多数据源（在线配置数据源，数据源工作类封装）
 *       计划任务控制（在线配置计划任务、方便计划任务的时间调整规划）
 *       邮件发送（配置邮件模版、邮件帐号的在线配置、邮件异步发送、邮件发送日志功能统计）
@@ -42,7 +44,8 @@ JEEWEB 功能特点
 * 	支持数据库: Mysql,Oracle10g,Postgre,SqlServer等
 * 	基础权限: 用户，角色，菜单权限，按钮权限，数据权限
 * 	Web容器测试通过的有Jetty和Tomcat,Weblogic
-* 	要求JDK1.7+</br>
+* 	要求JDK1.7+
+
 
 技术文档
 -----------------------------------
