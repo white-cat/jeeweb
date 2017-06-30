@@ -45,6 +45,7 @@ JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完
 代码示例
 -----------------------------------
 ###  [1].GRID列表
+```
 <grid:grid id="codegenGrid"  url="${adminPath}/codegen/table/ajaxList">
     <grid:column label="sys.common.key" hidden="true"   name="id"/>
     <grid:column label="codegen.table.tabletype"   width="60" name="tableType"   dict="tabletype"  query="true" queryMode="select"  />
@@ -65,9 +66,11 @@ JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完
 	<grid:toolbar  function="search"/>
 	<grid:toolbar  function="reset"/>
 </grid:grid>
+```
 ![JSP列表图片](https://git.oschina.net/uploads/images/2017/0630/205011_87420e1e_1394985.png "JSP列表图片")
 
 ###  [2].TREEGRID列表
+```
 <grid:grid id="menuGridId" async="true" treeGrid="true"  expandColumn="name"  sortname="sort" url="${adminPath}/sys/menu/ajaxTreeList">
 	<grid:column label="sys.common.key" hidden="true"   name="id" />
 	<grid:column label="sys.menu.name"  name="name"  query="true" condition="like"/>
@@ -84,10 +87,77 @@ JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完
 	<grid:toolbar  function="search"/>
 	<grid:toolbar  function="reset"/>
 </grid:grid>
+```
 ![TREEGRID](https://git.oschina.net/uploads/images/2017/0630/205353_af457e21_1394985.png "TREEGRID")
-###  [3].完善的权限体系
-    
-    
+###  [3].表单代码
+```
+<form:form id="userForm" modelAttribute="data" method="post" class="form-horizontal">
+		<form:hidden path="id"/>
+		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
+		   <tbody>
+		       <tr>
+		         <td  class="width-15 active text-right">	<label><font color="red">*</font>用户名:</label></td>
+		         <td  class="width-35" >
+		             <form:input path="username" class="form-control" ajaxurl="${adminPath}/sys/user/validate"  validErrorMsg="用户名重复"  htmlEscape="false"  datatype="*"  nullmsg="请输入用户名！"/>
+		             <label class="Validform_checktip"></label>
+		         </td>
+		          <td  class="width-15 active text-right">	
+		              <label><font color="red">*</font>姓名:</label>
+		         </td>
+		         <td class="width-35" >
+		             <form:input path="realname" class="form-control " datatype="*" nullmsg="请输入姓名！" validErrorMsg="用户名重复" htmlEscape="false" />
+		             <label class="Validform_checktip"></label>
+		         </td>
+		      </tr>
+		      <tr>
+		         <td  class="width-15 active text-right">	
+		              <label><font color="red">*</font>邮箱:</label>
+		         </td>
+		         <td class="width-35" >
+		             <form:input path="email" class="form-control" ajaxurl="${adminPath}/sys/user/validate"   datatype="e" nullmsg="请输入邮箱！"  htmlEscape="false" />
+		             <label class="Validform_checktip"></label>
+		         </td>
+		         <td  class="width-15 active text-right">	
+		           	 <label><font color="red">*</font>联系电话:</label>
+		         </td>
+		         <td  class="width-35" >
+		             <form:input path="phone" class="form-control" ajaxurl="${adminPath}/sys/user/validate"  htmlEscape="false"  datatype="m"  nullmsg="请输入用户名！"/>
+		             <label class="Validform_checktip"></label>
+		         </td>
+		      </tr>
+		      <tr>
+		         <td  class="width-15 active text-right">	
+		              <label><font color="red">*</font>密码:</label>
+		         </td>
+		         <td class="width-35" >
+		             <input type="password" value="" name="password"  class="form-control" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" />
+		             <label class="Validform_checktip"></label>
+		         </td>
+		         <td  class="width-15 active text-right">	<label><font color="red">*</font>确认密码:</label></td>
+		         <td  class="width-35" >
+		             <input type="password" value="" name="userpassword2" class="form-control" datatype="*" recheck="password" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" />
+		             <label class="Validform_checktip"></label>
+		         </td>
+		      </tr>
+		      <tr>
+		         <td class="active"><label class="pull-right"><font color="red">*</font>用户角色:</label></td>
+		         <td>
+		         	<form:checkboxes path="roleIdList" nested="false" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" cssClass="i-checks required"/>
+		          
+		         </td>
+		      </tr>
+		      <tr>
+				<td class="width-15 active"><label class="pull-right">组织机构:</label></td>
+				<td colspan="3">
+				   <form:treeselect title="请选择组织机构" path="organizationIds"  nested="false"  dataUrl="${adminPath}/sys/organization/treeData" labelName="parentname" labelValue="${organizationNames}" multiselect="true" />	   
+				</td>
+		      </tr>
+		     
+		   </tbody>
+		   </table>   
+	</form:form>
+```
+![表单](https://git.oschina.net/uploads/images/2017/0630/205612_2d09fd89_1394985.png "表单")
 
 
 
