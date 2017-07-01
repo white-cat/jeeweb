@@ -13,8 +13,6 @@ JeeWeb主要定位于企业快速开发平台建设，已内置很多优秀的�
 
 目前功能模块代码生成器、权限框架、数据字典、数据缓存、并发框架、数据监控、计划任务、多数据源管理、附件管理、类似mybatis动态SQL、UI模板标签、短信发送、邮件发送、统计功能等功能。
 
-
-
 JeeWeb的开发方式采用（代码生成器快速设计生成代码->手工完善逻辑->丰富模板标签快速前端开发），可以快速协助java开发人员解决60%的重复工作，让开发人员更多关注业务逻辑的实现，框架使用前端模板标签，解放JAVA开发人员的开发压力，提高开发效率，为企业节省项目研发成本，减少开发周期。
 
 JeeWeb 技术特点
@@ -49,6 +47,36 @@ JeeWeb 功能特点
 * 	Web容器测试通过的有Jetty和Tomcat,Weblogic
 * 	要求JDK1.7+
 
+技术选型
+===============
+
+1、后端
+
+* 核心框架：Spring Framework
+* 安全框架：Apache Shiro
+* 视图框架：Spring MVC
+* 服务端验证：Hibernate Validator
+* 布局框架：SiteMesh
+* 任务调度：Quartz
+* 持久层框架：Hibernate 
+* 数据库连接池：Alibaba Druid
+* 缓存框架：Ehcache
+* 并发框架：Disruptor
+* 日志管理：SLF4J、Log4j
+* 工具类：Apache Commons、Jackson、Xstream、
+ 
+2、前端
+
+* JS框架：jQuery。
+* CSS框架：Twitter Bootstrap
+* 客户端验证：Validform。
+* 富文本在线编辑：markdown、simditor、Summernote、CodeMirror自由切换
+* 文件上传工具:Bootstrap fileinput
+* 数据表格：jqGrid
+* 对话框：layer
+* 树结构控件：jQuery zTree
+* 日期控件： datepicker
+* 代码高亮： syntaxhighlighter
 
 技术文档
 -----------------------------------
