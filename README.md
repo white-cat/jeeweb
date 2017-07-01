@@ -1,4 +1,4 @@
-JeeWeb敏捷开发系统平台
+JeeWeb敏捷开发平台
 ===============
 * 	QQ交流群： ******
 * 	官方网站： [http://www.jeeweb.cn](http://www.jeeweb.cn)
