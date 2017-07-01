@@ -13,11 +13,11 @@ JeeWeb主要定位于企业快速开发平台建设，已内置很多优秀的�
 
 目前功能模块代码生成器、权限框架、数据字典、数据缓存、并发框架、数据监控、计划任务、多数据源管理、附件管理、类似mybatis动态SQL、UI模板标签、短信发送、邮件发送、统计功能等功能。
 
-JeeWeb的开发方式采用（代码生成器快速设计生成代码->手工完善逻辑->丰富模板标签快速前端开发），可以快速协助java开发人员解决60%的重复工作，让开发人员更多关注业务逻辑的实现，框架使用前端模板标签，解放JAVA开发人员的开发压力，提高开发效率，为企业节省项目研发成本，减少开发周期。
+JeeWeb的开发方式采用（ **代码生成器快速设计生成代码->手工完善逻辑->丰富模板标签快速前端开发** ），可以快速协助java开发人员解决60%的重复工作，让开发人员更多关注业务逻辑的实现，框架使用前端模板标签，解放JAVA开发人员的开发压力，提高开发效率，为企业节省项目研发成本，减少开发周期。
 
 JeeWeb 技术特点
 -----------------------------------
-JeeWeb使用目前流程的WEB开发架构技术，如SpringMVC, Hibernate,Apache Shiro,Disruptor, ehcache, Jquery ,BootStrap等等，支持多种数据库MySQL, Oracle, sqlserver等。 分层设计：使用分层设计，分为dao，service，Controller，view层，层次清楚，低耦合，高内聚。 
+JeeWeb使用目前流程的WEB开发架构技术，如 **SpringMVC, Hibernate,Apache Shiro, Disruptor , ehcache, Jquery ,BootStrap** 等等，支持多种数据库MySQL, Oracle, sqlserver等。  **分层设计：使用分层设计，分为dao，service，Controller，view层，层次清楚，低耦合，高内聚。**  
 
 安全考虑：严格遵循了web安全的规范，前后台双重验证，参数编码传输，密码md5加密存储，shiro权限验证，从根本上避免了SQL注入，XSS攻击，CSRF攻击等常见的web攻击手段。
 
