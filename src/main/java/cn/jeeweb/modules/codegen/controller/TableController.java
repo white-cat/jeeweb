@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,8 +121,8 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return Boolean.FALSE;
 	}
 
-	@RequestMapping(value = "/generateCode", method = RequestMethod.GET)
-	public String generateCode(@RequestParam(required = false) String id, Model model, HttpServletRequest request,
+	@RequestMapping(value = "{id}/generateCode", method = RequestMethod.GET)
+	public String generateCode(@PathVariable("id") String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		TableEntity table = tableService.get(id);
 		if (!table.getSyncDatabase()) {
@@ -153,7 +154,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return display("generate_code");
 	}
 
-	@RequestMapping(value = "/generateCode", method = RequestMethod.POST)
+	@RequestMapping(value = "generateCode", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson generateCode(SchemeEntity scheme, GeneratorInfo generatorInfo, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -198,7 +199,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return ajaxJson;
 	}
 
-	@RequestMapping(value = "/syncDatabase", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/syncDatabase", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson syncDatabase(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("id") String id) {
@@ -213,9 +214,9 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return ajaxJson;
 	}
 
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/remove", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson remove(@RequestParam("id") String id) {
+	public AjaxJson remove(@PathVariable("id") String id) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("移除成功");
 		try {
@@ -227,10 +228,10 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return ajaxJson;
 	}
 
-	@RequestMapping(value = "/createMenu", method = RequestMethod.GET)
-	public String createMenu(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "{id}/createMenu", method = RequestMethod.GET)
+	public String createMenu(@PathVariable("id") String id,HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("tableid", request.getParameter("id"));
-		SchemeEntity scheme = schemeService.get("table.id", request.getParameter("id"));
+		SchemeEntity scheme = schemeService.get("table.id", id);
 		if (scheme == null || StringUtils.isEmpty(scheme.getModuleName())) {
 			return display("un_generate_code");
 		}
@@ -247,7 +248,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		return display("create_menu");
 	}
 
-	@RequestMapping(value = "/saveMenu", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/saveMenu", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson saveMenu(Menu menu, HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();

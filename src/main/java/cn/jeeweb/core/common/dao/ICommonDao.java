@@ -85,15 +85,21 @@ public interface ICommonDao extends IDynamicHibernateAdapter, ISqlDao {
 
 	<T> void batchDeleteByProperty(String propertyName, Object value, Class<T> entityClass);
 
-	public int updateByHql(final String hql, final Object... params);
+	int updateByHql(final String hql, final Object... params);
+
+	int updateByAliasHql(final String hql, final Map<String, Object> alias);
 
 	Long countByHql(final String hql, final Object... params);
 
+	Long countByAliasHql(final String hql, final Map<String, Object> alias);
+
 	<T> List<T> listByHql(final String hql, final Object... params);
 
-	<T> List<T> listByHql(final String hql, int page, int rows, final Object... params);
-
 	<T> List<T> listByAliasHql(final String hql, final Map<String, Object> alias);
+
+	<T> List<T> listByHql(final String hql, int page, int rows, final Object... params);
+	
+	<T> List<T> listByAliasHql(final String hql, int page, int rows, final Map<String, Object> alias);
 
 	List<Map<String, Object>> listMapByHql(final String hql, final Object... params);
 

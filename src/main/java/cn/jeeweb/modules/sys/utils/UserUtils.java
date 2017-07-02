@@ -153,8 +153,7 @@ public class UserUtils {
 	 * @return
 	 */
 	public static List<Menu> getMenuList() {
-		// List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-		List<Menu> menuList = null;
+		List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
 		if (menuList == null) {
 			User user = getUser();
 			menuList = menuService.findMenuByUserId(user.getId());

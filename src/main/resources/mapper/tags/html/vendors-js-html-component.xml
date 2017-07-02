@@ -95,7 +95,7 @@
     <js name="Validform">  
     <![CDATA[ 
       <!-- Validform -->
-	  <script type="text/javascript" src="${staticPath}/vendors/Validform_v5.3.2/js/Validform_v5.3.2_min.js"></script>
+	  <script type="text/javascript" src="${staticPath}/vendors/Validform_v5.3.2/js/Validform_v5.3.2.js"></script>
     ]]>   
     </js>
     <js name="bootstrap-fileinput">  

@@ -13,7 +13,6 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import cn.jeeweb.modules.common.entity.TreeEntity;
 
-
 @Entity
 @Table(name = "sys_menu", schema = "")
 @DynamicUpdate(false)
@@ -21,42 +20,30 @@ import cn.jeeweb.modules.common.entity.TreeEntity;
 @SuppressWarnings("serial")
 public class Menu extends TreeEntity {
 
-	// 这里需要设置CascadeType.ALL，否则无法保存
-	@ManyToOne(fetch = FetchType.LAZY)
-	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
 	private Menu parent;
 	/**
 	 * 是否有叶子节点
 	 */
-	@Formula(value = "(select count(*) from sys_menu f_t where f_t.parent_id = id)")
 	private boolean hasChildren;
 
 	/** 图标 */
-	@Column(name = "menu_icon", nullable = true, length = 255)
 	private String menuIcon;
 	/** 资源类型 */
-	@Column(name = "type", nullable = true, length = 50)
 	private String type;
 	/** 点击后前往的地址 */
-	@Column(name = "url", nullable = true, length = 200)
 	private String url;
 
 	/** 权限字符串 */
-	@Column(name = "permission", nullable = true, length = 100)
 	private String permission;
 	/** 是否显示 */
-	@Column(name = "isshow", nullable = true)
 	private Short isshow;
 
 	/** 排序 */
-	@Column(name = "sort", nullable = true, length = 10, scale = 0)
 	private Integer sort;
 	/** 备注 */
-	@Column(name = "remarks", nullable = true, length = 100)
 	private String remarks;
 
-
+	@Formula(value = "(select count(*) from sys_menu f_t where f_t.parent_id = id)")
 	@Override
 	public boolean isHasChildren() {
 		return hasChildren;
@@ -67,6 +54,10 @@ public class Menu extends TreeEntity {
 		this.hasChildren = hasChildren;
 	}
 
+	// 这里需要设置CascadeType.ALL，否则无法保存
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
 	public Menu getParent() {
 		return parent;
 	}
@@ -75,6 +66,7 @@ public class Menu extends TreeEntity {
 		this.parent = parent;
 	}
 
+	@Column(name = "menu_icon", nullable = true, length = 255)
 	public String getMenuIcon() {
 		return menuIcon;
 	}
@@ -83,6 +75,7 @@ public class Menu extends TreeEntity {
 		this.menuIcon = menuIcon;
 	}
 
+	@Column(name = "type", nullable = true, length = 50)
 	public String getType() {
 		return type;
 	}
@@ -91,6 +84,7 @@ public class Menu extends TreeEntity {
 		this.type = type;
 	}
 
+	@Column(name = "url", nullable = true, length = 200)
 	public String getUrl() {
 		return url;
 	}
@@ -99,6 +93,7 @@ public class Menu extends TreeEntity {
 		this.url = url;
 	}
 
+	@Column(name = "permission", nullable = true, length = 100)
 	public String getPermission() {
 		return permission;
 	}
@@ -107,6 +102,7 @@ public class Menu extends TreeEntity {
 		this.permission = permission;
 	}
 
+	@Column(name = "isshow", nullable = true)
 	public Short getIsshow() {
 		return isshow;
 	}
@@ -115,6 +111,7 @@ public class Menu extends TreeEntity {
 		this.isshow = isshow;
 	}
 
+	@Column(name = "sort", nullable = true, length = 10, scale = 0)
 	public Integer getSort() {
 		return sort;
 	}
@@ -123,6 +120,7 @@ public class Menu extends TreeEntity {
 		this.sort = sort;
 	}
 
+	@Column(name = "remarks", nullable = true, length = 100)
 	public String getRemarks() {
 		return remarks;
 	}

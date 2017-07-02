@@ -14,14 +14,14 @@
 			        toolbar : toolbar,  //工具栏  
 			        height:"${height!}",
 					width:"${width!}",
-			        defaultImage : 'simditor-2.0.1/images/image.png', //编辑器插入图片时使用的默认图片  
+			        //defaultImage : 'simditor-2.0.1/images/image.png', //编辑器插入图片时使用的默认图片  
 			        upload : {  
-			            url : '${adminPath}/sys/user/savePicture', //文件上传的接口地址  
-			            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交  
+			            url : '${adminPath}/sys/attachment/uploadSimditor', //文件上传的接口地址  
+			            params: {ctx:"${ctx}"}, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交  
 			            connectionCount: 3, 
 			            fileKey:"upload_file",
-			            leaveConfirm: '正在上传文件'  
-			     	}   
+			            leaveConfirm: '正在上传文件'
+			     	}
 			 	};
 	            <#if editorSettingCallback??&&editorSettingCallback!=''>
 	            $.extend(settings, typeof ${editorSettingCallback} == "function" &&${editorSettingCallback}());
@@ -32,7 +32,10 @@
 	            <#if editorAfterSetting??&&editorAfterSetting!=''>
 	            typeof ${editorAfterSetting} == "function" &&${editorAfterSetting}(editor);
 	            </#if>
+	            
 	        });
+	        
+	        
 	    </script> 
     ]]>
 	</fragment>

@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="emailTemplateForm">
-    <form:form id="emailTemplateForm" modelAttribute="data" action="${adminPath}/email/emailtemplate/save" method="post" class="form-horizontal">
+    <form:form id="emailTemplateForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

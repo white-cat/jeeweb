@@ -4,18 +4,21 @@
 	<fragment name="jqGrid-grid">  
     <![CDATA[
     <#if gridShowType??&&gridShowType=='list'>
-    <div class="ibox-content">
+    <div>
 		<!-- 查询条件 -->
 		<div class="row">
 			<div id="${(id)}GridQuery" class="col-sm-12">
 			 	<div class="form-inline">
 			 	   <#list queryList as queryItem>
 			 	     <div class="form-group">
-			 	          <#if showQueryLabel??&&showQueryLabel>
+			 	          <#if showQueryLabel??&&showQueryLabel&&queryItem.queryMode!="hidden">
 			 	          <label class="control-label">${queryItem.label}：</label>
 			 	          </#if>
+			 	          <#if queryItem.queryMode=='hidden'>
+			 	          <input type="hidden" placeholder="${queryItem.label!}"  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>/>
+			 	          </#if>
 			 	          <#if queryItem.queryMode=='input'>
-			 	          <${queryItem.queryMode}  placeholder="${queryItem.label}"  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>/>
+			 	          <${queryItem.queryMode}  type="text" placeholder="${queryItem.label}"  <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>/>
 			 	          </#if>
 			 	          <#if queryItem.queryMode=='select'>
 			 	          <${queryItem.queryMode} <#list queryItem?keys as queryItemKey><#if queryItemKey??&&queryItemKey!='label'&&queryItemKey!='queryMode'&&queryItemKey!=''> ${queryItemKey}='${queryItem[queryItemKey]}'</#if></#list>>
@@ -62,14 +65,16 @@
 				   <#list toobarList as toolbarItem>
 				       <#if toolbarItem.layout=='left'>
 					      <button   class="btn btn-white btn-sm" <#list toolbarItem.dynamicAttributes?keys as toolbarItemKey>${toolbarItemKey}='${toolbarItem.dynamicAttributes[toolbarItemKey]}'</#list>
-					       <#if toolbarItem.function?exists>
-				           		 <#if toolbarItem.function=='deleteALLSelect'>
-				               		  onclick="${toolbarItem.function!}('${toolbarItem.title!}','${toolbarItem.url!}','${(id)}Grid')"
-				                  <#elseif toolbarItem.function=='toolbarConfirm'>
+					       <#if toolbarItem.function?exists&&toolbarItem.function!=''>
+				           		  <#if toolbarItem.function=='delete'>
+				               		  onclick="batchDelete('${toolbarItem.title!}','${toolbarItem.url!}','${(id)}Grid')"
+				                  <#elseif toolbarItem.function=='toolbarSelectConfirm'>
 				                  	  onclick="${toolbarItem.function!}('${toolbarItem.title!}','${toolbarItem.url!}','${(id)}Grid','${toolbarItem.tipMsg!}')"
-				                 <#else>
+				                  <#else>
 				                      onclick="${toolbarItem.function!}('${toolbarItem.title!}','${toolbarItem.url!}','${(id)}Grid','${toolbarItem.winwidth!}','${toolbarItem.winheight!}')"
 				                 </#if>
+				            <#elseif toolbarItem.onclick?exists&&toolbarItem.onclick!=''>
+				                      onclick="${toolbarItem.onclick}"
 					       </#if>><i class="fa ${toolbarItem.icon!}"></i> ${toolbarItem.title!}</button>
 				      </#if>
 				    </#list>
@@ -357,8 +362,8 @@
 				           href +="onclick=\"${buttonItem.onclick}\"";
 				        <#else>
 				            <#if buttonItem.function?exists>
-				             	 <#if buttonItem.function=='delObj'>
-				               		  href +="onclick=\"${buttonItem.function!}('${buttonItem.title!}','${buttonItem.url!}','"+row.id+"','${(id)}Grid')\"";
+				             	 <#if buttonItem.function=='delete'>
+				               		  href +="onclick=\"deleteRowData('${buttonItem.title!}','${buttonItem.url!}','"+row.id+"','${(id)}Grid')\"";
 				                  <#elseif buttonItem.function=='rowConfirm'>
 				                 	  href +="onclick=\"${buttonItem.function!}('${buttonItem.title!}','${buttonItem.url!}','"+row.id+"','${(id)}Grid','${buttonItem.tipMsg!}')\"";
 				                 <#else>

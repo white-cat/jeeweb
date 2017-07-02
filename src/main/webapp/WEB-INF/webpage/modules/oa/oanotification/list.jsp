@@ -10,16 +10,17 @@
 <grid:grid id="oaNotificationGridId" url="${adminPath}/oa/oanotification/ajaxList">
 	<grid:column label="sys.common.key" hidden="true"   name="id" width="100"/>
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="40"/>
-	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${adminPath}/oa/oanotification/delete" />
+	<grid:button   groupname="opt" function="delete" />
     <grid:column label="标题"  name="title"  query="true"  queryModel="input" width="100"   condition="like" />
     <grid:column label="内容"  name="content"  query="true"  queryModel="input"  condition="like" />
     <grid:column label="发布状态"  name="status"  query="true" queryMode="select" width="60"  condition="eq"  dict="sf"/>
-	<grid:toolbar title="sys.common.add" icon="fa-plus" function="add" url="${adminPath}/oa/oanotification/edit"  />
-	<grid:toolbar title="sys.common.update" icon="fa-file-text-o" function="update" url="${adminPath}/oa/oanotification/edit"  />
-	<grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${adminPath}/oa/oanotification/batchDelete"  />
+    
+    <grid:toolbar function="create"/>
+	<grid:toolbar   function="update" />
+	<grid:toolbar   function="delete" />
 	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

@@ -16,12 +16,12 @@
     <grid:column label="<#if column.remarks??&&column.remarks!="">${column.remarks}<#else>${column.javaField}</#if>"  name="${column.javaField}" <#if column.isQuery> query="true" <#if column.queryModel??&&column.queryModel!=""> queryModel="${column.queryModel}"</#if> <#if column.queryType??&&column.queryType!=""> condition="${column.queryType}" </#if></#if><#if column.dictGroup??&&column.dictGroup!=""> dict="${column.dictGroup}"</#if>/>
    </#if>
 </#list>
-	<grid:toolbar title="sys.common.add" icon="fa-plus" function="add" url="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/edit"  />
-	<grid:toolbar title="sys.common.update" icon="fa-file-text-o" function="update" url="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/edit"  />
-	<grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/batchDelete"  />
+	<grid:toolbar function="create"/>
+	<grid:toolbar function="update"/>
+	<grid:toolbar function="delete"/>
 	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar function="search"/>
+	<grid:toolbar function="reset"/>
 </grid:grid>
 </body>
 </html>

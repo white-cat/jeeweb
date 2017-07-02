@@ -19,10 +19,10 @@
     <grid:column label="返回码"  name="code" hidden="true" />
     <grid:column label="返回消息"  name="msg" />
     <grid:column label="响应时间"  name="responseDate" />
-    <grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${adminPath}/sms/smssendlog/batchDelete"  />
+	<grid:toolbar function="delete"/>
 	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar function="search"/>
+	<grid:toolbar function="reset"/>
 </grid:grid>
 </body>
 </html>

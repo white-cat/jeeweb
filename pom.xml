@@ -12,6 +12,7 @@
 		<spring.version>4.0.3.RELEASE</spring.version>
 
 		<hibernate.version>4.1.0.Final</hibernate.version>
+		<hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
 		<shiro.version>1.2.2</shiro.version>
 		<druid.version>0.2.23</druid.version>
 
@@ -167,7 +168,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
@@ -327,13 +328,13 @@
 			<version>2.3</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		
-		<!--poi对excel2007以上版本的支持-->  
-        <dependency>  
-            <groupId>org.apache.poi</groupId>  
-            <artifactId>poi-ooxml</artifactId>  
-            <version>${poi.version}</version>  
-        </dependency>  
+
+		<!--poi对excel2007以上版本的支持 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
 
 		<!-- jcaptcha 验证码 -->
 		<dependency>
@@ -369,24 +370,24 @@
 			<artifactId>javax.mail</artifactId>
 			<version>${mail.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.lmax</groupId>
-		    <artifactId>disruptor</artifactId>
-		    <version>${disruptor.version}</version>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>${disruptor.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-email</artifactId>
-		    <version>${email.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>${email.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -398,7 +399,12 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>${commons.httpclient.version}</version>
 		</dependency>
-        
+		<!-- hibernate validator 相关jar包 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>jeeweb</finalName>

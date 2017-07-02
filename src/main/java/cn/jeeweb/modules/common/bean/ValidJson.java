@@ -4,14 +4,23 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class ValidJson implements Serializable {
-	private Boolean valid = false;
+	private String status;
+	private String info;
 
-	public Boolean getValid() {
-		return valid;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setValid(Boolean valid) {
-		this.valid = valid;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

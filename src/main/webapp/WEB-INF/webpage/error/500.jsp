@@ -1,59 +1,38 @@
-<%
-response.setStatus(500);
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@include file="/WEB-INF/webpage/common/taglibs.jspf"%>
 
-// 获取异常类
-Throwable ex = Exceptions.getThrowable(request);
-if (ex != null){
-	LoggerFactory.getLogger("500.jsp").error(ex.getMessage(), ex);
-}
-
-// 编译错误信息
-StringBuilder sb = new StringBuilder("错误信息：\n");
-if (ex != null) {
-	sb.append(Exceptions.getStackTraceAsString(ex));
-} else {
-	sb.append("未知错误.\n\n");
-}
-
-// 如果是异步请求或是手机端，则直接返回信息
-if (Servlets.isAjaxRequest(request)) {
-	out.print(sb);
-}
-
-// 输出异常信息页面
-else {
-%>
-<%@page import="org.slf4j.Logger,org.slf4j.LoggerFactory"%>
-<%@page import="com.jeeplus.common.web.Servlets"%>
-<%@page import="com.jeeplus.common.utils.Exceptions"%>
-<%@page import="com.jeeplus.common.utils.StringUtils"%>
-<%@page contentType="text/html;charset=UTF-8" isErrorPage="true"%>
-<%@include file="/webpage/include/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>500 - 系统内部错误</title>
-	<%@include file="/webpage/include/head.jsp" %>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>400</title>
+  
+    <link rel="shortcut icon" href="${staticPath}/common/favicon.ico"> 
+    <link href="${staticPath}/common/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${staticPath}/common/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="${staticPath}/common/css/animate.css" rel="stylesheet">
+    <link href="${staticPath}/common/css/style.css?v=4.1.0" rel="stylesheet">
+
 </head>
-<body>
-	<div class="container-fluid">
-		<div class="page-header"><h1>系统内部错误.</h1></div>
-		<div class="errorMessage">
-			错误信息：<%=ex==null?"未知错误.":StringUtils.toHtml(ex.getMessage())%> <br/> <br/>
-			请点击“查看详细信息”按钮，将详细错误信息发送给系统管理员，谢谢！<br/> <br/>
-			<a href="javascript:" onclick="history.go(-1);" class="btn">返回上一页</a> &nbsp;
-			<a href="javascript:" onclick="$('.errorMessage').toggle();" class="btn">查看详细信息</a>
-		</div>
-		<div class="errorMessage hide">
-			<%=StringUtils.toHtml(sb.toString())%> <br/>
-			<a href="javascript:" onclick="history.go(-1);" class="btn">返回上一页</a> &nbsp;
-			<a href="javascript:" onclick="$('.errorMessage').toggle();" class="btn">隐藏详细信息</a>
-			<br/> <br/>
-		</div>
-		<script>try{top.$.jBox.closeTip();}catch(e){}</script>
-	</div>
+
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h2 style="font-size:80px;">400</h2>
+        <h3 class="font-bold">没有访问当前页面的权限！</h3>
+    </div>
+
+    <!-- 全局js -->
+    <script src="${staticPath}/common/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${staticPath}/common/js/bootstrap.min.js?v=3.3.6"></script>
+
 </body>
+
 </html>
-<%
-} out = pageContext.pushBody();
-%>

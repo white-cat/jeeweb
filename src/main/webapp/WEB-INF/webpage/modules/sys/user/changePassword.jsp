@@ -12,7 +12,7 @@
 </head>
 
 <body class="white-bg"  formid="userForm">
-     <form:form id="userForm" modelAttribute="data" action="${adminPath}/sys/user/changePassword" method="post" class="form-horizontal">
+     <form:form id="userForm" modelAttribute="data"  method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

@@ -9,7 +9,7 @@
 </head>
 
 <body class="white-bg"  formid="importForm">
-    <form:form id="importForm" modelAttribute="data" action="${adminPath}/codegen/table/importDatabase" method="post" class="form-horizontal">
+    <form:form id="importForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

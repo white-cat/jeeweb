@@ -18,24 +18,18 @@ import cn.jeeweb.core.utils.JeewebPropertiesUtil;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
 import cn.jeeweb.modules.oa.service.IOaNotificationService;
-import cn.jeeweb.modules.sys.entity.Menu;
-import cn.jeeweb.modules.sys.entity.User;
-import cn.jeeweb.modules.sys.service.IMenuService;
 import cn.jeeweb.modules.sys.utils.UserUtils;
 
 @Controller
 @RequestMapping("${admin.url.prefix}")
 public class IndexController {
 	@Autowired
-	private IMenuService menuService;
-	@Autowired
 	private IOaNotificationService oaNotificationService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
-		User user = UserUtils.getUser();
-		List<Menu> menus = menuService.findMenuByUserId(user.getId());
-		model.addAttribute("menus", menus);
+		// 加载菜单
+		model.addAttribute("menus", UserUtils.getMenuList());
 		// 加载通知公告
 		int oaNotificationCount = oaNotificationService.count(Restrictions.eq("status", "1"));
 		List<OaNotificationEntity> oaNotifications = oaNotificationService.listByCriterion(1, 5,

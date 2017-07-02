@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="${entityName?uncap_first}Form" beforeSubmit="beforeSubmit">
-    <form:form id="${entityName?uncap_first}Form" modelAttribute="data" action="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/save" method="post" class="form-horizontal">
+    <form:form id="${entityName?uncap_first}Form" modelAttribute="data"  method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
@@ -74,7 +74,7 @@
                         <grid:grid id="${schedule.className?uncap_first}"  datas="${r'$'}{data.${schedule.className?uncap_first}List}"  gridShowType="form" pageable="false"  editable="true">
 						    <#list schedule.columns as column>
 							   <#if column.isList&&column.columnName!='id'>
-							    <grid:column editable="true" label="<#if column.remarks??&&column.remarks!="">${column.remarks}<#else>${column.javaField}</#if>"  name="${column.javaField}" <#if column.isQuery> query="true" <#if column.queryModel??&&column.queryModel!=""> queryModel="${column.queryModel}"</#if> <#if column.queryType??&&column.queryType!=""> condition="${column.queryType}" </#if></#if><#if column.dictGroup??&&column.dictGroup!=""> dict="${column.dictGroup}"</#if>/>
+							    <grid:column label="<#if column.remarks??&&column.remarks!="">${column.remarks}<#else>${column.javaField}</#if>"  name="${column.javaField}"  editable="true"  <#if column.formType??&&column.formType=="dateselect">  edittype="date" </#if>   <#if column.dictGroup??&&column.dictGroup!=""> edittype="select"  dict="${column.dictGroup}"</#if> <#if column.validType??&&column.validType!=""> datatype="${column.validType}" </#if> <#if column.nullmsg??&&column.nullmsg!=""> nullmsg="${column.nullmsg}" </#if> <#if column.errormsg??&&column.errormsg!=""> errormsg="${column.errormsg}" </#if>/>
 							   </#if>
 							</#list>
 						</grid:grid>

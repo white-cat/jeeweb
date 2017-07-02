@@ -24,7 +24,11 @@ public class CCPSmsSender extends SmsSender {
 	private CCPRestSDK restAPI = new CCPRestSDK();;
 
 	public CCPSmsSender() {
-		init();
+		try {
+			init();
+		} catch (Exception e) {
+
+		}
 	}
 
 	@Override
@@ -104,6 +108,7 @@ public class CCPSmsSender extends SmsSender {
 	protected String name() {
 		return "CCP";
 	}
+
 	public static void main(String[] args) {
 		// 70585
 		SmsTemplate smsTemplate = SmsTemplate.newTemplateById("70585");

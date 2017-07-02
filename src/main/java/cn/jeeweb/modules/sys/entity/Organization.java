@@ -27,21 +27,17 @@ import cn.jeeweb.modules.common.entity.TreeEntity;
 @DynamicInsert(false)
 @SuppressWarnings("serial")
 public class Organization extends TreeEntity {
-	// 这里需要设置CascadeType.ALL，否则无法保存
-	@ManyToOne(fetch = FetchType.LAZY)
-	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
+
 	private Organization parent;
-	
-	@Column(name = "remarks", nullable = true, length = 1000)
+
 	private String remarks;
-	 
+
+	private boolean hasChildren;
+
 	/**
 	 * 是否有叶子节点
 	 */
 	@Formula(value = "(select count(*) from sys_organization f_t where f_t.parent_id = id)")
-	private boolean hasChildren;
-
 	@Override
 	public boolean isHasChildren() {
 		return hasChildren;
@@ -52,6 +48,10 @@ public class Organization extends TreeEntity {
 		this.hasChildren = hasChildren;
 	}
 
+	// 这里需要设置CascadeType.ALL，否则无法保存
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
 	public Organization getParent() {
 		return parent;
 	}
@@ -60,6 +60,7 @@ public class Organization extends TreeEntity {
 		this.parent = parent;
 	}
 
+	@Column(name = "remarks", nullable = true, length = 1000)
 	public String getRemarks() {
 		return remarks;
 	}

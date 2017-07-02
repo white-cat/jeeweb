@@ -19,6 +19,7 @@ import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.core.common.service.ITreeCommonService;
 import cn.jeeweb.core.model.PageJson;
 import cn.jeeweb.core.query.data.PropertyPreFilterable;
+import cn.jeeweb.core.query.data.QueryPropertyPreFilter;
 import cn.jeeweb.core.query.data.Queryable;
 import cn.jeeweb.core.utils.ObjectUtils;
 import cn.jeeweb.core.utils.StringUtils;
@@ -49,7 +50,7 @@ public abstract class BaseTreeController<Entity extends AbstractEntity<ID> & Tre
 	 */
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Entity> treeData(Queryable queryable,
+	public void treeData(Queryable queryable,
 			@RequestParam(value = "nodeid", required = false, defaultValue = "") ID nodeid,
 			@RequestParam(value = "async", required = false, defaultValue = "false") boolean async,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -69,7 +70,13 @@ public abstract class BaseTreeController<Entity extends AbstractEntity<ID> & Tre
 			treeNodeList = commonService.listWithNoPage(queryable, detachedCriteria);
 			TreeSortUtil.create().sync(treeNodeList);
 		}
-		return treeNodeList;
+		PropertyPreFilterable propertyPreFilterable = new QueryPropertyPreFilter();
+		propertyPreFilterable.addQueryProperty("id", "name", "expanded", "hasChildren", "leaf", "loaded", "level",
+				"parentId");
+		SerializeFilter filter = propertyPreFilterable.constructFilter(entityClass);
+		PageJson<Entity> pagejson = new PageJson<Entity>(treeNodeList);
+		String content = JSON.toJSONString(pagejson, filter);
+		StringUtils.printJson(response, content);
 	}
 
 	/**

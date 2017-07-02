@@ -46,6 +46,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>基础Url地址</description>
+			<name>baseUrl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<description>grid显示的类型</description>
 			<name>gridShowType</name>
 			<required>false</required>
@@ -358,6 +364,46 @@
 		<attribute>
 			<description>图片高度</description>
 			<name>errormsg</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<!-- 指定支持动态属性 -->
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<tag>
+		<!--查询标签 -->
+		<name>query</name>
+		<!-- 处理类 -->
+		<tag-class>cn.jeeweb.core.tags.grid.DataGridQueryTag</tag-class>
+		<!-- 标签的内容体 -->
+		<body-content>empty</body-content>
+		<attribute>
+			<description>标题文字</description>
+			<name>label</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>列字段名称</description>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>是否为查询</description>
+			<name>query</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>查询模式</description>
+			<name>queryMode</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>查询方式</description>
+			<name>condition</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

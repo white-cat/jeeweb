@@ -147,14 +147,6 @@
 	                    </div>
 	                </div>
                 </div>
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content">
-                        <p class="m-t">这里写一些提示：<a href="http://www.jeeweb.cn/" target="_blank">查看</a>
-                        </p>
-                         <p>可以参考一些：<a href="http://www.jeeweb.cn/" target="_blank">http://www.jeeweb.cn/</a>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
 

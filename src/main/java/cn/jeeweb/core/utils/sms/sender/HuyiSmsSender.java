@@ -21,7 +21,11 @@ public class HuyiSmsSender extends SmsSender {
 	private HuyiRestSDK huyiRestSDK;
 
 	public HuyiSmsSender() {
-		init();
+		try {
+			init();
+		} catch (Exception e) {
+
+		}
 	}
 
 	@Override

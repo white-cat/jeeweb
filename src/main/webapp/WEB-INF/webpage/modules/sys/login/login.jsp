@@ -4,8 +4,6 @@
 
 <!DOCTYPE html>
 <html>
-<!-- 国际化数据库保存http://www.cnblogs.com/HD/p/4167331.html 简单调用http://hbiao68.iteye.com/blog/1947489 -->
-<!-- 国际化比较好的资料https://my.oschina.net/u/129165/blog/29884 -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +14,6 @@
     <link rel="shortcut icon" href="${staticPath}/common/favicon.ico">
     <html:css  name="bootstrap,font-awesome,animate,iCheck,toastr,bootstrapvalidator"/>
     <link href="${staticPath}/common/css/style.css" rel="stylesheet">
-
 </head>
 
 <body class="gray-bg">
@@ -53,13 +50,13 @@
                 
                 
                 <div class="form-group" >
-                	
                     <div class="col-lg-5">
                             <label><input id="rememberMe"  type="checkbox" name="rememberMe" value="1" class="i-checks"><spring:message code="sys.login.rememberMe"/></label>
                     </div>
  
                  </div>
                  <button type="submit" class="btn btn-primary block full-width m-b"><spring:message code="sys.login.submit.label"/></button>
+                 <p class="text-muted text-center"><span>默认账号密码:<b>admin/123456</span></b></p>
                  
             </form>
         </div>

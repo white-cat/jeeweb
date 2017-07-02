@@ -3,8 +3,6 @@
 <html:js  name="peity,iCheck,sweetalert,datepicker,Validform"/>
 <!-- 自定义js -->
 <script src="${staticPath}/common/js/content.js?v=1.0.0"></script>
-<!-- 系统公用JS -->
-<script src="${staticPath}/common/js/jeeweb.js"></script>
 
 <script type="text/javascript">
         //初始化表单

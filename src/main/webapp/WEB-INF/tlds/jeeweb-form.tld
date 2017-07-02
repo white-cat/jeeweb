@@ -3313,6 +3313,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>父子关联关系</description>
+			<name>chkboxType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<description>回调函数</description>
 			<name>callback</name>
 			<required>false</required>

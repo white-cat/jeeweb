@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="smsTemplateForm">
-    <form:form id="smsTemplateForm" modelAttribute="data" action="${adminPath}/sms/smstemplate/save" method="post" class="form-horizontal">
+    <form:form id="smsTemplateForm" modelAttribute="data"  method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

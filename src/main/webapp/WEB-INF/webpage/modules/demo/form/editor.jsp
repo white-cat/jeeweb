@@ -11,7 +11,7 @@
     <meta name="keywords" content="<spring:message code="sys.site.keywords" arguments="${platformName}"/>">
 	<meta name="description" content="<spring:message code="sys.site.description" arguments="${platformName}"/>">
 	
-    <html:css name="favicon,bootstrap,font-awesome,animate,iCheck,Validform,simditor,syntaxhighlighter" />
+    <html:css name="favicon,bootstrap,font-awesome,animate,iCheck,Validform,markdown,syntaxhighlighter" />
     <html:js name="jquery,bootstrap,syntaxhighlighter" />
     <link href="${staticPath}/common/css/style.css?v=4.1.0" rel="stylesheet">
 </head>
@@ -34,15 +34,15 @@
 					<div class="ibox-content">
 						 
                         <p>
-                           	 扩展实现了TextareaTag 具有TextareaTag标签的一些功能。编辑器目前支持，simditor、simditor、Summernote、CodeMirror 
+                           	 扩展实现了TextareaTag 具有TextareaTag标签的一些功能。编辑器目前支持，markdown、simditor、Summernote、CodeMirror 
                         </p>
 
                          <html:codedisplay>
- 							 <form:editor editorType="simditor"
+ 							 <form:editor editorType="markdown"
 								height="100px" path="editor"
 								defaultValue="${tesdfsdfsdf}" nested="false" />
 						 </html:codedisplay>
-					     <form:editor editorType="simditor"
+					     <form:editor editorType="markdown"
 						    editorAfterSetting="editorAfterSetting"  path="test"
 							defaultValue="" nested="false" />
 					</div>
@@ -52,7 +52,7 @@
 
 	</div>
 	<!-- 全局js -->
-	<html:js name="iCheck,Validform,simditor" />
+	<html:js name="iCheck,Validform,markdown" />
 	<!-- 自定义js -->
 	<script src="${staticPath}/common/js/content.js?v=1.0.0"></script>
 </body>

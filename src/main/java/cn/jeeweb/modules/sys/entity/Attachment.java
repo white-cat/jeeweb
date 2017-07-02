@@ -11,6 +11,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cn.jeeweb.core.common.entity.AbstractEntity;
 
 import java.lang.String;
@@ -37,6 +39,7 @@ public class Attachment extends AbstractEntity<String> {
 
 	private String fileext;// 文件扩展名
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "USERID", nullable = false)
 	private User user; //用戶ID

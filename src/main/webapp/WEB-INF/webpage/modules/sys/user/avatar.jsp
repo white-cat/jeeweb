@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                         <form:form id="avatarForm" modelAttribute="data" action="${adminPath}/sys/user/avatar"  method="post" class="form-horizontal">
+                         <form:form id="avatarForm" modelAttribute="data"  method="post" class="form-horizontal">
                             <form:hidden path="id" />
                             <form:fileinput showType="avatar" fileInputWidth="100px"  fileInputHeight="100px"  path="portrait"/>
                             <div class="form-group">

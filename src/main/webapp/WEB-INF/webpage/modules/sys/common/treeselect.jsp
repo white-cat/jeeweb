@@ -20,7 +20,8 @@
         var treeObj;
 		var setting = {
 			check: {
-				enable: ${multiselect}
+				enable: ${multiselect},
+				chkboxType:  { "Y": "${chkboxType}", "N": "${chkboxType}" }
 			},
 			data: {
 				key: {
@@ -67,7 +68,8 @@
 			       url : "${url}",  
 			       dataType : "json",  
 			       //data:{key:'1'},
-			       success : function(nodes) { 
+			       success : function(data) {
+			    	   var nodes=data.results;
 			    	   initTree(setting,nodes);
 			       }
 			});

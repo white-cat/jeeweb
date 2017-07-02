@@ -16,7 +16,7 @@
 		<!-- #section:basics/navbar.layout.brand -->
 		<a href="#" class="navbar-brand">
 			<small>
-				<i class="fa fa-leaf"></i>
+				<i class="fa fa fa-fire"></i>
 				<spring:message code="sys.site.title" arguments="${platformName}"/>
 			</small>
 		</a>
@@ -294,28 +294,20 @@
 						<small>欢迎您,</small>
 						${fns:getUser().realname}
 					</span>
-
 					<i class="ace-icon fa fa-caret-down"></i>
 				</a>
 
 				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 					<li>
-						<a href="#">
-							<i class="ace-icon fa fa-cog"></i>
-							Settings
-						</a>
-					</li>
-
-					<li>
-						<a href="profile.html">
+						<a class="J_menuItem" href="${adminPath}/sys/user/${fns:getUser().id}/avatar">
 							<i class="ace-icon fa fa-user"></i>
-							Profile
+							修改密码
 						</a>
 					</li>
 					<li class="divider"></li>
                     <li><a href="#" onclick="changeStyle()">
                     	<i class="ace-icon fa  fa-mail-reply"></i>
-                    	切换到经典模式</a>
+                    	切换回原风格</a>
                     </li> 
 					<li class="divider"></li>
 					<li>

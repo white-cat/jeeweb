@@ -1,65 +1,38 @@
-<%
-response.setStatus(400);
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@include file="/WEB-INF/webpage/common/taglibs.jspf"%>
 
-// 获取异常类
-Throwable ex = Exceptions.getThrowable(request);
-
-// 编译错误信息
-StringBuilder sb = new StringBuilder("错误信息：\n");
-if (ex != null) {
-	if (ex instanceof BindException) {
-		for (ObjectError e : ((BindException)ex).getGlobalErrors()){
-			sb.append("☆" + e.getDefaultMessage() + "(" + e.getObjectName() + ")\n");
-		}
-		for (FieldError e : ((BindException)ex).getFieldErrors()){
-			sb.append("☆" + e.getDefaultMessage() + "(" + e.getField() + ")\n");
-		}
-		LoggerFactory.getLogger("400.jsp").warn(ex.getMessage(), ex);
-	}else if (ex instanceof ConstraintViolationException) {
-		for (ConstraintViolation<?> v : ((ConstraintViolationException)ex).getConstraintViolations()) {
-			sb.append("☆" + v.getMessage() + "(" + v.getPropertyPath() + ")\n");
-		}
-	} else {
-		//sb.append(Exceptions.getStackTraceAsString(ex));
-		sb.append("☆" + ex.getMessage());
-	}
-} else {
-	sb.append("未知错误.\n\n");
-}
-
-// 如果是异步请求或是手机端，则直接返回信息
-if (Servlets.isAjaxRequest(request)) {
-	out.print(sb);
-}
-
-// 输出异常信息页面
-else {
-%>
-<%@page import="javax.validation.ConstraintViolation"%>
-<%@page import="javax.validation.ConstraintViolationException"%>
-<%@page import="org.springframework.validation.BindException"%>
-<%@page import="org.springframework.validation.ObjectError"%>
-<%@page import="org.springframework.validation.FieldError"%>
-<%@page import="org.slf4j.Logger,org.slf4j.LoggerFactory"%>
-<%@page import="cn.jeeweb.core.utils.StringUtils"%>
-<%@page contentType="text/html;charset=UTF-8" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>400 - 请求出错</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>400</title>
+  
+    <link rel="shortcut icon" href="${staticPath}/common/favicon.ico"> 
+    <link href="${staticPath}/common/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${staticPath}/common/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="${staticPath}/common/css/animate.css" rel="stylesheet">
+    <link href="${staticPath}/common/css/style.css?v=4.1.0" rel="stylesheet">
+
 </head>
-<body>
-	<div class="container-fluid">
-		<div class="page-header"><h1>参数有误,服务器无法解析.</h1></div>
-		<div class="errorMessage">
-			<%= sb.toString()%> <br/>
-		</div>
-		<a href="javascript:" onclick="history.go(-1);" class="btn">返回上一页</a> &nbsp;
-		<br/> <br/>
-		<script>try{top.$.jBox.closeTip();}catch(e){}</script>
-	</div>
+
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h2 style="font-size:80px;">400</h2>
+        <h3 class="font-bold">没有访问当前页面的权限！</h3>
+    </div>
+
+    <!-- 全局js -->
+    <script src="${staticPath}/common/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${staticPath}/common/js/bootstrap.min.js?v=3.3.6"></script>
+
 </body>
+
 </html>
-<%
-} out = pageContext.pushBody();
-%>

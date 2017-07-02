@@ -3,11 +3,11 @@ package cn.jeeweb.core.common.service;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 
 import cn.jeeweb.core.common.dao.support.OrderHelper;
+import cn.jeeweb.core.common.data.DuplicateValid;
 import cn.jeeweb.core.query.data.Page;
 import cn.jeeweb.core.query.data.Pageable;
 import cn.jeeweb.core.query.data.Queryable;
@@ -74,15 +74,21 @@ public interface ICommonService<T extends Serializable> {
 
 	List<T> listByCriterion(OrderHelper orderHelper, int page, int rows, Criterion... criterions);
 
-	public int updateByHql(final String hql, final Object... params);
+	int updateByHql(final String hql, final Object... params);
+	
+	int updateByIndexHql(final String hql, final Object... params);
+
+	int updateByAliasHql(final String hql, final Map<String, Object> alias);
 
 	Long countByHql(final String hql, final Object... params);
 
-	public List<T> listByHql(final String hql, final Object... params);
+	Long countByAliasHql(final String hql, final Map<String, Object> alias);
 
-	public List<T> listByHql(String hql, int page, int rows, Object... params);
+	List<T> listByHql(final String hql, final Object... params);
 
-	public List<T> listByAliasHql(final String hql, final Map<String, Object> alias);
+	List<T> listByAliasHql(final String hql, final Map<String, Object> alias);
+
+	List<T> listByHql(String hql, int page, int rows, Object... params);
 
 	List<Map<String, Object>> listMapByHql(final String hql, final Object... params);
 
@@ -163,5 +169,6 @@ public interface ICommonService<T extends Serializable> {
 	List<T> listPageEntityBySqlQueryId(String queryId, int page, int rows, final Object... params);
 
 	List<T> listPageEntityByAliasSqlQueryId(String queryId, int page, int rows, final Map<String, Object> alias);
-
+	
+	Boolean doValid(DuplicateValid duplicateValid); 
 }

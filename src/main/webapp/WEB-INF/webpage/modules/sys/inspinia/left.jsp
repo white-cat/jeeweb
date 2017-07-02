@@ -12,8 +12,8 @@
 			</span>
 			</a>
 			<ul class="dropdown-menu animated fadeInRight m-t-xs">
-				<li><a class="J_menuItem" href="${adminPath}/sys/user/avatar?id=${fns:getUser().id}">修改头像</a></li>
-				<li><a  href="#" onclick=" openDialog(title,url,gridId,width, height);update('修改密码','/jeeweb/admin/sys/user/changePassword','userGridId','800px','500px')">修改密码</a></li>
+				<li><a class="J_menuItem" href="${adminPath}/sys/user/${fns:getUser().id}/avatar">修改头像</a></li>
+				<li style="display:none;"><a  href="#" onclick=" openDialog(title,url,gridId,width, height);update('修改密码','/jeeweb/admin/sys/user/changePassword','userGridId','800px','500px')">修改密码</a></li>
 				<li class="divider"></li>
                 <li><a onclick="changeStyle()" href="#">切换到ACE模式</a></li> 
 				<li class="divider"></li>

@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="${entityName?uncap_first}Form">
-    <form:form id="${entityName?uncap_first}Form" modelAttribute="data" action="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/save" method="post" class="form-horizontal">
+    <form:form id="${entityName?uncap_first}Form" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

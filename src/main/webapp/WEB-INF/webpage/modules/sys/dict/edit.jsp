@@ -9,9 +9,8 @@
 </head>
 
 <body class="white-bg"  formid="dictForm">
-    <form:form id="dictForm" modelAttribute="data" action="${adminPath}/sys/dict/save" method="post" class="form-horizontal">
+    <form:form id="dictForm" modelAttribute="data"  method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<form:hidden path="gid" nested="false"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
 		        <tr>

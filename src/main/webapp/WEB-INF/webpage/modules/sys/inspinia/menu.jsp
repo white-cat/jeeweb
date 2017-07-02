@@ -4,7 +4,7 @@
 	     <li>
 	        <c:choose>
 			   <c:when test="${empty menu.url}">  
-				   <a href="#"><i class="fa ${menu.menuIcon}"></i> <span class="nav-label">${menu.name}</span><span class="fa arrow"></span></a>  
+				  <a href="#"><i class="fa ${menu.menuIcon}"></i> <span class="nav-label">${menu.name}</span><span class="fa arrow"></span></a>  
 			   </c:when>
 			   <c:otherwise> 
 				  <a  class="J_menuItem"  href="${adminPath}/${menu.url}"><i class="fa ${menu.menuIcon}"></i> <span class="nav-label">${menu.name}</span><span class="fa arrow"></span></a>

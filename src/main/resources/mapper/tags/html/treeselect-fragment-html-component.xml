@@ -23,7 +23,7 @@
 					    title:"${title!}",
 		                maxmin: true, //开启最大化最小化按钮
 					    ajaxData:{selectIds: $("#${name!}").val()},
-					    content: "${adminPath}/sys/common/treeselect?selectNodes=${value}&multiselect=${multiselect?string("true","false")}&url="+encodeURIComponent("${dataUrl!}"),
+					    content: "${adminPath}/sys/common/treeselect?selectNodes=${value}&chkboxType=${chkboxType!}&multiselect=${multiselect?string("true","false")}&url="+encodeURIComponent("${dataUrl!}"),
 					    btn: ['确定', '关闭'],
 					    yes: function(index, layero){ //或者使用btn1
 									var tree = layero.find("iframe")[0].contentWindow.treeObj;//h.find("iframe").contents();

@@ -19,8 +19,8 @@
     <grid:column label="系统主机IP"  name="systemHost" />
     <grid:column label="最后停止时间"  name="lastStopTimestamp" />
     <grid:column label="最后登录时间"  name="lastLoginTimestamp" />
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

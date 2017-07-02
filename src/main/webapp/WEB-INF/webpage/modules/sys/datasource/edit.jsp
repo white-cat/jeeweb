@@ -9,7 +9,7 @@
 </head>
 
 <body class="white-bg"  formid="datasourceForm">
-    <form:form id="datasourceForm" modelAttribute="data" action="${adminPath}/sys/datasource/save" method="post" class="form-horizontal">
+    <form:form id="datasourceForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

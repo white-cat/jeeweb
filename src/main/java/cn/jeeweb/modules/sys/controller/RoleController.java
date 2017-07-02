@@ -8,6 +8,8 @@ import cn.jeeweb.modules.sys.entity.Role;
 import cn.jeeweb.modules.sys.entity.RoleMenu;
 import cn.jeeweb.modules.sys.service.IMenuService;
 import cn.jeeweb.modules.sys.service.IRoleMenuService;
+import cn.jeeweb.modules.sys.utils.UserUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +61,7 @@ public class RoleController extends BaseCRUDController<Role, String> {
 				roleMenuList.add(roleMenu);
 			}
 			roleMenuService.batchSave(roleMenuList);
+			UserUtils.clearCache();
 		} catch (Exception e) {
 			e.printStackTrace();
 			ajaxJson.fail("权限设置失败");

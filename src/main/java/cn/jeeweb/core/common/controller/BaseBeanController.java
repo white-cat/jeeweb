@@ -1,11 +1,9 @@
 package cn.jeeweb.core.common.controller;
 
-import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import cn.jeeweb.core.utils.ReflectionUtils;
 import cn.jeeweb.core.utils.StringUtils;
-
 import java.io.Serializable;
 
 public abstract class BaseBeanController<Entity extends Serializable> extends BaseController {
@@ -19,13 +17,6 @@ public abstract class BaseBeanController<Entity extends Serializable> extends Ba
 		this.entityClass = ReflectionUtils.getSuperGenericType(getClass());
 	}
 
-	/**
-	 * 设置通用数据
-	 *
-	 * @param model
-	 */
-	protected void setCommonData(Model model) {
-	}
 
 	protected Entity newModel() {
 		try {

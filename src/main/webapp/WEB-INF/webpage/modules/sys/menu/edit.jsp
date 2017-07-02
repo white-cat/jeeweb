@@ -8,7 +8,7 @@
 </head>
 
 <body class="white-bg"  formid="menuForm">
-     <form:form id="menuForm" modelAttribute="data" action="${adminPath}/sys/menu/save" method="post" class="form-horizontal">
+     <form:form id="menuForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

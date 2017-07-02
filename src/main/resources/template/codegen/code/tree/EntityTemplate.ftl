@@ -35,15 +35,11 @@ import ${importType};
 @DynamicInsert(false)
 @SuppressWarnings("serial")
 public class ${entityName?cap_first}Entity extends TreeEntity {
-    // 这里需要设置CascadeType.ALL，否则无法保存
-	@ManyToOne(fetch = FetchType.LAZY)
-	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
-	private ${entityName?cap_first}Entity parent;
+  
+    private ${entityName?cap_first}Entity parent;
 	/**
 	 * 是否有叶子节点
 	 */
-	@Formula(value = "(select count(*) from ${tableName} f_t where f_t.parent_id = id)")
 	private boolean hasChildren;
 	
     <#list attributeInfos as attributeInfo>
@@ -51,11 +47,11 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	/**
 	 * ${attributeInfo.remarks}
 	 */
-	@Column(name ="${attributeInfo.dbName}",nullable=<#if attributeInfo.nullable>true<#else>false</#if><#if attributeInfo.length?exists><#if attributeInfo.length != ''>,length=${attributeInfo.length}</#if></#if><#if attributeInfo.decimalDigits?exists><#if attributeInfo.decimalDigits != ''>,scale=${attributeInfo.decimalDigits}</#if></#if><#if attributeInfo.precision != ''>,precision=${attributeInfo.precision}</#if>)
 	private ${attributeInfo.type} ${attributeInfo.name};
 	</#if>
 	</#list>
 	
+	@Formula(value = "(select count(*) from ${tableName} f_t where f_t.parent_id = id)")
 	@Override
 	public boolean isHasChildren() {
 		return hasChildren;
@@ -66,6 +62,9 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 		this.hasChildren = hasChildren;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
 	public ${entityName?cap_first}Entity getParent() {
 		return parent;
 	}
@@ -76,11 +75,13 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	
 	<#list attributeInfos as attributeInfo>
 	<#if attributeInfo.name!='id'&&attributeInfo.name!='name'&& attributeInfo.name!='parentId'&& attributeInfo.name!='parentIds'>
-	/**
-	 * 获取  ${attributeInfo.name}
-	 *@return: ${attributeInfo.type}  ${attributeInfo.remarks}
-	 */
-	public ${attributeInfo.type} get${attributeInfo.name?cap_first}(){
+	<#if attributeInfo.importedKey>
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "${attributeInfo.dbName}")
+	<#else>
+	@Column(name ="${attributeInfo.dbName}",nullable=<#if attributeInfo.nullable>true<#else>false</#if><#if attributeInfo.length?exists><#if attributeInfo.length != ''>,length=${attributeInfo.length}</#if></#if><#if attributeInfo.decimalDigits?exists><#if attributeInfo.decimalDigits != ''>,scale=${attributeInfo.decimalDigits}</#if></#if><#if attributeInfo.precision != ''>,precision=${attributeInfo.precision}</#if>)
+	</#if>
+	public <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
 		return this.${attributeInfo.name};
 	}
 
@@ -88,7 +89,7 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	 * 设置  ${attributeInfo.name}
 	 *@param: ${attributeInfo.name}  ${attributeInfo.remarks}
 	 */
-	public void set${attributeInfo.name?cap_first}(${attributeInfo.type} ${attributeInfo.name}){
+	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
 		this.${attributeInfo.name} = ${attributeInfo.name};
 	}
 	</#if>

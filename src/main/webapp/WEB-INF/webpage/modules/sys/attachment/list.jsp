@@ -10,7 +10,7 @@
 <grid:grid id="attachmentId" url="${adminPath}/sys/attachment/ajaxList">
 	<grid:column label="sys.common.key" hidden="true"   name="id" width="100"/>
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
-	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${adminPath}/sys/attachment/delete" />
+	<grid:button groupname="opt" function="delete"/>
     <grid:column label="附件名称"  name="filename" width="200"  />
     <grid:column label="文件路径"  name="filepath"  width="200" />
     <grid:column label="文件大小"  name="filesize" width="100"    />
@@ -19,10 +19,10 @@
     <grid:column label="上传人"  name="user.realname"  />
     <grid:column label="上传IP"  name="uploadip"  />
     
-	<grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${adminPath}/sys/attachment/batchDelete"  />
+	<grid:toolbar  function="delete" />
 	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

@@ -20,10 +20,10 @@
     <grid:column label="User-Agent"  name="userAgent"  />
     <grid:column label="用户会话ID"  name="id"  />
  
-	<grid:toolbar title="强制退出" icon="fa-trash-o" function="toolbarConfirm"  url="${adminPath}/sys/online/forceLogout"  tipMsg="您确定要强制退出这些信息么，请谨慎操作！"/>
+	<grid:toolbar title="强制退出" icon="fa-trash-o" function="toolbarSelectConfirm"  url="${adminPath}/sys/online/forceLogout"  tipMsg="您确定要强制退出这些信息么，请谨慎操作！"/>
  	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

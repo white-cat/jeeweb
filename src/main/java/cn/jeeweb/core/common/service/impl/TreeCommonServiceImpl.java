@@ -69,7 +69,7 @@ public class TreeCommonServiceImpl<T extends Serializable & TreeNode<ID>, ID ext
 
 	@Override
 	public void delete(T entity) {
-		updateByHql(DELETE_CHILDREN_QL, entity.getId(), entity.makeSelfAsNewParentIds());
+		updateByIndexHql(DELETE_CHILDREN_QL, entity.getId(), entity.makeSelfAsNewParentIds());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -102,7 +102,7 @@ public class TreeCommonServiceImpl<T extends Serializable & TreeNode<ID>, ID ext
 		source.setParentIds(newParentIds);
 		super.update(source);
 		String newSourceChildrenParentIds = source.makeSelfAsNewParentIds();
-		updateByHql(UPDATE_CHILDREN_PARENT_IDS_QL, newSourceChildrenParentIds, oldSourceChildrenParentIds);
+		updateByIndexHql(UPDATE_CHILDREN_PARENT_IDS_QL, newSourceChildrenParentIds, oldSourceChildrenParentIds);
 	}
 
 }

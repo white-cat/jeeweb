@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="oaNotificationForm">
-    <form:form id="oaNotificationForm" modelAttribute="data" action="${adminPath}/oa/oanotification/save" method="post" class="form-horizontal">
+    <form:form id="oaNotificationForm" modelAttribute="data"   method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

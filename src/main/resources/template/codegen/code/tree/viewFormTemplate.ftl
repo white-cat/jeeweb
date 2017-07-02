@@ -9,13 +9,26 @@
 </head>
 
 <body class="white-bg"  formid="${entityName?uncap_first}Form">
-    <form:form id="${entityName?uncap_first}Form" modelAttribute="data" action="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/save" method="post" class="form-horizontal">
+    <form:form id="${entityName?uncap_first}Form"  modelAttribute="data"  method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
+			  <tr>
+		         <td class="width-15 active"><label class="pull-right">上级${functionName}:</label></td>
+		         <td class="width-35">
+		            <form:treeselect title="请选择上级${functionName}" path="parentId" dataUrl="${r'${adminPath}'}/${moduleName}/${entityName?lower_case}/treeData" labelName="parentname" labelValue="${r'${data.parent.name}'}" />	   
+				  </td>
+		          <td  class="width-15 active text-right">	
+		              <label><font color="red">*</font>${functionName}名称:</label>
+		         </td>
+		         <td class="width-35" >
+		             <form:input path="name" class="form-control " datatype="*" nullmsg="请输入${functionName}名称！" htmlEscape="false" />
+		             <label class="Validform_checktip"></label>
+		         </td>
+		      </tr>
 	    <#assign index=0 />
 		<#list columns as column>
-			<#if column.isForm?? && column.isForm>
+			<#if column.isForm?? && column.isForm&& column.javaField != 'parentId'&& column.javaField != 'name'>
 			<#assign index=index+1 />
 			<#if index%2==1> 
 				<tr>

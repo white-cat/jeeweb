@@ -25,6 +25,7 @@ import cn.jeeweb.core.utils.MessageUtils;
  */
 @SuppressWarnings("serial")
 public class DataGridButtonTag extends AbstractGridHtmlTag {
+	private static String[] INNER_DEFAULT_FUNCTION = { "delete" };
 	private String title = "";// 标题文字
 	private String groupname = "";// 分组名
 	private String winwidth = "1000px";// 打开窗口宽度
@@ -134,17 +135,53 @@ public class DataGridButtonTag extends AbstractGridHtmlTag {
 		this.tipMsg = tipMsg;
 	}
 
+	private void dealDefault(DataGridTag parent) {
+		if (!StringUtils.isEmpty(this.function) && isFunction(this.function)) {
+			// 预处理Url问题
+			if (StringUtils.isEmpty(url)) {
+				String url = "";
+				if (this.function.equals("delete")) {
+					url = parent.getBaseUrl() + "/{id}/delete";
+				} else {
+					url = parent.getBaseUrl() + "/" + this.function;
+				}
+				staticAttributes.put("url", url);
+			}
+			if (StringUtils.isEmpty(title)) {
+				String title = "sys.common." + this.function;
+				staticAttributes.put("title", MessageUtils.getMessageOrSelf(title));
+			}
+
+			if (StringUtils.isEmpty(outclass)) {
+				String outclass = "";
+				if (this.function.equals("delete")) {
+					outclass = "btn-danger";
+				}
+				staticAttributes.put("outclass", outclass);
+			}
+
+			if (StringUtils.isEmpty(innerclass)) {
+				String innerclass = "";
+				if (this.function.equals("delete")) {
+					innerclass = "fa-trash";
+				}
+				staticAttributes.put("innerclass", innerclass);
+			}
+		}
+	}
+
 	public int doEndTag() throws JspTagException {
 		// toobar参数配置
 		Tag t = findAncestorWithClass(this, DataGridTag.class);
 		final DataGridTag parent = (DataGridTag) t;
+		dealDefault(parent);
 		Map<String, Object> buttonMap = new HashMap<String, Object>();
 		buttonMap.putAll(staticAttributes);
-		if (!StringUtils.isEmpty(outclass)) {
-			buttonMap.put("outclass", "btn btn-xs " + outclass);
+		if (buttonMap.containsKey("outclass")) {
+			buttonMap.put("outclass", "btn btn-xs " + buttonMap.get("outclass"));
 		}
-		if (!StringUtils.isEmpty(innerclass)) {
-			buttonMap.put("innerclass", "fa " + innerclass);
+		if (buttonMap.containsKey("innerclass")) {
+			buttonMap.put("innerclass", "fa " + buttonMap.get("innerclass"));
 		} else {
 			buttonMap.put("innerclass", "empty");
 		}
@@ -156,7 +193,7 @@ public class DataGridButtonTag extends AbstractGridHtmlTag {
 			dynamicAttributes = new HashMap<String, Object>();
 		}
 		if (!dynamicAttributes.containsKey("class")) {
-			dynamicAttributes.put("class","btn btn-xs ");
+			dynamicAttributes.put("class", "btn btn-xs ");
 		}
 		buttonMap.put("dynamicAttributes", dynamicAttributes);
 		parent.addButton(buttonMap);
@@ -198,4 +235,12 @@ public class DataGridButtonTag extends AbstractGridHtmlTag {
 		}
 	}
 
+	public Boolean isFunction(String function) {
+		for (String defaultFunction : INNER_DEFAULT_FUNCTION) {
+			if (defaultFunction.equals(function.toLowerCase())) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
 }

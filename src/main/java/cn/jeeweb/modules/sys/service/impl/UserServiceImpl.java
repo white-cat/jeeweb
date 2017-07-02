@@ -1,10 +1,18 @@
 package cn.jeeweb.modules.sys.service.impl;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.entity.User;
+import cn.jeeweb.modules.sys.entity.UserOrganization;
+import cn.jeeweb.modules.sys.entity.UserRole;
+import cn.jeeweb.modules.sys.service.IOrganizationService;
+import cn.jeeweb.modules.sys.service.IUserOrganizationService;
+import cn.jeeweb.modules.sys.service.IUserRoleService;
 import cn.jeeweb.modules.sys.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl extends CommonServiceImpl<User> implements IUserService {
 	@Autowired
 	PasswordService passwordService;
+	@Autowired
+	private IUserOrganizationService userOrganizationService;
+	@Autowired
+	private IUserRoleService userRoleService;
 
 	@Override
 	public void changePassword(String userid, String newPassword) {
@@ -58,15 +70,18 @@ public class UserServiceImpl extends CommonServiceImpl<User> implements IUserSer
 	}
 
 	@Override
-	public Set<String> findRoles(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteById(Serializable id) {
+		super.deleteById(id);
+		// 删除角色关联
+		userRoleService.batchDeleteByProperty("userId", id);
+		// 删除部门关联
+		userOrganizationService.batchDeleteByProperty("userId", id);
 	}
 
 	@Override
-	public Set<String> findPermissions(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public void batchDeleteById(List<?> ids) {
+		for (Object id : ids) {
+			this.deleteById((Serializable) id);
+		}
 	}
-
 }

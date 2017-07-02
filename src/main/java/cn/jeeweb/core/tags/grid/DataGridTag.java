@@ -37,6 +37,7 @@ public class DataGridTag extends AbstractGridHtmlTag {
 	private String gridShowType = "list";// list,form,js
 	private String caption = ""; // 表格的标题
 	private String url = ""; // 从datas中加入的数据,请求的地址
+	private String baseUrl = "";// 请求的基础网页
 	private String editurl = "clientArray"; // 行内编辑URL
 	private Boolean editable = Boolean.FALSE;// 是否行内编辑
 	private String datatype = "json"; // 默认为JSON,local,jsonp远程
@@ -236,6 +237,14 @@ public class DataGridTag extends AbstractGridHtmlTag {
 		this.gridSettingCallback = gridSettingCallback;
 	}
 
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
 	public String getEditurl() {
 		return editurl;
 	}
@@ -291,6 +300,12 @@ public class DataGridTag extends AbstractGridHtmlTag {
 		if (staticAttributes != null) {
 			staticAttributes.clear();
 		}
+		if (StringUtils.isEmpty(baseUrl) && !StringUtils.isEmpty(url)) {
+			this.baseUrl = url.substring(0, url.lastIndexOf("/"));
+		}
+		if (StringUtils.isEmpty(url) && !StringUtils.isEmpty(baseUrl)) {
+			this.url = this.baseUrl + "/ajaxList";
+		}
 		Field[] field = getClass().getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
 		for (int j = 0; j < field.length; j++) { // 遍历所有属性
 			Field field2 = field[j];
@@ -321,11 +336,6 @@ public class DataGridTag extends AbstractGridHtmlTag {
 
 	@SuppressWarnings("rawtypes")
 	private void writeFragment() throws JspException {
-		try {
-			htmlComponentManager.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		if (!StringUtils.isEmpty(url)) {
 			if (this.url.contains("?")) {
 				this.url = this.url + "&gridtype=" + gridtype;

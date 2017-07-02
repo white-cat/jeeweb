@@ -21,8 +21,10 @@
 							<a class="close-link"> <i class="fa fa-times"></i>
 							</a>
 						</div>
-					</div>  
-					<sitemesh:body/>
+					</div>
+					<div class="ibox-content">
+					   <sitemesh:body/>
+					</div>
 				</div>
 			</div>
 		</div>

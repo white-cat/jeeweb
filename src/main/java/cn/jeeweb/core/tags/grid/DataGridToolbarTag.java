@@ -8,6 +8,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 import cn.jeeweb.core.tags.common.tag.AbstractGridHtmlTag;
 import cn.jeeweb.core.utils.MessageUtils;
+import cn.jeeweb.core.utils.StringUtils;
 
 /**
  * 
@@ -24,16 +25,18 @@ import cn.jeeweb.core.utils.MessageUtils;
  */
 @SuppressWarnings("serial")
 public class DataGridToolbarTag extends AbstractGridHtmlTag {
+	private static String[] INNER_DEFAULT_FUNCTION = { "create", "update", "delete", "search", "reset" };
 	private String title = "";// 标题文字
 	private String winwidth = "800px";// 打开窗口宽度
 	private String winheight = "500px";// 打开窗口高度
 	private String icon = "";// 图标
 	private String url = "";// 方法请求地址
-	private String function = "";// 默认的add，update方法
+	private String function = "";// 默认的create,update,delete方法
 	private String onclick = "";// click事件
 	private String layout = "left";// left，right;默认在左边
 	private String tipMsg = ""; // 当时询问时打开的时候的询问提示语
 	private String exp = ""; // 表达式
+
 	public String getTitle() {
 		return title;
 	}
@@ -113,24 +116,67 @@ public class DataGridToolbarTag extends AbstractGridHtmlTag {
 	public void setExp(String exp) {
 		this.exp = exp;
 	}
+
 	public int doEndTag() throws JspTagException {
 		// toobar参数配置
 		Tag t = findAncestorWithClass(this, DataGridTag.class);
 		final DataGridTag parent = (DataGridTag) t;
+		dealDefault(parent);
 		Map<String, Object> toobarMap = new HashMap<String, Object>();
 		toobarMap.putAll(staticAttributes);
-		if (dynamicAttributes==null) {
-			dynamicAttributes=new HashMap<String, Object>();
+		if (dynamicAttributes == null) {
+			dynamicAttributes = new HashMap<String, Object>();
 		}
 		toobarMap.put("dynamicAttributes", dynamicAttributes);
 		parent.addToolbar(toobarMap);
 		return EVAL_PAGE;
 	}
 
+	private void dealDefault(DataGridTag parent) {
+		if (!StringUtils.isEmpty(this.function) && isFunction(this.function)) {
+			// 预处理Url问题
+			if (StringUtils.isEmpty(url)) {
+				String url = "";
+				if (this.function.equals("delete")) {
+					url = parent.getBaseUrl() + "/batch/delete";
+				} else if (this.function.equals("update")) {
+					url = parent.getBaseUrl() + "/{id}/" + this.function;
+				} else {
+					url = parent.getBaseUrl() + "/" + this.function;
+				}
+				staticAttributes.put("url", url);
+			}
+
+			if (StringUtils.isEmpty(title)) {
+				String title = "sys.common." + this.function;
+				staticAttributes.put("title", MessageUtils.getMessageOrSelf(title));
+			}
+
+			if (StringUtils.isEmpty(this.icon)) {
+				String icon = "";
+				if (this.function.equals("create")) {
+					icon = "fa-plus";
+				} else if (this.function.equals("update")) {
+					icon = "fa-file-text-o";
+				} else if (this.function.equals("delete")) {
+					icon = "fa-trash-o";
+				} else if (this.function.equals("delete")) {
+					icon = "fa-search";
+				} else if (this.function.equals("delete")) {
+					icon = "fa-refresh";
+				}
+				staticAttributes.put("icon", icon);
+			}
+			if (this.function.equals("search") || this.function.equals("reset")) {
+				staticAttributes.put("layout", "right");
+			}
+		}
+	}
+
 	@Override
 	public void setDynamicAttribute(String url, String localName, Object value) throws JspException {
 		super.setDynamicAttribute(url, localName, value);
-		if (localName.equals("title")) {
+		if (localName.equals("title") && StringUtils.isEmpty(title)) {
 			dynamicAttributes.put(localName, MessageUtils.getMessageOrSelf((String) value));
 		}
 	}
@@ -143,6 +189,13 @@ public class DataGridToolbarTag extends AbstractGridHtmlTag {
 		}
 	}
 
-	
+	public Boolean isFunction(String function) {
+		for (String defaultFunction : INNER_DEFAULT_FUNCTION) {
+			if (defaultFunction.equals(function.toLowerCase())) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
 
 }

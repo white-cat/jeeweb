@@ -12,21 +12,21 @@
 </head>
 
 <body class="white-bg"  formid="userForm">
-     <form:form id="userForm" modelAttribute="data" action="${adminPath}/sys/user/save" method="post" class="form-horizontal">
+     <form:form id="userForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
 		       <tr>
 		         <td  class="width-15 active text-right">	<label><font color="red">*</font>用户名:</label></td>
 		         <td  class="width-35" >
-		             <form:input path="username" class="form-control"  htmlEscape="false"  datatype="*"  nullmsg="请输入用户名！"/>
+		             <form:input path="username" class="form-control" ajaxurl="${adminPath}/sys/user/validate"  validErrorMsg="用户名重复"  htmlEscape="false"  datatype="*"  nullmsg="请输入用户名！"/>
 		             <label class="Validform_checktip"></label>
 		         </td>
 		          <td  class="width-15 active text-right">	
 		              <label><font color="red">*</font>姓名:</label>
 		         </td>
 		         <td class="width-35" >
-		             <form:input path="realname" class="form-control " datatype="*" nullmsg="请输入姓名！" htmlEscape="false" />
+		             <form:input path="realname" class="form-control " datatype="*" nullmsg="请输入姓名！" validErrorMsg="用户名重复" htmlEscape="false" />
 		             <label class="Validform_checktip"></label>
 		         </td>
 		      </tr>
@@ -35,12 +35,14 @@
 		              <label><font color="red">*</font>邮箱:</label>
 		         </td>
 		         <td class="width-35" >
-		             <form:input path="email" class="form-control " datatype="e" nullmsg="请输入姓名！" htmlEscape="false" />
+		             <form:input path="email" class="form-control" ajaxurl="${adminPath}/sys/user/validate"   datatype="e" nullmsg="请输入邮箱！"  htmlEscape="false" />
 		             <label class="Validform_checktip"></label>
 		         </td>
-		         <td  class="width-15 active text-right">	<label><font color="red">*</font>联系电话:</label></td>
+		         <td  class="width-15 active text-right">	
+		           	 <label><font color="red">*</font>联系电话:</label>
+		         </td>
 		         <td  class="width-35" >
-		             <form:input path="phone" class="form-control"  htmlEscape="false"  datatype="m"  nullmsg="请输入用户名！"/>
+		             <form:input path="phone" class="form-control" ajaxurl="${adminPath}/sys/user/validate"  htmlEscape="false"  datatype="m"  nullmsg="请输入用户名！"/>
 		             <label class="Validform_checktip"></label>
 		         </td>
 		      </tr>

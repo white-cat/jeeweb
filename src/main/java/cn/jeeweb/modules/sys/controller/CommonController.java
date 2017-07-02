@@ -35,6 +35,8 @@ public class CommonController extends BaseController {
 	public String treeselect(Model model, HttpServletRequest request) {
 		model.addAttribute("url", request.getParameter("url")); // 树结构数据URL
 		String multiselect = request.getParameter("multiselect");
+		String chkboxType = request.getParameter("chkboxType");
+		model.addAttribute("chkboxType", chkboxType); // 父子关联 
 		if (StringUtils.isEmpty(multiselect)) {
 			multiselect = Boolean.TRUE + "";
 		}

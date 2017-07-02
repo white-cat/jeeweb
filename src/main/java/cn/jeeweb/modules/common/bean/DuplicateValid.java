@@ -9,53 +9,80 @@ package cn.jeeweb.modules.common.bean;
 @SuppressWarnings("serial")
 public class DuplicateValid implements java.io.Serializable {
 
-	/** 编辑数据ID */
-	private String dataId;
-	/**
-	 * 表名
-	 */
-	private String table;
-
 	/**
 	 * 字段名
 	 */
-	private String field;
+	private String name;
 
 	/**
 	 * 字段值
 	 */
-	private String vlaue;
+	private String param;
 
-	public String getTable() {
-		return table;
+	/**
+	 * 字段名
+	 */
+	private String extendName;
+
+	/**
+	 * 字段值
+	 */
+	private String extendParam;
+	/**
+	 * 查询方式
+	 */
+	private String queryType;
+	/**
+	 * 查询的DATA
+	 */
+	private String queryData;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setTable(String table) {
-		this.table = table;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getField() {
-		return field;
+	public String getParam() {
+		return param;
 	}
 
-	public void setField(String field) {
-		this.field = field;
+	public void setParam(String param) {
+		this.param = param;
 	}
 
-	public String getVlaue() {
-		return vlaue;
+	public String getQueryType() {
+		return queryType;
 	}
 
-	public void setVlaue(String vlaue) {
-		this.vlaue = vlaue;
+	public void setQueryType(String queryType) {
+		this.queryType = queryType;
 	}
 
-	public String getDataId() {
-		return dataId;
+	public String getQueryData() {
+		return queryData;
 	}
 
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setQueryData(String queryData) {
+		this.queryData = queryData;
+	}
+
+	public String getExtendName() {
+		return extendName;
+	}
+
+	public void setExtendName(String extendName) {
+		this.extendName = extendName;
+	}
+
+	public String getExtendParam() {
+		return extendParam;
+	}
+
+	public void setExtendParam(String extendParam) {
+		this.extendParam = extendParam;
 	}
 
 }

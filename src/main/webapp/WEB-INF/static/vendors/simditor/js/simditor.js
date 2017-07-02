@@ -3593,7 +3593,7 @@ LinkButton = (function(_super) {
       $contents = $(range.extractContents());
       linkText = this.editor.formatter.clearHtml($contents.contents(), false);
       $link = $('<a/>', {
-        href: 'http://www.example.com',
+        href: 'http://www.jeeweb.cn',
         target: '_blank',
         text: linkText || this._t('linkText')
       });

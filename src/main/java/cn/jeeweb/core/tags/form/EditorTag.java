@@ -12,7 +12,6 @@ import cn.jeeweb.core.utils.SpringContextHolder;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.tags.SysFunctions;
 
-
 @SuppressWarnings("serial")
 public class EditorTag extends TextareaTag {
 	protected HtmlComponentManager htmlComponentManager = SpringContextHolder.getApplicationContext()
@@ -47,8 +46,6 @@ public class EditorTag extends TextareaTag {
 	public void setEditorWidth(String editorWidth) {
 		this.editorWidth = editorWidth;
 	}
-
-	 
 
 	public String getEditorSetting() {
 		return editorSetting;
@@ -85,7 +82,7 @@ public class EditorTag extends TextareaTag {
 		writeOptionalAttribute(tagWriter, COLS_ATTRIBUTE, getCols());
 		writeOptionalAttribute(tagWriter, ONSELECT_ATTRIBUTE, getOnselect());
 		String value = getDisplayString(getBoundValue(), getPropertyEditor());
-		value=StringEscapeUtils.unescapeHtml4(value);
+		value = StringEscapeUtils.unescapeHtml4(value);
 		tagWriter.appendValue(processFieldValue(getName(), value, "textarea"));
 		tagWriter.endTag();
 		// 输出编辑器代码片段
@@ -95,7 +92,7 @@ public class EditorTag extends TextareaTag {
 
 	private void writeFragment() throws JspException {
 		Map<String, Object> rootMap = new HashMap<String, Object>();
-		String ctx = pageContext.getServletContext().getContextPath() + SysFunctions.getAdminUrlPrefix();
+		String ctx = pageContext.getServletContext().getContextPath();
 		String adminPath = pageContext.getServletContext().getContextPath() + SysFunctions.getAdminUrlPrefix();
 		String staticPath = pageContext.getServletContext().getContextPath() + "/static";
 		rootMap.put("ctx", ctx);

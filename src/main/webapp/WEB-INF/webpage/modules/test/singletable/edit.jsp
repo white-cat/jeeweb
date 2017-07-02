@@ -10,7 +10,7 @@
 </head>
 
 <body class="white-bg"  formid="singleTableForm">
-    <form:form id="singleTableForm" modelAttribute="data" action="${adminPath}/test/singletable/save" method="post" class="form-horizontal">
+    <form:form id="singleTableForm" modelAttribute="data" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<table  class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>

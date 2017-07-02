@@ -1,10 +1,12 @@
 package cn.jeeweb.core.common.service.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import cn.jeeweb.core.common.dao.ICommonDao;
 import cn.jeeweb.core.common.dao.support.OrderHelper;
+import cn.jeeweb.core.common.data.DuplicateValid;
 import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.core.query.data.Page;
 import cn.jeeweb.core.query.data.PageImpl;
@@ -14,12 +16,14 @@ import cn.jeeweb.core.query.parse.CriteriaParse;
 import cn.jeeweb.core.query.parse.QueryParse;
 import cn.jeeweb.core.query.utils.QueryableConvertUtils;
 import cn.jeeweb.core.utils.ReflectionUtils;
+
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Transactional
 public class CommonServiceImpl<T extends Serializable> implements ICommonService<T> {
@@ -156,6 +160,22 @@ public class CommonServiceImpl<T extends Serializable> implements ICommonService
 	}
 
 	@Override
+	public int updateByIndexHql(String hql, Object... params) {
+		Map<String, Object> alias = new HashMap<String, Object>();
+		if (params != null) {
+			for (int i = 0; i < params.length; i++) {
+				alias.put((i + 1) + "", params[i]);
+			}
+		}
+		return updateByAliasHql(hql, alias);
+	}
+
+	@Override
+	public int updateByAliasHql(String hql, Map<String, Object> alias) {
+		return commonDao.updateByAliasHql(hql, alias);
+	}
+
+	@Override
 	public int count(Criterion... criterions) {
 		return commonDao.count(entityClass, criterions);
 	}
@@ -183,6 +203,11 @@ public class CommonServiceImpl<T extends Serializable> implements ICommonService
 	@Override
 	public Long countByHql(String hql, Object... params) {
 		return commonDao.countByHql(hql, params);
+	}
+
+	@Override
+	public Long countByAliasHql(String hql, Map<String, Object> alias) {
+		return commonDao.countByAliasHql(hql, alias);
 	}
 
 	@Override
@@ -382,4 +407,42 @@ public class CommonServiceImpl<T extends Serializable> implements ICommonService
 		return commonDao.listPageEntityByAliasSqlQueryId(queryId, page, rows, entityClass, alias);
 	}
 
+	@Override
+	public Boolean doValid(DuplicateValid duplicateValid) {
+		Boolean valid = Boolean.FALSE;
+		String queryType = duplicateValid.getQueryType();
+		if (StringUtils.isEmpty(queryType)) {
+			queryType = "table";
+		}
+		if (queryType.equals("table")) {
+			valid = validTable(duplicateValid);
+		}
+		return valid;
+	}
+
+	private Boolean validTable(DuplicateValid duplicateValid) {
+		Long num = null;
+		String hql = "";
+		String extendName = duplicateValid.getExtendName();
+		String extendParam = duplicateValid.getExtendParam();
+		if (!StringUtils.isEmpty(extendParam)) {
+			// [2].编辑页面校验
+			hql = "SELECT count(*) FROM " + entityClass.getName() + " as t WHERE t." + duplicateValid.getName() + " ='"
+					+ duplicateValid.getParam() + "' and t." + extendName + " != '" + extendParam + "'";
+			num = countByHql(hql);
+		} else {
+			// [1].添加页面校验
+			hql = "SELECT count(*) FROM " + entityClass.getName() + " as t WHERE t." + duplicateValid.getName() + " ='"
+					+ duplicateValid.getParam() + "'";
+			num = countByHql(hql);
+		}
+
+		if (num == null || num == 0) {
+			// 该值可用
+			return true;
+		} else {
+			// 该值不可用
+			return false;
+		}
+	}
 }

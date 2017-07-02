@@ -13,7 +13,7 @@
 	<grid:button title="开启"  exp="row.jobStatus==0" tipMsg="你确定要启动该计划任务么?"  groupname="opt" function="rowConfirm" outclass="btn-primary" innerclass="fa-hourglass-start" url="${adminPath}/task/schedulejob/changeJobStatus?cmd=start" />
 	<grid:button title="停止" exp="row.jobStatus==1" tipMsg="你确定要停止该计划任务么?" groupname="opt" function="rowConfirm" outclass="btn-danger"  innerclass="fa-square-o" url="${adminPath}/task/schedulejob/changeJobStatus?cmd=stop" />
 	<grid:button title="更新cron" exp="row.jobStatus==1"  groupname="opt" outclass="btn-primary" tipMsg="你确定要更新该计划任务么?" function="rowConfirm" innerclass="fa-refresh" url="${adminPath}/task/schedulejob/updateCron" />
-	<grid:button title="sys.common.delete"  groupname="opt" function="delObj" outclass="btn-danger" innerclass="fa-trash" url="${adminPath}/task/schedulejob/delete" />
+	<grid:button   groupname="opt" function="delete" />
     <grid:column label="任务名称"  name="jobName"   query="true" />
     <grid:column label="任务分组"  name="jobGroup"     />
     <grid:column label="类路径"  name="beanClass"     />
@@ -22,11 +22,11 @@
     <grid:column label="cron表达式"  name="cronExpression" />
     <grid:column label="是否启动任务"  name="jobStatus" dict="sf"  />
     <grid:column label="是否同步"  name="isConcurrent" dict="sf" />
-	<grid:toolbar title="sys.common.add" icon="fa-plus" function="add" url="${adminPath}/task/schedulejob/edit"  />
-	<grid:toolbar title="sys.common.update" icon="fa-file-text-o" function="update" url="${adminPath}/task/schedulejob/edit"  />
-	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+    <grid:toolbar  function="create"/>
+	<grid:toolbar  function="update" />
+	<grid:toolbar  function="delete" />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

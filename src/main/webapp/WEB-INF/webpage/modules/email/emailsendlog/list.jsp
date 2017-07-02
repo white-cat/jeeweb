@@ -14,11 +14,9 @@
     <grid:column label="发送数据"  name="senddata" />
     <grid:column label="响应时间"  name="responseDate" />
     <grid:column  label="是否发送成功"  name="status" dict="sf"  />
-    <grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${adminPath}/email/emailsendlog/batchDelete"  />
-	
-    
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+   	<grid:toolbar function="delete"/>
+	<grid:toolbar function="search"/>
+	<grid:toolbar function="reset"/>
 </grid:grid>
 </body>
 </html>

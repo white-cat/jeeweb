@@ -115,6 +115,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 	@Override
 	protected void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
 		Principal p = UserUtils.getPrincipal();
+		UserUtils.clearCache();
 		if (p != null && !p.isMobileLogin()) {
 			WebUtils.issueRedirect(request, response, getSuccessUrl(), null, true);
 		} else {

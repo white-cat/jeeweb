@@ -785,7 +785,37 @@
 			var ajaxurl=$(this).attr("ajaxurl");
 			if(ajaxurl && !Validform.util.isEmpty.call($(this),inputval) && !bool){
 				var inputobj=$(this);
-
+				var dataField=$(this).attr("dataField"); //包含SQL,或queryid
+				if(!dataField){
+					dataField="id";
+				}
+				var dataValue="";
+				var extendData="";
+				var fromInputs = curform[0];
+				if(dataField){
+					for(var j=0;j<fromInputs.length;j++)
+					{
+						var formName=fromInputs[j].name;
+						if(formName==dataField){
+							dataValue=fromInputs[j].value
+							break;
+						}
+					}
+					extendData+="&extendName="+encodeURIComponent(dataField);
+					extendData+="&extendParam="+encodeURIComponent(dataValue);
+				}
+				var queryType=$(this).attr("queryType"); //模板table,SQL,HQL,或queryid,hql
+				if(queryType){
+					extendData+="&queryType="+encodeURIComponent(queryType);
+				}
+				var queryData=$(this).attr("queryData"); //包含tabel,SQ,或queryid
+				if(queryData){
+					extendData+="&queryData="+encodeURIComponent(queryData);
+				}
+				var validMsg=$(this).attr("validErrorMsg"); //验证错误信息
+				if(validMsg){
+					extendData+="&errorMsg="+encodeURIComponent(validMsg);
+				}
 				//当提交表单时，表单中的某项已经在执行ajax检测，这时需要让该项ajax结束后继续提交表单;
 				if(subpost=="postform"){
 					inputobj[0].validform_subpost="postform";
@@ -807,7 +837,7 @@
 					type: "POST",
 					cache:false,
 					url: ajaxurl,
-					data: "param="+encodeURIComponent(inputval)+"&name="+encodeURIComponent($(this).attr("name")),
+					data: "param="+encodeURIComponent(inputval)+"&name="+encodeURIComponent($(this).attr("name"))+extendData,
 					success: function(data){
 						if($.trim(data.status)==="y"){
 							inputobj[0].validform_valid="true";

@@ -1,6 +1,6 @@
 package ${packageName}<#if moduleName?exists><#if moduleName!=''>.${moduleName}</#if></#if>.service;
 
-import cn.jeeweb.core.service.ICommonService;
+import cn.jeeweb.core.common.service.ICommonService;
 import ${packageName}<#if moduleName?exists><#if moduleName!=''>.${moduleName}</#if></#if>.entity.${entityName?cap_first}Entity;
 
 /**   

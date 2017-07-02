@@ -1,15 +1,15 @@
 package cn.jeeweb.modules.common.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.jeeweb.modules.common.bean.DuplicateValid;
 import cn.jeeweb.modules.common.bean.ValidJson;
-import cn.jeeweb.modules.sys.controller.AdminController;
-
+import cn.jeeweb.modules.sys.service.IUserService;
 /**
  * @Title: 重复验证
  * @Description: 重复验证
@@ -19,40 +19,61 @@ import cn.jeeweb.modules.sys.controller.AdminController;
  */
 @Controller
 @RequestMapping("/duplicateValid")
-public class DuplicateValidController extends AdminController {
+public class DuplicateValidController {
+
+	@Autowired
+	private IUserService userService;
 
 	/**
 	 * 校验数据是否在系统中是否存在
 	 * 
 	 * @return
 	 */
-	@RequestMapping("valid")
+	@RequestMapping(value = "validate")
 	@ResponseBody
 	public ValidJson doValid(DuplicateValid duplicateValid, HttpServletRequest request) {
-
 		ValidJson validJson = new ValidJson();
+		Boolean valid=Boolean.FALSE;
+		String queryType=duplicateValid.getQueryType();
+		if (StringUtils.isEmpty(queryType)) {
+			queryType="table";
+		}
+		if (queryType.equals("table")) {
+			valid= validTable(duplicateValid);
+		}
+		if (valid) {
+			validJson.setStatus("y");
+			validJson.setInfo("验证通过!");
+		}else{
+			validJson.setStatus("n");
+			validJson.setInfo("当前信息重复!");
+		}
+		return validJson;
+	}
+
+	private Boolean validTable(DuplicateValid duplicateValid) {
 		Integer num = null;
 		String sql = "";
-		if (!StringUtils.isEmpty(duplicateValid.getDataId())) {
+		String extendName = duplicateValid.getExtendName();
+		String extendParam = duplicateValid.getExtendParam();
+		if (!StringUtils.isEmpty(extendParam)) {
 			// [2].编辑页面校验
-			sql = "SELECT count(*) FROM " + duplicateValid.getTable() + " WHERE " + duplicateValid.getField() + " ='"
-					+ duplicateValid.getVlaue() + "' and id != '" + duplicateValid.getDataId() + "'";
-			// num = commonEasyService.countBySql(sql);
+			sql = "SELECT count(*) FROM " + duplicateValid.getQueryData() + " WHERE " + duplicateValid.getName() + " ='"
+					+ duplicateValid.getParam() + "' and " + extendName + " != '" + extendParam + "'";
+			num = userService.countBySql(sql);
 		} else {
 			// [1].添加页面校验
-			sql = "SELECT count(*) FROM " + duplicateValid.getTable() + " WHERE " + duplicateValid.getField() + " ='"
-					+ duplicateValid.getVlaue() + "'";
-			// num = commonEasyService.countBySql(sql);
+			sql = "SELECT count(*) FROM " + duplicateValid.getQueryData() + " WHERE " + duplicateValid.getName() + " ='"
+					+ duplicateValid.getParam() + "'";
+			num = userService.countBySql(sql);
 		}
 
 		if (num == null || num == 0) {
 			// 该值可用
-			validJson.setValid(true);
-			// j.setMsg("该值可用！");
+			return true;
 		} else {
 			// 该值不可用
-			validJson.setValid(false);
+			return false;
 		}
-		return validJson;
 	}
 }

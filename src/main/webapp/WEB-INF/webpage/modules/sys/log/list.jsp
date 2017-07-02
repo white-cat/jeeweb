@@ -16,10 +16,10 @@
     <grid:column label="提交方式"  name="method"   width="60"/>
     <grid:column label="操作者IP"  name="remoteAddr" />
     <grid:column label="操作时间"  name="createDate" />
- 	<grid:toolbar title="sys.common.delete" icon="fa-trash-o" function="deleteALLSelect" url="${adminPath}/sys/log/batchDelete"  />
+ 	<grid:toolbar   function="delete" />
 	
-	<grid:toolbar  layout="right" title="sys.common.search" icon="fa-search"  function="doSearch"  />
-	<grid:toolbar  layout="right" title="sys.common.reset" icon="fa-refresh"  function="searchReset"  />
+	<grid:toolbar  function="search"  />
+	<grid:toolbar  function="reset" />
 </grid:grid>
 </body>
 </html>

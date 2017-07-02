@@ -2,6 +2,7 @@ package cn.jeeweb.modules.sys.controller;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
+import cn.jeeweb.core.query.data.Queryable;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.core.utils.MyBeanUtils;
 import cn.jeeweb.core.utils.StringUtils;
@@ -20,9 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,29 +67,28 @@ public class UserController extends BaseCRUDController<User, String> {
 		setCommonService(userService);
 	}
 
-	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String create(User user, Model model, HttpServletRequest request, HttpServletResponse response) {
-		preEdit(user, model, request, response);
-		model.addAttribute("data", user);
+	@Override
+	public String showCreate(User user, Model model, HttpServletRequest request, HttpServletResponse response) {
 		return display("create");
 	}
 
-	@RequestMapping(value = "changePassword", method = RequestMethod.GET)
-	public String changePassword(@RequestParam(required = false) String id, Model model, HttpServletRequest request,
+	@RequestMapping(value = "{id}/changePassword", method = RequestMethod.GET)
+	public String changePassword(@PathVariable("id") String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		User user = userService.get(id);
 		model.addAttribute("data", user);
 		return display("changePassword");
 	}
 
-	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/changePassword", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson changePassword(User user, HttpServletRequest request, HttpServletResponse response) {
+	public AjaxJson changePassword(@PathVariable("id") String id, HttpServletRequest request,
+			HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("密码修改成功");
 		try {
 			String password = request.getParameter("password");
-			userService.changePassword(user.getId(), password);
+			userService.changePassword(id, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 			ajaxJson.fail("密码修改失败");
@@ -92,15 +96,15 @@ public class UserController extends BaseCRUDController<User, String> {
 		return ajaxJson;
 	}
 
-	@RequestMapping(value = "avatar", method = RequestMethod.GET)
-	public String avatar(@RequestParam(required = false) String id, Model model, HttpServletRequest request,
+	@RequestMapping(value = "{id}/avatar", method = RequestMethod.GET)
+	public String avatar(@PathVariable("id") String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		User user = userService.get(id);
 		model.addAttribute("data", user);
 		return display("avatar");
 	}
 
-	@RequestMapping(value = "/avatar", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/avatar", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson avatar(User user, HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
@@ -145,6 +149,20 @@ public class UserController extends BaseCRUDController<User, String> {
 			request.setAttribute("organizationIds", organizationIds);
 			request.setAttribute("organizationNames", organizationNames);
 		}
+	}
+
+	@Override
+	public void preAjaxList(Queryable queryable, DetachedCriteria detachedCriteria, HttpServletRequest request,
+			HttpServletResponse response) {
+		// 子查询
+		String organizationid = request.getParameter("organizationid");
+		if (!StringUtils.isEmpty(organizationid)) {
+			DetachedCriteria userOrganizationCriteria = DetachedCriteria.forClass(UserOrganization.class);
+			userOrganizationCriteria.setProjection(Property.forName("user.id"));
+			userOrganizationCriteria.add(Restrictions.eq("organization.id", organizationid));
+			detachedCriteria.add(Property.forName("id").in(userOrganizationCriteria));
+		}
+
 	}
 
 	@Override

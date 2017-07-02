@@ -37,11 +37,11 @@
 
 						<p>文件上传标签</p>
 						<html:codedisplay>
-					      <form:combox nested="false" effectiveFields="name" effectiveFieldsAlias="name|标题"  
-                                  showHeader="true" path="infoid"  dataUrl="${adminPath}//demo/form/ajaxCombox" />
+					      <form:combox nested="false" effectiveFields="realname" effectiveFieldsAlias="realname|用户名"  
+                                  showHeader="true" path="infoid"  dataUrl="${adminPath}/demo/form/ajaxCombox" />
 					    </html:codedisplay>
-						<form:combox nested="false" idField="name" keyField="name" effectiveFields="name" multiWord="true"
-							effectiveFieldsAlias="name|标题" showHeader="true" path="infoid"
+						<form:combox nested="false" idField="id" keyField="realname" effectiveFields="realname" multiWord="true"
+							effectiveFieldsAlias="realname|用户名" showHeader="true" path="infoid"
 							dataUrl="${adminPath}/demo/form/ajaxCombox" />
 					</div>
 				</div>

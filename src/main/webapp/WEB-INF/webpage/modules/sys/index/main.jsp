@@ -19,61 +19,11 @@
 <body class="gray-bg">
     <div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
-            <blockquote class="text-warning" style="font-size:14px">您是否需要自己做一款后台、会员中心等等的，但是又缺乏html等前端知识…
-                <br>您是否一直在苦苦寻找一款适合自己的后台主题…
-                <br>您是否想做一款自己的web应用程序…
-                <br>…………
-                <h4 class="text-danger">那么，现在H+来了</h4>
+            <blockquote class="text-warning" style="font-size:14px">JEEWEB是一款基于SpringMVC+Spring+Hibernate的敏捷开发系统；它是一款具有代码生成功能的智能快速开发平台；是以Spring Framework为核心容器，Spring MVC为模型视图控制器，Hibernate为数据访问层， Apache Shiro为权限授权层，Ehcahe对常用数据进行缓存，Disruptor作为并发框架，Bootstrap作为前端框架的优秀开源系统。
+<br/>目前功能模块代码生成器、权限框架、数据字典、数据缓存、并发框架、数据监控、计划任务、多数据源管理、附件管理、类似mybatis动态SQL、UI模板标签、短信发送、邮件发送、统计功能等功能。
+<br/><br/>JEEWEB的开发方式采用（代码生成器快速设计生成代码->手工完善逻辑->丰富模板标签快速前端开发），可以快速协助java开发人员解决60%的重复工作，让开发人员更多关注业务逻辑的实现，框架使用前端模板标签，解放JAVA开发人员的开发压力，提高开发效率，为企业节省项目研发成本，减少开发周期。
             </blockquote>
-
-            <hr>
         </div>
-        <div class="col-sm-3">
-            <h2>Hello,Guest</h2>
-            <small>移动设备访问请扫描以下二维码：</small>
-            <br>
-            <br>
-            <img src="img/qr_code.png" width="100%" style="max-width:264px;">
-            <br>
-        </div>
-        <div class="col-sm-5">
-            <h2>
-                            H+ 后台主题UI框架
-                        </h2>
-            <p>H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.4)，当然，也集成了很多功能强大，用途广泛的jQuery插件，她可以用于所有的Web应用程序，如<b>网站管理后台</b>，<b>网站会员中心</b>，<b>CMS</b>，<b>CRM</b>，<b>OA</b>等等，当然，您也可以对她进行深度定制，以做出更强系统。</p>
-            <p>
-                <b>当前版本：</b>v4.1.0
-            </p>
-            <p>
-                <b>定价：</b><span class="label label-warning">&yen;988（不开发票，不议价）</span>
-            </p>
-            <br>
-            <p>
-                <a class="btn btn-success btn-outline" href="http://wpa.qq.com/msgrd?v=3&uin=516477188&site=qq&menu=yes" target="_blank">
-                    <i class="fa fa-qq"> </i> 联系我
-                </a>
-                <a class="btn btn-white btn-bitbucket" href="http://www.zi-han.net" target="_blank">
-                    <i class="fa fa-home"></i> 访问博客
-                </a>
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <h4>H+具有以下特点：</h4>
-            <ol>
-                <li>完全响应式布局（支持电脑、平板、手机等所有主流设备）</li>
-                <li>基于最新版本的Bootstrap 3.3.6</li>
-                <li>提供3套不同风格的皮肤</li>
-                <li>支持多种布局方式</li>
-                <li>使用最流行的的扁平化设计</li>
-                <li>提供了诸多的UI组件</li>
-                <li>集成多款国内优秀插件，诚意奉献</li>
-                <li>提供盒型、全宽、响应式视图模式</li>
-                <li>采用HTML5 & CSS3</li>
-                <li>拥有良好的代码结构</li>
-                <li>更多……</li>
-            </ol>
-        </div>
-
     </div>
     <div class="wrapper wrapper-content">
         <div class="row">
@@ -81,17 +31,10 @@
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>二次开发</h5>
+                        <h5>商业支持</h5>
                     </div>
                     <div class="ibox-content">
-                        <p>我们提供基于H+的二次开发服务，具体费用请联系作者。</p>
-                        <p>同时，我们也提供以下服务：</p>
-                        <ol>
-                            <li>基于WordPress的网站建设和主题定制</li>
-                            <li>PSD转WordPress主题</li>
-                            <li>PSD转XHTML</li>
-                            <li>Html页面（CSS+XHTML+jQuery）制作</li>
-                        </ol>
+                        <p>我们提供基于Jeeweb的二次开发服务，具体费用请联系官方。</p>
                     </div>
                 </div>
                 <div class="ibox float-e-margins">
@@ -100,15 +43,10 @@
 
                     </div>
                     <div class="ibox-content">
-                        <p><i class="fa fa-send-o"></i> 博客：<a href="http://www.zi-han.net" target="_blank">http://www.zi-han.net</a>
-                        </p>
-                        <p><i class="fa fa-qq"></i> QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=516477188&site=qq&menu=yes" target="_blank">516477188</a>
-                        </p>
-                        <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">zheng-zihan</a>
-                        </p>
-                        <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">zheng-zihan@qq.com / *子涵</a>
-                        </p>
-                    </div>
+	                    <p><i class="fa fa-send-o"></i> 官网：<a href="http://www.jeeweb.cn/" target="_blank">http://www.jeeweb.cn/</a></p>
+	                    <p><i class="fa fa-qq"></i> QQ群：<a href="javascript:;">570062301</a></p>
+	                </div>
+
                 </div>
             </div>
             <div class="col-sm-4">
@@ -122,21 +60,13 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#version" href="#v01">v0.1</a><code class="pull-right">2017.05.10</code>
+                                                <a data-toggle="collapse" data-parent="#version" href="#v01">v1.0</a><code class="pull-right">2017.06.30</code>
                                         </h5>
                                     </div>
                                     <div id="v01" class="panel-collapse collapse in">
                                         <div class="panel-body">
-                                            <div class="alert alert-warning">此版本是一个维护版本，主要是升级和修复bug，让我们共同期待5.0版的到来</div>
-                                            <ol>
-                                                <li>增加不支持IE8的页面提示</li>
-                                                <li>修复页面链接和表单提交默认在新窗口中打开的问题</li>
-                                                <li>更新suggest插件，修复错位问题</li>
-                                                <li>升级bootstrap版本到3.3.6版本</li>
-                                                <li>升级layer到2.1版本</li>
-                                                <li>升级echarts到2.2.7版本</li>
-                                                <li>升级webuploader到0.1.5版本</li>
-                                                <li>修复网络条件不好情况下，页面加载提示遮挡页面无法操作的问题</li>
+                                             <ol>
+                                                <li>框架首次发布</li>
                                             </ol>
                                         </div>
                                     </div>
@@ -151,130 +81,36 @@
             <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>购买说明</h5>
+                        <h5>Jeeweb适用范围</h5>
                     </div>
                     <div class="ibox-content">
-                        <p>购买后我可以获得什么？</p>
-                        <ol>
-                            <li>所有源码(未压缩、带注释版本)；</li>
-                            <li>说明文档；</li>
-                            <li>终身免费升级服务；</li>
-                            <li>必要的技术支持；</li>
-                            <li>付费二次开发服务；</li>
-                            <li>授权许可；</li>
-                            <li>……</li>
-                        </ol>
+                        <h4>Jeeweb具有以下特点：</h4>
+				        <ol>
+				            <li>采用主流的框架，容易上手;</li>
+				            <li>强大的代码生成器，一键生成代码</li>
+				            <li>强大的标签支持，快速完成前端开发功能</li>
+				            <li>扩展Hibernate拥有 Mybits 的SQL/HQL特性 (注解、XML两不误)</li>
+				            <li>提供不同风格,比如inspinia、ace。支持风格扩展...</li>
+				            <li>开发效率很高，节省60%重复工作</li>
+				            <li>采用Bootstrap技术，完美兼容手机端开发</li>
+				            <li>Apache Shiro为权限授权层，使得权限易用，更可靠</li>
+				            <li>国际化能力，支持多语言</li>
+				            <li>整合短信发送、邮件发送功能</li>
+				            <li>跨数据源操作，便捷集成第三方系统</li>
+				            <li>计划任务管理，快捷完成计划任务的配置</li>
+				            <li>Ehcahe对常用数据进行缓存</li>
+				            <li>更多……</li>
+				        </ol>
                         <hr>
-                        <p>如果需要购买H+主题，可直接付款到支付宝：<a href="javascript;">zheng-zihan@qq.com</a>，收款人：<a href="javascript;">*子涵</a>。也可以使用手机支付宝或者微信扫码支付：</p>
-                        <div class="alert alert-warning">
-                            付款完成后请及时联系作者，或在付款备注中留下邮箱或QQ，方便作者及时联系您。
-                            <br>如果图片太小，可以点击图片放大。
-                        </div>
-                        <p id="pay-qrcode">
-                            <a href="javascript:;"><img src="img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
-                            </a>
-                        </p>
-
+                         <div class="alert alert-warning">
+                               JeeWeb敏捷开发平台，可以应用在任何JAVA WEB项目的开发中，是信息化建设的良好解决方案。
+                                                              采用代码生成功能，以及手工完善逻辑代码的开发方式，可以显著提高开发效率60%以上，极大降低开发成本。
+                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script id="welcome-template" type="text/x-handlebars-template">
-        <div class="border-bottom white-bg page-heading clearfix">
-            <h2>更新日志：</h2>
-            <div>今天是情人节，H+终于跨到了v3.0，就算是情人节礼物吧，感谢你们的不离不弃，一路相伴！</div>
-            <div class="pull-right">——Beau-zihan / 2015.8.20</div>
-        </div>
-        <div class="m">
-            <div class="tabs-container">
-                <div class="tabs-left">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a data-toggle="tab" href="#layouts"><i class="fa fa-columns"></i> 布局
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#new"><i class="fa fa-plus-square"></i> 新增
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#update"><i class="fa fa-arrow-circle-o-up"></i> 升级
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#revise"><i class="fa fa-pencil"></i> 修正
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#optimize"><i class="fa fa-magic"></i> 优化
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" style="line-height:1.8em;">
-                        <div id="layouts" class="tab-pane active">
-                            <div class="panel-body">
-                                <ol class="no-left-padding">
-                                    <li class="text-danger"><b>推荐：</b>期待已久的contentTabs效果，支持关闭、双击刷新、左右滑动等；</li>
-                                    <li>固定左侧主菜单栏，并对菜单项做了新的调整；</li>
-                                    <li>增加右侧面板及聊天窗口等。</li>
-                                </ol>
-
-                                <p style="margin-left:25px;">
-                                    <hr><span class="label label-danger">特别致谢</span> 感谢[子·梦]同学提供的contentTabs优化方案和代码！</p>
-                            </div>
-                        </div>
-                        <div id="new" class="tab-pane">
-                            <div class="panel-body">
-                                <ol class="no-left-padding">
-                                    <li>表单：搜索自动补全插件suggest、高级表单插件（时间选择，切换按钮，图像裁剪上传，单选复选框美化，文件域美化等)等；</li>
-                                    <li>图表：图表组合页面等；</li>
-                                    <li>页面：团队、社交、客户管理、文章列表、文章详情、新登录页面等；</li>
-                                    <li>UI元素：竖向选项卡、拖动面板、文本对比、加载动画、SweetAlert等；</li>
-                                    <li>相册：layer相册、Blueimp相册等；</li>
-                                    <li>表格：FooTables等。</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div id="update" class="tab-pane">
-                            <div class="panel-body">
-                                <ol>
-                                    <li>页面弹层插件layer升级至1.9.3；</li>
-                                    <li>更新jqgrid，支持树形表格；</li>
-                                    <li>更新帮助文档。</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div id="revise" class="tab-pane">
-                            <div class="panel-body">
-                                <ol>
-                                    <li>jstree、Simditor等多处错误；</li>
-                                    <li>页面加载进度提示；</li>
-                                    <li>Glyphicon字体图标不显示的问题；</li>
-                                    <li>重新整理开发文档；</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div id="optimize" class="tab-pane">
-                            <div class="panel-body">
-                                <ol>
-                                    <li>H+整体视觉效果；</li>
-                                    <li>jstree默认主题显示效果；</li>
-                                    <li>表单验证显示效果；</li>
-                                    <li>iCheck显示效果；</li>
-                                    <li>Tabs显示效果。</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="alert alert-warning alert-dismissable m-t-sm">
-                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                同时这也是一个示例，演示了如何从iframe中弹出一个覆盖父页面的层。
-            </div>
-        </div>
-    </script>
  	<!-- 全局js -->
 	<html:js  name="jquery,bootstrap"/>
 

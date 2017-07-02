@@ -24,23 +24,22 @@ import cn.jeeweb.core.utils.StringUtils;
 public abstract class TreeEntity extends AbstractEntity<String> implements TreeNode<String> {
 
 	private static final long serialVersionUID = 1L;
+
+	private String id; // 编号
+	private String name; // 资源名称
+
+	private String parentId; // 父编号
+
+	private String parentIds; // 父编号列表
+
+	private Boolean expanded = Boolean.FALSE;
+
+	private Boolean loaded = Boolean.TRUE;
+
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
 	@Column(name = "id", nullable = false, length = 32)
-	private String id; // 编号
-	private String name; // 资源名称
-
-	@Column(name = "parent_id", nullable = true, length = 32)
-	private String parentId; // 父编号
-	@Column(name = "parent_ids", nullable = true, length = 32)
-	private String parentIds; // 父编号列表
-
-	@Transient
-	private Boolean expanded = Boolean.FALSE;
-	@Transient
-	private Boolean loaded = Boolean.TRUE;
-
 	public String getId() {
 		return id;
 	}
@@ -49,6 +48,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.id = id;
 	}
 
+	@Column(name = "name", nullable = true, length = 250)
 	public String getName() {
 		return name;
 	}
@@ -57,6 +57,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.name = name;
 	}
 
+	@Column(name = "parent_id", nullable = true, length = 32)
 	public String getParentId() {
 		return parentId;
 	}
@@ -65,6 +66,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.parentId = parentId;
 	}
 
+	@Column(name = "parent_ids", nullable = true, length = 32)
 	public String getParentIds() {
 		return parentIds;
 	}
@@ -73,6 +75,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.parentIds = parentIds;
 	}
 
+	@Transient
 	@Override
 	public boolean isRoot() {
 		if (getParentId() == null || getParentId().equals("0") || getParentId().equals("")) {
@@ -81,10 +84,12 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		return false;
 	}
 
+	@Transient
 	public abstract boolean isHasChildren();
 
 	public abstract void setHasChildren(boolean hasChildren);
 
+	@Transient
 	@Override
 	public Long getLevel() {
 		if (parentIds == null) {
@@ -100,6 +105,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		return (long) (idsList.size());
 	}
 
+	@Transient
 	@Override
 	public Boolean isLeaf() {
 		if (isHasChildren()) {
@@ -117,6 +123,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		return getParentIds() + getId() + getSeparator();
 	}
 
+	@Transient
 	@Override
 	public String getSeparator() {
 		return "/";
@@ -126,6 +133,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.expanded = expanded;
 	}
 
+	@Transient
 	@Override
 	public Boolean getExpanded() {
 		return expanded;
@@ -136,6 +144,7 @@ public abstract class TreeEntity extends AbstractEntity<String> implements TreeN
 		this.loaded = loaded;
 	}
 
+	@Transient
 	public Boolean getLoaded() {
 		return loaded;
 	}

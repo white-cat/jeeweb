@@ -302,7 +302,13 @@ public class CommonDaoImpl extends BaseDaoImpl implements ICommonDao, ISqlDao, I
 		Query query = getSession().createQuery(hql);
 		setParameters(query, params);
 		return query.executeUpdate();
+	}
 
+	@Override
+	public int updateByAliasHql(String hql, Map<String, Object> alias) {
+		Query query = getSession().createQuery(hql);
+		setAliasParameter(query, alias);
+		return query.executeUpdate();
 	}
 
 	@Override
@@ -389,22 +395,28 @@ public class CommonDaoImpl extends BaseDaoImpl implements ICommonDao, ISqlDao, I
 	@Override
 	public Long countByHql(String hql, Object... params) {
 		Query query = getSession().createQuery(hql);
-		if (params != null) {
-			for (int i = 0; i < params.length; i++) {
-				query.setParameter(i, params[i]);
-			}
-		}
+		setParameters(query, params);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long countByAliasHql(String hql, Map<String, Object> alias) {
+		Query query = getSession().createQuery(hql);
+		setAliasParameter(query, alias);
 		return (Long) query.uniqueResult();
 	}
 
 	@Override
 	public <T> List<T> listByHql(String hql, Object... params) {
 		Query query = getSession().createQuery(hql);
-		if (params != null) {
-			for (int i = 0; i < params.length; i++) {
-				query.setParameter(i, params[i]);
-			}
-		}
+		setParameters(query, params);
+		return query.list();
+	}
+
+	@Override
+	public <T> List<T> listByAliasHql(String hql, int page, int rows, Map<String, Object> alias) {
+		Query query = getSession().createQuery(hql);
+		setAliasParameter(query, alias);
 		return query.list();
 	}
 

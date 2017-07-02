@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-
 import cn.jeeweb.core.common.entity.AbstractEntity;
 import cn.jeeweb.modules.sys.entity.User;
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.Date;
  * @Title: 单表测试
  * @Description: 单表测试
  * @author jeeweb
- * @date 2017-06-26 16:50:57
+ * @date 2017-06-28 23:54:46
  * @version V1.0   
  *
  */

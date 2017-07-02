@@ -34,6 +34,7 @@ public class TreeSelectTag extends HiddenInputTag {
 	private String layerHeight = "420px";// 高度
 	private Boolean genField = Boolean.TRUE;// 是否生成,显示域及隐藏域标签
 	private Boolean multiselect = Boolean.FALSE;// 是否多选
+	private String chkboxType = "ps";// 上下级关系“p” 表示操作会影响父级节点； “s” 表示操作会影响子级节点。 
 	private String dataUrl = "";// 访问链接
 	private String callback = "";// 回调函数
 
@@ -115,6 +116,14 @@ public class TreeSelectTag extends HiddenInputTag {
 
 	public void setLayerHeight(String layerHeight) {
 		this.layerHeight = layerHeight;
+	}
+
+	public String getChkboxType() {
+		return chkboxType;
+	}
+
+	public void setChkboxType(String chkboxType) {
+		this.chkboxType = chkboxType;
 	}
 
 	@Override
