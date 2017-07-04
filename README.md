@@ -78,6 +78,13 @@ JeeWeb 功能特点
 * 日期控件： datepicker
 * 代码高亮： syntaxhighlighter
 
+简单使用说明
+-----------------------------------
+* 导入sql/jeeweb-mysql-v1.0.sql文件到mysql数据库
+* 导入项目到Eclipse.
+* 修改数据库配置文件dbconfig.properties中的账号密码.
+* 启动项目,管理员账号admin/密码123456
+
 技术文档
 -----------------------------------
 * [JeeWeb 开发环境搭建入门(完善中...)]
@@ -86,6 +93,48 @@ JeeWeb 功能特点
 * [JeeWeb 视频教程(完善中...)]
 * [JeeWeb 官方百度网盘](http://pan.baidu.com/s/1hrFKF2k)
 
+项目目录结构说明
+-----------------------------------
+```
+├─main
+│  │  
+│  ├─java
+│  │   │
+│  │   ├─com.stylefeng.guns----------------项目主代码
+│  │   │          │
+│  │   │          ├─common----------------项目公用的部分(业务中经常调用的类,例如常量,异常,实体,注解,分页类,节点类)
+│  │   │          │
+│  │   │          ├─config----------------项目配置代码(例如mybtais-plus配置,ehcache配置等)
+│  │   │          │
+│  │   │          ├─core----------------项目运行的核心依靠(例如aop日志记录,拦截器,监听器,guns模板引擎,shiro权限检查等)
+│  │   │          │
+│  │   │          ├─modular----------------项目业务代码
+│  │   │          │
+│  │   │          ├─GunsApplication类----------------以main方法启动springboot的类
+│  │   │          │
+│  │   │          └─GunsServletInitializer类----------------用servlet容器启动springboot的核心类
+│  │   │
+│  │   └─generator----------------mybatis-plus Entity生成器
+│  │
+│  ├─resources----------------项目资源文件
+│  │     │
+│  │     ├─gunsTemplate----------------guns代码生成模板
+│  │     │ 
+│  │     ├─application.yml----------------springboot项目配置
+│  │     │ 
+│  │     └─ehcache.xml----------------ehcache缓存配置
+│  │
+│  └─webapp----------------web页面和静态资源存放的目录
+│      │
+│      ├─WEB-INF
+│            │
+│            ├─static----------------静态资源目录
+│                 │
+│                 ├─vendors----------------第三方的JS包
+│                 ├─vendors----------------第三方的JS包
+│                 ├─vendors----------------第三方的JS包
+│                 └─modules类----------------用servlet容器启动springboot的核心类
+```
 系统演示
 -----------------------------------
 ###  [1].多套首页风格，支持自定义（Inspinia风格|ACE风格）
