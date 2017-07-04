@@ -44,7 +44,7 @@ JeeWeb 功能特点
 *   多种首页风格切换,支持自定义首页风格。（Inspinia风格|ACE风格）
 *   数据统计报表：丰富的报表统计功能
 * 	支持多种浏览器: Google, 火狐, IE,360 等
-* 	支持数据库: Mysql,Oracle10g,Postgre,SqlServer等
+* 	支持数据库: Mysql,Oracle10g,SqlServer等
 * 	基础权限: 用户，角色，菜单权限
 * 	Web容器测试通过的有Jetty和Tomcat,Weblogic
 * 	要求JDK1.7+
