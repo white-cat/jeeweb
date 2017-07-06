@@ -3,7 +3,7 @@
      <c:if test="${menu.parentId == null && menu.isshow eq '1'}">
 	     <li>
 	        <c:choose>
-			   <c:when test="${empty menu.url}">  
+			   <c:when test="${menu.hasChildren}">  
 				  <a href="#"><i class="fa ${menu.menuIcon}"></i> <span class="nav-label">${menu.name}</span><span class="fa arrow"></span></a>  
 			   </c:when>
 			   <c:otherwise> 
@@ -27,7 +27,6 @@
 						 </li>
 					 </c:if>
 				 </c:forEach>
-				
 			</ul> 
 		</li>
      </c:if>

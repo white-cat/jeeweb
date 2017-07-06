@@ -45,7 +45,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 	@Autowired
 	private IMenuService menuService;
 
-	private String[] types = { "String", "Double", "Text", "Date", "Blob", "String", "Short", "Integer", "User",
+	private String[] types = { "String", "Double", "Text", "Date", "Blob", "Short", "Integer", "User",
 			"this" };
 
 	@Override
@@ -206,6 +206,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("数据库同步成功");
 		try {
+			tableService.dropTable(id);
 			tableService.syncDatabase(id);
 		} catch (Exception e) {
 			e.printStackTrace();

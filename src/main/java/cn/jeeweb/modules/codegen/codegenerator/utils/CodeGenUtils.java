@@ -13,7 +13,7 @@ public class CodeGenUtils {
 
 	public static String getDbType() {
 		SessionFactoryImpl sessionFactory = (SessionFactoryImpl) SpringContextHolder.getBean(SessionFactory.class);
-		String dialect = sessionFactory.getDialect().getClass().getName();
+		String dialect = sessionFactory.getDialect().getClass().getName().toUpperCase();
 		String dbType = DB_TYPE_MYSQL;
 		if (dialect.contains(DB_TYPE_MYSQL)) {
 			dbType = DB_TYPE_MYSQL;

@@ -61,12 +61,6 @@
 		<name>display</name>
 		<tag-class>cn.jeeweb.core.tags.html.DisplayTag</tag-class>
 		<bodycontent>tagdependent</bodycontent>
-		<attribute>
-			<description>组建名称</description>
-			<name>name</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
 	</tag>
 	<tag>
 		<description>代码显示组建</description>

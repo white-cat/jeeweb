@@ -44,7 +44,7 @@ public class AttributeInfo implements Serializable {
 				this.importType = type.getFullType();
 			}
 		}
-		if (column.getTypeName().equals(Double.class.getSimpleName())) {
+		if (!StringUtils.isEmpty(column.getTypeName()) && column.getTypeName().equals(Double.class.getSimpleName())) {
 			this.precision = column.getColumnSize();
 		} else {
 			this.length = column.getColumnSize();
@@ -52,7 +52,7 @@ public class AttributeInfo implements Serializable {
 		this.remarks = column.getRemarks();
 		this.nullable = column.getNullable();
 		this.parmaryKey = column.getParmaryKey();
-		
+
 		// 这里目前写死，以后升级再完善
 		this.importedKey = column.getImportedKey();
 		try {
@@ -62,7 +62,7 @@ public class AttributeInfo implements Serializable {
 					this.importedKey = Boolean.TRUE;
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

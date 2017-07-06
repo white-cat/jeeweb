@@ -4,7 +4,7 @@
 	<groupId>jeeweb</groupId>
 	<artifactId>jeeweb</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>jeeweb Maven Webapp</name>
 	<url>http://www.jeeweb.cn</url>
 	<properties>
@@ -131,13 +131,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+
 		<!-- shiro开始 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -405,6 +399,25 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>  
+		    <groupId>com.oracle</groupId>  
+		    <artifactId>ojdbc14</artifactId>  
+		    <version>10.2.0.1.0</version>  
+		</dependency>  
+		
 	</dependencies>
 	<build>
 		<finalName>jeeweb</finalName>
@@ -466,7 +479,6 @@
 	</repository>
 </repositories>
 <build>
-
 	<plugins>
 		<!-- compiler插件, 设定JDK版本 -->
 		<plugin>

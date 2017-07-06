@@ -49,7 +49,7 @@ public class TableEntity extends DataEntity<String> implements java.io.Serializa
 	private String tablePKType;
 
 	private Boolean syncDatabase;
-	
+
 	private String parentField;
 
 	@JsonIgnore

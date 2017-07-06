@@ -1,72 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <!DOCTYPE mapper SYSTEM "http://www.jeeweb.cn/dtd/dynamic-hibernate-statement-1.0.dtd">  
-<mapper namespace="xxxx">  
-    <!-- 查询某个资源下的直接子节点 -->  
+<mapper namespace="cn.jeeweb">  
+    <!-- SQL 片段 -->  
     <sql id="userfield">  
     <![CDATA[ 
-         id
+         id,realname
     ]]>   
     </sql>
-    <!-- 查询系统中所有的root资源 -->  
-    <hql id="resource.getRoots">  
+    <!-- HQL 片段-->  
+    <hql id="userfield">  
     <![CDATA[ 
-        from Resource where parent.id = id order by orderIndex 
+        id,realname
     ]]>   
-    </hql>  
-    <!-- 获取某个用户可访问的某个资源下的所有子资源 -->  
-    <sql id="resource.getDescendants">  
-    <![CDATA[ 
-        select distinct t.id, 
-                        t.name, 
-                        t.description, 
-                        t.url, 
-                        t.type, 
-                        t.status, 
-                        t.code, 
-                        t.configuration, 
-                        t.module_name, 
-                        t.gmt_create, 
-                        t.gmt_modified, 
-                        t.create_by, 
-                        t.last_modified_by, 
-                        t.order_index, 
-                        t.parent_id 
-          from resource_info t 
-         inner join role_resource rr 
-            on t.id = rr.resource_id 
-         inner join user_role ur 
-            on rr.role_id = ur.role_id 
-         where ur.user_id = ${userId} 
-         <#if type == '1'> 
-            and t.type=1 
-            <#else> 
-            and t.type=0 
-         </#if> 
-           and t.type =  ${type} 
-           and t.status =  ${status} 
-         start with t.code = '${code}' 
-        connect by nocycle prior t.id = t.parent_id 
-    ]]>   
-    </sql>
-    <hql-query id="testsdfsdfsdf">
+    </hql>
+    <!-- SQL查询  --> 
+    <sql-query id="sys">
      <![CDATA[ 
-        <@include_hql  />
+        select * from sys_user where id in 
+		  (<#list ids as id>
+		      '${id}'<#if !book_has_next>,</#if>
+		  </list>)
+     ]]>
+    </sql-query>
+     <!-- SQL查询  --> 
+    <hql-query id="notirication">
+     <![CDATA[ 
+         FROM OaNotificationEntity m  WHERE m.title like :title
      ]]>
     </hql-query>
-    <sql-query id="sys.user">
-     <![CDATA[ 
-        select * from sys_user where id=?
-     ]]>
-    </sql-query>
-     <sql-query id="sys.two">
-     <![CDATA[ 
-        select<@include_sql refid="userfield" />from sys_user where id='${id}'
-     ]]>
-    </sql-query>
-    
-    <sql-query id="sys.three">
-     <![CDATA[ 
-        select  from sys_user
-     ]]>
-    </sql-query>
 </mapper>  

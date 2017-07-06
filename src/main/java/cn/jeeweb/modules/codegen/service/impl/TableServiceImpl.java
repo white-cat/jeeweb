@@ -180,7 +180,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 				List<ColumnEntity> oldSubColumnList = tableEntity.getColumns();
 				for (ColumnEntity column : oldSubColumnList) {
 					if (!StringUtils.isEmpty(column.getForeignTable())
-							&&column.getForeignTable().equals(table.getTableName())) {
+							&& column.getForeignTable().equals(table.getTableName())) {
 						tableEntity.setParentField(column.getJavaField());
 					}
 				}
@@ -201,18 +201,18 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 				List<AttributeInfo> subAttributeInfos = new ArrayList<AttributeInfo>();
 				for (ColumnEntity column : oldSubColumnList) {
 					if (!StringUtils.isEmpty(column.getForeignTable())
-							&&column.getForeignTable().equals(table.getTableName())) {
-						column.setJavaType(table.getClassName()+"Entity");
+							&& column.getForeignTable().equals(table.getTableName())) {
+						column.setJavaType(table.getClassName() + "Entity");
 						tableEntity.setParentField(column.getJavaField());
 						column.setImportedKey(Boolean.TRUE);
 					}
-					AttributeInfo attributeInfo=new AttributeInfo(column);
+					AttributeInfo attributeInfo = new AttributeInfo(column);
 					subAttributeInfos.add(attributeInfo);
 				}
 				generatorInfo.setType(tableEntity.getTableType());
 				generatorInfo.setColumns(oldSubColumnList);
 				generatorInfo.setAttributeInfos(subAttributeInfos);
-				List<String> generatorKeys=new ArrayList<String>();
+				List<String> generatorKeys = new ArrayList<String>();
 				generatorKeys.add("Entity");
 				generatorKeys.add("IService");
 				generatorKeys.add("ServiceImpl");
@@ -239,6 +239,16 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 
 	}
 
+	public void dropTable(String tableid) {
+		TableEntity table = get(tableid);
+		try {
+			generatorDao.dropTable(table.getTableName());
+		} catch (Exception e) {
+			// 部分数据库在没有表而执行删表语句时会报错
+			logger.error(e.getMessage());
+		}
+	}
+
 	@Override
 	public void syncDatabase(String tableid) throws HibernateException, SQLException {
 		TableEntity table = get(tableid);
@@ -249,12 +259,6 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		// 生成数据库模版
 		String xml = FreeMarkerUtils.initByDefaultTemplate().processToString("/codegen/sql/createTable.ftl", root);
 		logger.info(xml);
-		try {
-			generatorDao.dropTable(table.getTableName());
-		} catch (Exception e) {
-			// 部分数据库在没有表而执行删表语句时会报错
-			logger.error(e.getMessage());
-		}
 		generatorDao.createTableByXml(xml);
 		table.setSyncDatabase(Boolean.TRUE);
 		saveOrUpdate(table);

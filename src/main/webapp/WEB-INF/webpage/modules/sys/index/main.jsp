@@ -60,7 +60,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#version" href="#v01">v1.0</a><code class="pull-right">2017.06.30</code>
+                                                <a data-toggle="collapse" data-parent="#version" href="#v01">v1.0</a><code class="pull-right">2017.07.06</code>
                                         </h5>
                                     </div>
                                     <div id="v01" class="panel-collapse collapse in">

@@ -7,9 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
-import cn.jeeweb.core.common.entity.DataEntity;
 
-import java.lang.String;
+import cn.jeeweb.core.common.entity.DataEntity;
 
 /**
  * @Title: 角色实体

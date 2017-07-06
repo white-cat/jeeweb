@@ -138,8 +138,9 @@ public class CommonServiceImpl<T extends Serializable> implements ICommonService
 		QueryParse<DetachedCriteria> queryParse = new CriteriaParse();
 		QueryableConvertUtils.convertQueryValueToEntityValue(queryable, entityClass);
 		queryParse.parseCondition(detachedCriteria, queryable);
-		queryParse.parseSort(detachedCriteria, queryable);
 		Long total = commonDao.count(detachedCriteria);
+		//排序问题
+		queryParse.parseSort(detachedCriteria, queryable);
 		Pageable pageable = queryable.getPageable();
 		List<T> content = list(pageable.getPageNumber() + 1, pageable.getPageSize(), detachedCriteria);
 		return new PageImpl<T>(content, queryable.getPageable(), total);

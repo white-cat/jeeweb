@@ -50,6 +50,8 @@ public interface ITableService extends ICommonService<TableEntity> {
 	 */
 	public void importDatabase(TableEntity table);
 
+	public void dropTable(String tableid);
+
 	/**
 	 * 数据库生成
 	 * 

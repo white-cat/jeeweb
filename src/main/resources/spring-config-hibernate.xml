@@ -21,6 +21,7 @@
 		<property name="url" value="${connection.url}" />
 		<property name="username" value="${connection.username}" />
 		<property name="password" value="${connection.password}" />
+		<property name="dbType" value = "${connection.dbType}" />
 
 		<!-- 配置初始化大小、最小、最大 -->
 		<property name="initialSize" value="${druid.initialSize}" />
@@ -59,9 +60,11 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<!-- <prop key="hibernate.default_schema">jeeweb</prop>-->
 			</props>
 		</property>
 		<!-- 生成表的对象 -->

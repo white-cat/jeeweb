@@ -2,6 +2,7 @@ package cn.jeeweb.modules.codegen.dao.imp;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import cn.jeeweb.core.common.dao.impl.CommonDaoImpl;
+import cn.jeeweb.core.utils.PropertiesUtil;
 import cn.jeeweb.core.utils.SpringContextHolder;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbColumnInfo;
@@ -18,7 +20,9 @@ import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
 import cn.jeeweb.modules.codegen.codegenerator.utils.CodeGenUtils;
 import cn.jeeweb.modules.codegen.codegenerator.utils.sql.SqlUtils;
 import cn.jeeweb.modules.codegen.dao.IGeneratorDao;
+import oracle.jdbc.driver.OracleConnection;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.internal.SessionFactoryImpl;
@@ -37,6 +41,8 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings({ "resource", "unchecked", "rawtypes" })
 @Repository("generatorDao")
 public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
+	String properiesName = "dbconfig.properties";
+	PropertiesUtil propertiesUtil = new PropertiesUtil(properiesName);
 
 	@Override
 	public Boolean createTableByXml(String xml) throws HibernateException, SQLException {
@@ -45,8 +51,7 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 		org.hibernate.cfg.Configuration newconf = new org.hibernate.cfg.Configuration();
 		newconf.addXML(xml).setProperty("hibernate.dialect", sessionFactory.getDialect().getClass().getName());
 
-		SchemaExport dbExport;
-		dbExport = new SchemaExport(newconf,
+		SchemaExport dbExport = new SchemaExport(newconf,
 				SessionFactoryUtils.getDataSource(getSession().getSessionFactory()).getConnection());
 		dbExport.execute(true, true, false, true);
 		List<Exception> exceptionList = dbExport.getExceptions();
@@ -68,21 +73,63 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 		return SessionFactoryUtils.getDataSource(getSession().getSessionFactory());
 	}
 
+	private Connection getConnection() {
+		try {
+			Connection conn = null;
+			String dbType = propertiesUtil.getString("connection.dbType");
+			String url = propertiesUtil.getString("connection.url");
+			String username = propertiesUtil.getString("connection.username");
+			String password = propertiesUtil.getString("connection.password");
+			String driverClassName = "com.mysql.jdbc.Driver";
+			if (dbType.equals("sqlserver")) {
+				driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+			} else if (dbType.equals("mysql")) {
+				driverClassName = "com.mysql.jdbc.Driver";
+			} else if (dbType.equals("oracle")) {
+				driverClassName = "oracle.jdbc.driver.OracleDriver";
+			} else {
+				return getDataSource().getConnection();
+			}
+			// 初始化JDBC驱动并让驱动加载到jvm中
+			Class.forName(driverClassName);
+			conn = DriverManager.getConnection(url, username, password);
+			conn.setAutoCommit(true);
+			return conn;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@Override
 	public List<DbTableInfo> getDbTables() {
 		ResultSet resultSet = null;
 		Connection connection = null;
 		List<DbTableInfo> dbTableInfos = new ArrayList<DbTableInfo>();
 		try {
-			connection = getDataSource().getConnection();
+			connection = getConnection();
+			connection.setAutoCommit(true);
+
 			String[] types = { "TABLE" };
-			resultSet = connection.getMetaData().getTables(null, null, null, types);
+			// 判断是否为MYSQL
+			String driverName = connection.getMetaData().getDriverName().toUpperCase();
+			if (driverName.contains("ORACLE")) {
+				/**
+				 * 设置连接属性,使得可获取到表的REMARK(备注)
+				 */
+				((OracleConnection) connection).setRemarksReporting(true);
+				resultSet = connection.getMetaData().getTables(null, propertiesUtil.getString("connection.username"),
+						null, types);
+			} else {
+				resultSet = connection.getMetaData().getTables(null, null, null, types);
+			}
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
 				String remarks = resultSet.getString("REMARKS");
 				if (StringUtils.isEmpty(remarks)) {
-					// 判断是否为MYSQL
-					String driverName = connection.getMetaData().getDriverName();
+
 					if (driverName.contains("MySQL")) {
 						// String schemas = getCatalog(connection);
 						// remarks = getTableComment("jeeweb", tableName,
@@ -123,20 +170,35 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 		Connection connection = null;
 		List<DbColumnInfo> columnInfos = new ArrayList<DbColumnInfo>();
 		try {
-			connection = getDataSource().getConnection();
+			connection = getConnection();
+			connection.setAutoCommit(true);
+			// 判断是否为MYSQL
+			String driverName = connection.getMetaData().getDriverName().toUpperCase();
+			if (driverName.contains("ORACLE")) {
+				/**
+				 * 设置连接属性,使得可获取到表的REMARK(备注)
+				 */
+				((OracleConnection) connection).setRemarksReporting(true);
+			}
 			// 获得列的信息
 			resultSet = connection.getMetaData().getColumns(null, null, tableName, null);
 			while (resultSet.next()) {
 				// 获得字段名称
 				String columnName = resultSet.getString("COLUMN_NAME");
 				// 获得字段类型名称
-				String typeName = resultSet.getString("TYPE_NAME");
+				String typeName = resultSet.getString("TYPE_NAME").toUpperCase();
 				// 获得字段大小
 				String columnSize = resultSet.getString("COLUMN_SIZE");
 				// 获得字段备注
 				String remarks = resultSet.getString("REMARKS");
+
 				// 该列是否为空
-				Boolean nullable = resultSet.getBoolean("IS_NULLABLE");
+				Boolean nullable = Boolean.FALSE;
+				if (driverName.contains("ORACLE")) {
+					nullable = resultSet.getBoolean("NULLABLE");
+				} else {
+					nullable = resultSet.getBoolean("IS_NULLABLE");
+				}
 				// 小数部分的位数
 				String decimalDigits = resultSet.getString("DECIMAL_DIGITS");
 				// 默认值
@@ -172,7 +234,9 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 				}
 			}
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("获取字段信息的时候失败，请将问题反映到维护人员。" + e.getMessage(), e);
 		} finally {
@@ -200,8 +264,8 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 	@Override
 	public void dropTable(String tableName) {
 		String dropSql = SqlUtils.getSqlUtils().getSqlByID("dropTable").getContent();
-		dropSql=dropSql.replaceAll("\\$\\{tablename\\}",tableName);
-		getSession().createSQLQuery(dropSql).executeUpdate();
+		dropSql = dropSql.replaceAll("\\$\\{tablename\\}", tableName);
+		executeSql(dropSql);
 	}
 
 	@Override
@@ -211,17 +275,16 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 		String tableNamePattern = tableName;
 		try {
 			String[] types = { "TABLE" };
-			conn = SessionFactoryUtils.getDataSource(
-					getSession().getSessionFactory()).getConnection();
+			conn = getConnection();
 			String dbType = CodeGenUtils.getDbType().toLowerCase();
-			if("oracle".equals(dbType)){
+			if ("oracle".equals(dbType)) {
 				tableNamePattern = tableName.toUpperCase();
-				//由于PostgreSQL是大小写敏感的，并默认对SQL语句中的数据库对象名称转换为小写
-			}else if ("postgresql".equals(dbType)){
+				// 由于PostgreSQL是大小写敏感的，并默认对SQL语句中的数据库对象名称转换为小写
+			} else if ("postgresql".equals(dbType)) {
 				tableNamePattern = tableName.toLowerCase();
 			}
 			DatabaseMetaData dbMetaData = conn.getMetaData();
-			rs = dbMetaData.getTables(null,null,tableNamePattern, types);
+			rs = dbMetaData.getTables(null, null, tableNamePattern, types);
 			if (rs.next()) {
 				return true;
 			} else {
@@ -229,15 +292,18 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException();
-		}finally{//关闭连接
+		} finally {// 关闭连接
 			try {
-				if(rs!=null){rs.close();}
-				if(conn!=null){conn.close();}
+				if (rs != null) {
+					rs.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	 
 }

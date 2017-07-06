@@ -18,6 +18,7 @@ import cn.jeeweb.core.query.annotation.PageableDefaults;
 import cn.jeeweb.core.query.data.PropertyPreFilterable;
 import cn.jeeweb.core.query.data.Queryable;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresMethodPermissions;
+import cn.jeeweb.core.utils.JeewebPropertiesUtil;
 import cn.jeeweb.core.utils.MyBeanUtils;
 import cn.jeeweb.core.utils.ObjectUtils;
 import cn.jeeweb.core.utils.StringUtils;
@@ -79,7 +80,7 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 			HttpServletResponse response) {
 
 	}
-	
+
 	/**
 	 * 根据页码和每页记录数，以及查询条件动态加载数据
 	 * 
@@ -153,11 +154,7 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	@ResponseBody
 	public AjaxJson create(Model model, @Valid @ModelAttribute("data") Entity entity, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
-		if (hasError(entity, result)) {
-			// 错误提示
-
-		}
-		return doSave(entity, request, response);
+		return doSave(entity, request, response, result);
 	}
 
 	public String showUpdate(Entity entity, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -181,11 +178,7 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	@ResponseBody
 	public AjaxJson update(Model model, @Valid @ModelAttribute("data") Entity entity, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
-		if (hasError(entity, result)) {
-			// 错误提示
-
-		}
-		return doSave(entity, request, response);
+		return doSave(entity, request, response, result);
 	}
 
 	/**
@@ -200,9 +193,20 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson doSave(Entity entity, HttpServletRequest request, HttpServletResponse response) {
+	public AjaxJson doSave(Entity entity, HttpServletRequest request, HttpServletResponse response,
+			BindingResult result) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("保存成功");
+		if (hasError(entity, result)) {
+			// 错误提示
+			String errorMsg = errorMsg(result);
+			if (!StringUtils.isEmpty(errorMsg)) {
+				ajaxJson.fail(errorMsg);
+			} else {
+				ajaxJson.fail("保存失败");
+			}
+			return ajaxJson;
+		}
 		try {
 			preSave(entity, request, response);
 			if (ObjectUtils.isNullOrEmpty(entity.getId())) {
@@ -236,6 +240,10 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	public AjaxJson delete(@PathVariable("id") ID id) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("删除成功");
+		if (JeewebPropertiesUtil.getProperties().getBoolean("demoMode")) {
+			ajaxJson.fail("演示模式，不允许删除！");
+			return ajaxJson;
+		}
 		try {
 			commonService.deleteById(id);
 		} catch (Exception e) {
@@ -250,6 +258,10 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	public AjaxJson batchDelete(@RequestParam(value = "ids", required = false) ID[] ids) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("删除成功");
+		if (JeewebPropertiesUtil.getProperties().getBoolean("demoMode")) {
+			ajaxJson.fail("演示模式，不允许删除！");
+			return ajaxJson;
+		}
 		try {
 			List<ID> idList = java.util.Arrays.asList(ids);
 			commonService.batchDeleteById(idList);

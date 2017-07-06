@@ -2,22 +2,23 @@ package cn.jeeweb.modules.sys.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import cn.jeeweb.core.common.entity.AbstractEntity;
 import cn.jeeweb.modules.sys.security.shiro.session.mgt.OnlineSession;
-
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 当前在线会话
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 13-3-20 下午3:10
- * <p>
- * Version: 1.0
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: UserOnline.java
+ * @package cn.jeeweb.modules.sys.entity
+ * @description: 当前在线会话
+ * @author: 王存见
+ * @date: 2017年7月3日 下午3:59:32
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
+ *
  */
 @SuppressWarnings("serial")
 @Entity
@@ -67,28 +68,24 @@ public class UserOnline extends AbstractEntity<String> {
 	/**
 	 * session创建时间
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "start_timestsamp")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTimestamp;
 	/**
 	 * session最后访问时间
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "last_access_time")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastAccessTime;
 
 	/**
 	 * 超时时间
 	 */
-	@Column(name = "timeout")
+	@Column(name = "online_timeout")
 	private Long timeout;
 
 	/**
 	 * 备份的当前用户会话
 	 */
-	@Column(name = "session")
+	@Column(name = "online_session")
 	@Type(type = "cn.jeeweb.core.repository.hibernate.type.ObjectSerializeUserType")
 	private OnlineSession session;
 

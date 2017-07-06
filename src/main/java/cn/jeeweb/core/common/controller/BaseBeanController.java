@@ -2,9 +2,13 @@ package cn.jeeweb.core.common.controller;
 
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+
+import cn.jeeweb.core.utils.MessageUtils;
 import cn.jeeweb.core.utils.ReflectionUtils;
 import cn.jeeweb.core.utils.StringUtils;
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class BaseBeanController<Entity extends Serializable> extends BaseController {
 
@@ -16,7 +20,6 @@ public abstract class BaseBeanController<Entity extends Serializable> extends Ba
 	protected BaseBeanController() {
 		this.entityClass = ReflectionUtils.getSuperGenericType(getClass());
 	}
-
 
 	protected Entity newModel() {
 		try {
@@ -36,6 +39,29 @@ public abstract class BaseBeanController<Entity extends Serializable> extends Ba
 	protected boolean hasError(Entity entity, BindingResult result) {
 		Assert.notNull(entity);
 		return result.hasErrors();
+	}
+
+	/**
+	 * 
+	 * @title: errorMsg
+	 * @description: 错误信息组装
+	 * @param result
+	 * @return
+	 * @return: String
+	 */
+	protected String errorMsg(BindingResult result) {
+		String errorMsg = "";
+		if (result.getErrorCount() > 0) {
+			List<ObjectError> objectErrorList = result.getAllErrors();
+			for (ObjectError objectError : objectErrorList) {
+				String message = MessageUtils.getMessage(objectError.getCode(), objectError.getDefaultMessage(),
+						objectError.getArguments());
+				if (!StringUtils.isEmpty(message)) {
+					errorMsg = errorMsg + message + "<br />";
+				}
+			}
+		}
+		return errorMsg;
 	}
 
 	/**
