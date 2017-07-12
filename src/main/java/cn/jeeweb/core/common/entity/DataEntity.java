@@ -8,12 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import cn.jeeweb.core.common.entity.AbstractEntity;
 import cn.jeeweb.core.common.entity.MarkDeleteable;
 import cn.jeeweb.modules.sys.entity.User;

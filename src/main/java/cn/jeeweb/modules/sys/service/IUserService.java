@@ -1,16 +1,19 @@
 package cn.jeeweb.modules.sys.service;
 
-import java.util.Set;
-
 import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.modules.sys.entity.User;
 
 /**
- * @Title:
- * @Description:
- * @author jwcg
- * @date 2014-12-20 21:31:50
+ * 
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: IUserService.java
+ * @package cn.jeeweb.modules.sys.service
+ * @description: 用户
+ * @author: 王存见
+ * @date: 2017年7月11日 下午9:21:07
  * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
  *
  */
 public interface IUserService extends ICommonService<User> {

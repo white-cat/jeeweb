@@ -305,10 +305,12 @@
 						</a>
 					</li>
 					<li class="divider"></li>
-                    <li><a href="#" onclick="changeStyle()">
-                    	<i class="ace-icon fa  fa-mail-reply"></i>
-                    	切换回原风格</a>
-                    </li> 
+                    <li>
+                    	<a href="#" onclick="changeStyle('uadmin')"><i class="ace-icon fa  fa-wikipedia-w"></i>FLAT主题</a>
+                    </li>
+                    <li>
+                    	<a href="#" onclick="changeStyle('inspinia')"><i class="ace-icon fa  fa-wikipedia-w"></i>INSPINIA主题</a>
+                    </li>
 					<li class="divider"></li>
 					<li>
 						<a href="${adminPath}/logout">
@@ -326,7 +328,7 @@
 	<!-- /section:basics/navbar.dropdown -->
 </div><!-- /.navbar-container -->
 <script>
-function changeStyle(){
-	   $.get('${adminPath}/theme/inspinia?url='+window.top.location.href,function(result){   window.location.reload();});
+function changeStyle(theme){
+	   $.get('${adminPath}/theme/'+theme+'?url='+window.top.location.href,function(result){   window.location.reload();});
 }
 </script>

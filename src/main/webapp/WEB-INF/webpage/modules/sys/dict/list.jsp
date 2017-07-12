@@ -4,7 +4,7 @@
 <html>
 <head>
   <title><spring:message code="sys.dict.title" /></title>
-  <meta name="decorator" content="list"/>
+  <meta name="decorator" content="grid-select"/>
 </head>
 <body title="<spring:message code="sys.dict.title" />">
 <grid:grid id="groupGridId" url="${adminPath}/sys/dict/ajaxList?gid=${group.id}">

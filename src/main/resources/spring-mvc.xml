@@ -142,8 +142,9 @@
 	    <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 		<!-- 日志拦截器 -->
-		<bean class="cn.jeeweb.modules.common.interceptor.LogInterceptor" />
-		
+		<bean class="cn.jeeweb.modules.common.interceptor.LogInterceptor" >
+		      <property name="openAccessLog" value="${openAccessLog}" />
+		</bean>
 		<!--配置文件拦截器 -->
 		<bean class="cn.jeeweb.core.interceptor.ReloadConfigInterceptor" >
 		      <property name="developMode" value="${developMode}" />

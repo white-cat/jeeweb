@@ -21,8 +21,6 @@ import cn.jeeweb.modules.codegen.codegenerator.utils.CodeGenUtils;
 import cn.jeeweb.modules.codegen.codegenerator.utils.sql.SqlUtils;
 import cn.jeeweb.modules.codegen.dao.IGeneratorDao;
 import oracle.jdbc.driver.OracleConnection;
-
-import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.internal.SessionFactoryImpl;

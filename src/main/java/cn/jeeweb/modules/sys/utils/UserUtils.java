@@ -2,7 +2,6 @@ package cn.jeeweb.modules.sys.utils;
 
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
@@ -12,7 +11,10 @@ import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import cn.jeeweb.core.utils.CacheUtils;
+import cn.jeeweb.core.utils.JeewebPropertiesUtil;
+import cn.jeeweb.core.utils.ServletUtils;
 import cn.jeeweb.core.utils.SpringContextHolder;
+import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.entity.Menu;
 import cn.jeeweb.modules.sys.entity.Role;
 import cn.jeeweb.modules.sys.entity.User;
@@ -43,7 +45,7 @@ public class UserUtils {
 	public static final String USER_CACHE = "userCache";
 	public static final String USER_CACHE_ID_ = "id_";
 	public static final String USER_CACHE_USER_NAME_ = "username_";
-
+	public static final String MENU_CACHE_URL_ = "menu_url_";
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
 
@@ -160,6 +162,60 @@ public class UserUtils {
 			putCache(CACHE_MENU_LIST, menuList);
 		}
 		return menuList;
+	}
+
+	/**
+	 * 获取当前菜单
+	 * 
+	 * @return
+	 */
+	public static Menu getCurrentMenu() {
+		String url = ServletUtils.getRequest().getServletPath();
+		if (url.endsWith(".jsp")) {
+			return null;
+		}
+		String adminUrlPrefix = JeewebPropertiesUtil.getConfig("admin.url.prefix");
+		url = url.substring(adminUrlPrefix.length() + 1, url.length());
+		url = StringUtils.trimFirstAndLastChar(url, '/');
+		if (StringUtils.isEmpty(url)) {
+			return null;
+		}
+		// 全匹配查找
+		List<Menu> menuList = getMenuList();
+		return getCurrentMenu(menuList, url);
+	}
+
+	private static Menu getCurrentMenu(List<Menu> menuList, String url) {
+		for (Menu menu : menuList) {
+			if (!StringUtils.isEmpty(menu.getUrl())
+					&& url.equals(StringUtils.trimFirstAndLastChar(menu.getUrl(), '/'))) {
+				return menu;
+			}
+		}
+		/*if (StringUtils.isEmpty(url)) {
+		return null;
+		}
+		url = url.substring(0, url.lastIndexOf("/"));
+		return getCurrentMenu(menuList, url);*/
+		return null;
+	}
+
+	/**
+	 * 通过ID获得菜单信息
+	 * 
+	 * @return
+	 */
+	public static Menu getMenuById(String menuid) {
+		if (StringUtils.isEmpty(menuid)) {
+			return null;
+		}
+		List<Menu> menuList = getMenuList();
+		for (Menu menu : menuList) {
+			if (menuid.equals(menu.getId())) {
+				return menu;
+			}
+		}
+		return null;
 	}
 
 	public static Set<String> getPermissionsList() {

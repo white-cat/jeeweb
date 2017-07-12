@@ -1,20 +1,13 @@
 package cn.jeeweb.modules.sys.service.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.entity.User;
-import cn.jeeweb.modules.sys.entity.UserOrganization;
-import cn.jeeweb.modules.sys.entity.UserRole;
-import cn.jeeweb.modules.sys.service.IOrganizationService;
 import cn.jeeweb.modules.sys.service.IUserOrganizationService;
 import cn.jeeweb.modules.sys.service.IUserRoleService;
 import cn.jeeweb.modules.sys.service.IUserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

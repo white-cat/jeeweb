@@ -64,7 +64,7 @@
 				<div class="pull-left">
 				   <#list toobarList as toolbarItem>
 				       <#if toolbarItem.layout=='left'>
-					      <button   class="btn btn-white btn-sm" <#list toolbarItem.dynamicAttributes?keys as toolbarItemKey>${toolbarItemKey}='${toolbarItem.dynamicAttributes[toolbarItemKey]}'</#list>
+					      <button   class="btn btn-sm <#if toolbarItem.btnclass?exists&&toolbarItem.btnclass!=''>${toolbarItem.btnclass}<#else>btn-info</#if>" <#list toolbarItem.dynamicAttributes?keys as toolbarItemKey>${toolbarItemKey}='${toolbarItem.dynamicAttributes[toolbarItemKey]}'</#list>
 					       <#if toolbarItem.function?exists&&toolbarItem.function!=''>
 				           		  <#if toolbarItem.function=='delete'>
 				               		  onclick="batchDelete('${toolbarItem.title!}','${toolbarItem.url!}','${(id)}Grid')"
@@ -82,7 +82,7 @@
 				<div class="pull-right">
 				    <#list toobarList as toolbarItem>
 				       <#if toolbarItem.layout=='right'>
-					      <button class="btn btn-white btn-sm" <#list toolbarItem.dynamicAttributes?keys as toolbarItemKey>${toolbarItemKey}='${toolbarItem.dynamicAttributes[toolbarItemKey]}'</#list>
+					      <button class="btn btn-sm <#if toolbarItem.btnclass?exists&&toolbarItem.btnclass!=''>${toolbarItem.btnclass}<#else>btn-info</#if>" <#list toolbarItem.dynamicAttributes?keys as toolbarItemKey>${toolbarItemKey}='${toolbarItem.dynamicAttributes[toolbarItemKey]}'</#list>
 					        <#if toolbarItem.function?exists>
 					          onclick="${toolbarItem.function!}('${(id)}Grid')"
 					        </#if>><i class="fa ${toolbarItem.icon!}"></i> ${toolbarItem.title!}</button>
@@ -90,12 +90,11 @@
 				    </#list>
 				</div>
 			</div>
-		</div> 
-	    <div class="jqGrid_wrapper">
-	        <table id="${(id)}Grid"></table>
-	        <div id="pager_${(id)}"></div>
-	    </div>
-	
+		</div>
+		<div class="jqGrid_wrapper uadmin-grid-margin" >
+		        <table id="${(id)}Grid"></table>
+		        <div id="pager_${(id)}"></div>
+		</div>
 	</div>
 	<#elseif gridShowType??&&gridShowType=='form'> 
             <button class="btn btn-white btn-sm" onclick="return addRowData('${(id)}Grid')"><i class="fa fa-plus"> 增加</i></button>
@@ -406,7 +405,6 @@
     }  
     </#if>
 	</#list>  
-    
 	function iChecks()
 	{
 		$(".i-checks").iCheck({

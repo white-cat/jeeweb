@@ -29,6 +29,7 @@ public class DataGridToolbarTag extends AbstractGridHtmlTag {
 	private String title = "";// 标题文字
 	private String winwidth = "800px";// 打开窗口宽度
 	private String winheight = "500px";// 打开窗口高度
+	private String btnclass = "";// 按样式
 	private String icon = "";// 图标
 	private String url = "";// 方法请求地址
 	private String function = "";// 默认的create,update,delete方法
@@ -116,6 +117,15 @@ public class DataGridToolbarTag extends AbstractGridHtmlTag {
 	public void setExp(String exp) {
 		this.exp = exp;
 	}
+	
+
+	public String getBtnclass() {
+		return btnclass;
+	}
+
+	public void setBtnclass(String btnclass) {
+		this.btnclass = btnclass;
+	}
 
 	public int doEndTag() throws JspTagException {
 		// toobar参数配置
@@ -155,23 +165,45 @@ public class DataGridToolbarTag extends AbstractGridHtmlTag {
 			if (StringUtils.isEmpty(this.icon)) {
 				String icon = "";
 				if (this.function.equals("create")) {
+					// btn-info
 					icon = "fa-plus";
 				} else if (this.function.equals("update")) {
 					icon = "fa-file-text-o";
 				} else if (this.function.equals("delete")) {
 					icon = "fa-trash-o";
-				} else if (this.function.equals("delete")) {
+				} else if (this.function.equals("search")) {
 					icon = "fa-search";
-				} else if (this.function.equals("delete")) {
+				} else if (this.function.equals("reset")) {
 					icon = "fa-refresh";
 				}
 				staticAttributes.put("icon", icon);
 			}
+
+			if (StringUtils.isEmpty(this.btnclass)) {
+				String btnclass = "";
+				if (this.function.equals("create")) {
+					// btn-info
+					btnclass = "btn-primary";
+				} else if (this.function.equals("update")) {
+					btnclass = "btn-success";
+				} else if (this.function.equals("delete")) {
+					btnclass = "btn-danger";
+				} else if (this.function.equals("search")) {
+					btnclass = "btn-info";
+				} else if (this.function.equals("reset")) {
+					btnclass = "btn-warning";
+				} else {
+					btnclass = "btn-info";
+				}
+				staticAttributes.put("btnclass", btnclass);
+			}
+
 			if (this.function.equals("search") || this.function.equals("reset")) {
 				staticAttributes.put("layout", "right");
 			}
 		}
 	}
+
 
 	@Override
 	public void setDynamicAttribute(String url, String localName, Object value) throws JspException {

@@ -1,6 +1,9 @@
 package cn.jeeweb.modules.sys.tags;
 
+import javax.servlet.http.Cookie;
 import cn.jeeweb.core.utils.JeewebPropertiesUtil;
+import cn.jeeweb.core.utils.ServletUtils;
+import cn.jeeweb.core.utils.StringUtils;
 
 /**
  * 
@@ -28,7 +31,7 @@ public class SysFunctions {
 		String adminUrlPrefix = JeewebPropertiesUtil.getConfig("admin.url.prefix");
 		return adminUrlPrefix;
 	}
-	
+
 	/**
 	 * 获得后台地址
 	 * 
@@ -40,5 +43,33 @@ public class SysFunctions {
 	public static String get() {
 		String adminUrlPrefix = JeewebPropertiesUtil.getConfig("admin.url.prefix");
 		return adminUrlPrefix;
+	}
+
+	/**
+	 * 加载风格
+	 * 
+	 * @title: getTheme
+	 * @description: TODO(这里用一句话描述这个方法的作用)
+	 * @param request
+	 * @return
+	 * @return: String
+	 */
+	public static String getTheme() {
+		// 默认风格
+		String theme = JeewebPropertiesUtil.getConfig("admin.default.theme");
+		if (StringUtils.isEmpty(theme)) {
+			theme = "uadmin";
+		}
+		// cookies配置中的模版
+		Cookie[] cookies = ServletUtils.getRequest().getCookies();
+		for (Cookie cookie : cookies) {
+			if (cookie == null || StringUtils.isEmpty(cookie.getName())) {
+				continue;
+			}
+			if (cookie.getName().equalsIgnoreCase("theme")) {
+				theme = cookie.getValue();
+			}
+		}
+		return theme;
 	}
 }

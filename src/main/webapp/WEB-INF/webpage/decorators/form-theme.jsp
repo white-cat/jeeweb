@@ -1,17 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/webpage/common/taglibs.jspf"%>
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <!DOCTYPE html>
-<html style="overflow-x:auto;overflow-y:auto;">
-<head>
-	<title><sitemesh:title/>-<spring:message code="platform.copyright" /></title>
-	<%@include file="include/form-header.jsp" %>		
-	<sitemesh:head/>
-</head>
-<body id="<sitemesh:getProperty property='body.id'/>" class="<sitemesh:getProperty property='body.class'/>"  style="<sitemesh:getProperty property='body.style'/>">
-	<div class="ibox-content">
-	  <sitemesh:body/>
-	</div>
-    <%@include file="include/form-footer.jsp" %>		
-</body>
-</html>
+<c:set var="theme" value="${fns:getTheme()}" />
+<c:choose>
+    <c:when test="${theme eq 'uadmin'}">
+        <%@include file="./uadmin/form-theme.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%@include file="./default/form-theme.jsp" %>
+    </c:otherwise>
+</c:choose>

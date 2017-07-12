@@ -72,6 +72,7 @@
     <![CDATA[ 
        	<!-- iCheck -->
 		<script src="${staticPath}/vendors/iCheck/icheck.min.js"></script>
+        <script src="${staticPath}/vendors/iCheck/custom.min.js"></script>
     ]]>   
     </js>
     <js name="sweetalert">  
@@ -213,6 +214,18 @@
     <![CDATA[ 
 	    <!-- bootstrap-treeview -->
 	    <script src="${staticPath}/vendors/bootstrap-treeview/bootstrap-treeview.js"></script>
+	]]>   
+    </js>
+    <js name="jquery-cookie">  
+    <![CDATA[ 
+	    <!-- jquery-cookie -->
+	    <script src="${staticPath}/vendors/jquery-cookie/jquery.cookie.js"></script>
+	]]>   
+    </js>
+    <js name="bootstrap-hover-dropdown">  
+    <![CDATA[ 
+	    <!-- bootstrap-hover-dropdown -->
+	    <script src="${staticPath}/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 	]]>   
     </js>
 </html-component>  

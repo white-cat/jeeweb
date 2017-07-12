@@ -27,11 +27,18 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * 简单封装Jackson，实现JSON String<->Java Object的Mapper. 封装不同的输出风格,
- * 使用不同的builder函数创建实例.
  * 
- * @author jeeplus
- * @version 2013-11-15
+ * All rights Reserved, Designed By www.jeeweb.cn
+ * 
+ * @title: JsonMapper.java
+ * @package cn.jeeweb.core.mapper
+ * @description: 简单封装Jackson，实现JSON String<->Java Object的Mapper.
+ *               封装不同的输出风格,使用不同的builder函数创建实例.
+ * @author: 王存见
+ * @date: 2017年7月7日 下午2:01:31
+ * @version V1.0
+ * @copyright: 2017 www.jeeweb.cn Inc. All rights reserved.
+ *
  */
 public class JsonMapper extends ObjectMapper {
 
@@ -232,8 +239,6 @@ public class JsonMapper extends ObjectMapper {
 	public static Object fromJsonString(String jsonString, Class<?> clazz) {
 		return JsonMapper.getInstance().fromJson(jsonString, clazz);
 	}
-	
-	
 
 	/**
 	 * 测试

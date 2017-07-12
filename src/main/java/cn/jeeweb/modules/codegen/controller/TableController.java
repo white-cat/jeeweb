@@ -19,6 +19,7 @@ import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.mapper.JsonMapper;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
+import cn.jeeweb.core.utils.JeewebPropertiesUtil;
 import cn.jeeweb.core.utils.MyBeanUtils;
 import cn.jeeweb.core.utils.ObjectUtils;
 import cn.jeeweb.core.utils.PropertiesUtil;
@@ -205,6 +206,10 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 			@RequestParam("id") String id) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("数据库同步成功");
+		if (JeewebPropertiesUtil.getProperties().getBoolean("demoMode")) {
+			ajaxJson.fail("演示模式，不允许同步数据库！");
+			return ajaxJson;
+		}
 		try {
 			tableService.dropTable(id);
 			tableService.syncDatabase(id);

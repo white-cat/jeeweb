@@ -10,7 +10,6 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<spring.version>4.0.3.RELEASE</spring.version>
-
 		<hibernate.version>4.1.0.Final</hibernate.version>
 		<hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
 		<shiro.version>1.2.2</shiro.version>
@@ -57,7 +56,6 @@
 		<email.version>1.4</email.version>
 		<!-- Excel导入导出 -->
 		<poi.version>3.12</poi.version>
-
 	</properties>
 	<dependencies>
 		<!-- web begin Spring MVC Test Framework 需要 servlet-api 3.0 以上 -->
@@ -416,11 +414,11 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>${sqlserver.version}</version>
 		</dependency>
-		<!--<dependency>  
+		<dependency>  
 		    <groupId>com.oracle</groupId>  
 		    <artifactId>ojdbc14</artifactId>  
 		    <version>${oracle.version}</version>  
-		</dependency>-->
+		</dependency>  
 		
 	</dependencies>
 	<build>
@@ -432,6 +430,7 @@
 	<repository>
 		<id>alimaven</id>
 		<name>aliyun maven</name>
+		<layout>default</layout>
 		<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 	</repository>
 	<repository>
@@ -467,13 +466,11 @@
 	<repository>
 		<id>central</id>
 		<name>Maven Repository Switchboard</name>
-		<layout>default</layout>
 		<url>http://repo.maven.apache.org/maven2</url>
 	</repository>
 	<repository>
 		<id>maven-repo1</id>
 		<name>maven-repo1</name>
-		<layout>default</layout>
 		<url>http://repo1.maven.org/maven2/</url>
 	</repository>
 	<repository>

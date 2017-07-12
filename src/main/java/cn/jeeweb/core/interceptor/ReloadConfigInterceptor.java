@@ -34,7 +34,7 @@ public class ReloadConfigInterceptor implements HandlerInterceptor {
 	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		if (developMode) {
+		//if (developMode) {
 			/**
 			 * 下面是自动加载配置文件的算法实现
 			 */
@@ -50,7 +50,7 @@ public class ReloadConfigInterceptor implements HandlerInterceptor {
 						.getBean(DynamicHibernateStatementBuilder.class);
 				dynamicStatementBuilder.init();
 			}
-		}
+		//}
 		return true;
 	}
 

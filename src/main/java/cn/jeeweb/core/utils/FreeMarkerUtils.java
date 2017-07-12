@@ -108,6 +108,8 @@ public class FreeMarkerUtils {
 		try {
 			StringWriter result = new StringWriter();
 			Template t = new Template("name", new StringReader(templateString), new Configuration());
+			// 编码设置2  
+            t.setEncoding(ENCODING);  
 			t.process(model, result);
 			return result.toString();
 		} catch (Exception e) {
@@ -126,6 +128,7 @@ public class FreeMarkerUtils {
 		Template template = null;
 		try {
 			template = configuration.getTemplate(name);
+			template.setEncoding(ENCODING);  
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

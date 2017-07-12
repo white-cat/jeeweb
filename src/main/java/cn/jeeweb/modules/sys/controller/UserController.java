@@ -4,6 +4,7 @@ import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.query.data.Queryable;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
+import cn.jeeweb.core.utils.JeewebPropertiesUtil;
 import cn.jeeweb.core.utils.MyBeanUtils;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.sys.entity.Organization;
@@ -86,6 +87,10 @@ public class UserController extends BaseCRUDController<User, String> {
 			HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("密码修改成功");
+		if (JeewebPropertiesUtil.getProperties().getBoolean("demoMode")) {
+			ajaxJson.fail("演示模式，不允许修改密码！");
+			return ajaxJson;
+		}
 		try {
 			String password = request.getParameter("password");
 			userService.changePassword(id, password);

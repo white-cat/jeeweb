@@ -14,7 +14,7 @@
     </div>
 	<grid:column label="sys.common.key" hidden="true"   name="id" width="100"/>
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
-	<grid:button title="sys.role.authMenu"  groupname="opt" function="updateObj" outclass="btn-primary" winwidth="300px" innerclass="fa-plus" url="${adminPath}/sys/role/authMenu" />
+	<grid:button title="sys.role.authMenu"  groupname="opt" function="updateObj" outclass="btn-info" winwidth="300px" innerclass="fa-plus" url="${adminPath}/sys/role/authMenu" />
 	<grid:button   groupname="opt" function="delete" />
     <grid:column label="sys.role.name"  name="name"  query="true"  />
     <grid:column label="sys.role.code"  name="code"  query="true"  />

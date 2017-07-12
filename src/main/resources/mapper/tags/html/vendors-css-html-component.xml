@@ -23,7 +23,7 @@
     </css>
     <css name="iCheck">  
     <![CDATA[ 
-        <link href="${staticPath}/vendors/iCheck/custom.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="${staticPath}/vendors/iCheck/skins/all.css">
     ]]>   
     </css>
     <css name="datepicker">  

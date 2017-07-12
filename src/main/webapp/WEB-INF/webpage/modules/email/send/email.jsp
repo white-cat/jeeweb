@@ -2,40 +2,27 @@
 <%@include file="/WEB-INF/webpage/common/taglibs.jspf"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>邮件发送</title>
-<meta name="keywords"
-	content="<spring:message code="sys.site.keywords" arguments="${platformName}"/>">
-<meta name="description"
-	content="<spring:message code="sys.site.description" arguments="${platformName}"/>">
-
-<link rel="shortcut icon" href="favicon.ico">
-<html:css name="bootstrap,font-awesome,animate,iCheck,Validform,simditor" />
-<link href="${staticPath}/common/css/style.css?v=4.1.0" rel="stylesheet">
-<link href="${staticPath}/iCheck/custom.css" rel="stylesheet">
-<html:js name="jquery,bootstrap" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="decorator" content="single"/>
+    <title>邮件发送</title>
+    <html:css  name="iCheck,Validform,simditor"/>
 </head>
-
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
                 <div class="col-sm-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>邮件发送(邮件內容方式发送)</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
+					<div class="portlet box  portlet-grey">
+						 <div class="portlet-header">
+							<div class="caption">邮件发送(邮件內容方式发送)</div>
+							<div class="tools">
+		                        <i class="fa fa-chevron-up"></i>
+		                        <i class="fa fa-refresh"></i><i class="fa fa-times"></i>
+		                     </div>
 						</div>
-						<div class="ibox-content">
+						<div class="portlet-body">
 							<form:form id="emailForm"
 								action="${adminPath}/email/send/sendEmailByContent" method="post"
 								class="form-horizontal">
@@ -74,16 +61,15 @@
 					</div>
 				</div>
 				<div class="col-sm-12">
-				    <div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>邮件发送(模版方式发送)</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
+				    <div class="portlet box  portlet-grey">
+						 <div class="portlet-header">
+							<div class="caption">邮件发送(模版方式发送)</div>
+							<div class="tools">
+		                        <i class="fa fa-chevron-up"></i>
+		                        <i class="fa fa-refresh"></i><i class="fa fa-times"></i>
+		                     </div>
 						</div>
-						<div class="ibox-content">
+						<div class="portlet-body">
 							<form:form id="emailTemplateEmailForm"
 								action="${adminPath}/email/send/sendEmailByCode" method="post"
 								class="form-horizontal">

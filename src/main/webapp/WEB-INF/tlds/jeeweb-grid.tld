@@ -425,6 +425,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>样式</description>
+			<name>btnclass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<description>图标</description>
 			<name>icon</name>
 			<required>false</required>

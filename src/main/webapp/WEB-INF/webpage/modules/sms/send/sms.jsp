@@ -2,22 +2,12 @@
 <%@include file="/WEB-INF/webpage/common/taglibs.jspf"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>短信发送</title>
-<meta name="keywords"
-	content="<spring:message code="sys.site.keywords" arguments="${platformName}"/>">
-<meta name="description"
-	content="<spring:message code="sys.site.description" arguments="${platformName}"/>">
-
-<link rel="shortcut icon" href="favicon.ico">
-<html:css name="bootstrap,font-awesome,animate,iCheck,Validform" />
-<link href="${staticPath}/common/css/style.css?v=4.1.0" rel="stylesheet">
-<link href="${staticPath}/iCheck/custom.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="decorator" content="single"/>
+    <title>短信发送</title>
+    <html:css  name="iCheck,Validform"/>
 </head>
 
 <body class="gray-bg">
@@ -32,16 +22,15 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>短信发送(短信內容方式发送)</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
+					<div class="portlet box  portlet-grey">
+						 <div class="portlet-header">
+							<div class="caption">短信发送(短信內容方式发送)</div>
+							<div class="tools">
+		                        <i class="fa fa-chevron-up"></i>
+		                        <i class="fa fa-refresh"></i><i class="fa fa-times"></i>
+		                     </div>
 						</div>
-						<div class="ibox-content">
+						<div class="portlet-body">
 							<form:form id="smsForm"
 								action="${adminPath}/sms/send/sendSmsByContent" method="post"
 								class="form-horizontal">
@@ -73,16 +62,15 @@
 					</div>
 				</div>
 				<div class="col-sm-6">
-				    <div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>短信发送(模版方式发送)</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
+				    <div class="portlet box  portlet-grey">
+						 <div class="portlet-header">
+							<div class="caption">短信发送(模版方式发送)</div>
+							<div class="tools">
+		                        <i class="fa fa-chevron-up"></i>
+		                        <i class="fa fa-refresh"></i><i class="fa fa-times"></i>
+		                     </div>
 						</div>
-						<div class="ibox-content">
+						<div class="portlet-body">
 							<form:form id="smsTemplateSmsForm"
 								action="${adminPath}/sms/send/sendSmsByCode" method="post"
 								class="form-horizontal">
@@ -125,7 +113,7 @@
 
 
 	<!-- 全局js -->
-	<html:js name="jquery,bootstrap,iCheck,Validform" />
+	<html:js name="iCheck,Validform" />
 
 	<!-- 自定义js -->
 	<script src="${staticPath}/common/js/content.js?v=1.0.0"></script>

@@ -28,15 +28,6 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-4">
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>商业支持</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>我们提供基于Jeeweb的二次开发服务，具体费用请联系官方。</p>
-                    </div>
-                </div>
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>联系信息</h5>
@@ -45,6 +36,7 @@
                     <div class="ibox-content">
 	                    <p><i class="fa fa-send-o"></i> 官网：<a href="http://www.jeeweb.cn/" target="_blank">http://www.jeeweb.cn/</a></p>
 	                    <p><i class="fa fa-qq"></i> QQ群：<a href="javascript:;">570062301</a></p>
+	                    <p><i class="fa fa-code"></i> 源码下载：<a href="http://git.oschina.net/dataact/jeeweb/"  target="_blank">开源中国</a></p>
 	                </div>
 
                 </div>
