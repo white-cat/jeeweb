@@ -111,8 +111,10 @@
 	<input type="hidden" id="query${(id)}Fields" name="query${(id)}Fields" value="<#list columnList as columnItem><#if !columnItem.formatter??||"button" != columnItem.formatter>${columnItem.name},</#if></#list>">
 			 	     
 	<script type="text/javascript"> 
-	    
 	    $(document).ready(function () {
+	    	 $.jgrid.defaults.width = 960;
+			 $.jgrid.defaults.responsive = true;
+			 $.jgrid.defaults.styleUI = 'Bootstrap';
 	    	 iChecks();
 	    	 init${(id)}Table();
 	    	 init${(id)}Date();
