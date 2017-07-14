@@ -151,7 +151,7 @@ function setGridEdit(gridId){
          }
 	}
    function initGrid(girdid,colModel,data){
-    	 //初始化用户列表
+	 //初始化用户列表
  	 $("#"+girdid).jqGrid({
  	         datatype: "local",
 			 data: data,
@@ -174,6 +174,7 @@ function setGridEdit(gridId){
              sortable:true,
              rownumbers: true,
              rownumWidth: 35,
+             rowNum:10000,
              altRows: true
          });
 }
