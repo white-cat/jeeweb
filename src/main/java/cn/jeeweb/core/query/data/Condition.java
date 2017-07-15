@@ -12,10 +12,10 @@ public class Condition implements Iterable<cn.jeeweb.core.query.data.Condition.F
 	private static final long serialVersionUID = 5737186511678863905L;
 	public static final Operator DEFAULT_OPERATOR = Operator.custom;
 
-	private final List<Filter> filters;
+	private final List<Filter> filters = new ArrayList<Filter>();
 
 	public Condition(Filter... filters) {
-		this(Arrays.asList(filters));
+		this.filters.addAll(Arrays.asList(filters));
 	}
 
 	public Condition(List<Filter> filters) {
@@ -23,31 +23,23 @@ public class Condition implements Iterable<cn.jeeweb.core.query.data.Condition.F
 		if (null == filters || filters.isEmpty()) {
 			throw new IllegalArgumentException("You have to provide at least one condition property to condition by!");
 		}
-
-		this.filters = filters;
+		this.filters.addAll(filters);
 	}
 
 	public Condition and(Operator operator, final String property, final Object value) {
-
-		ArrayList<Filter> these = new ArrayList<Filter>(this.filters);
 		Filter filter = new Filter(operator, property, value);
-		these.add(filter);
-		return new Condition(these);
+		filters.add(filter);
+		return this;
 	}
 
 	public Condition and(Condition condition) {
-
 		if (condition == null) {
 			return this;
 		}
-
-		ArrayList<Filter> these = new ArrayList<Filter>(this.filters);
-
 		for (Filter filter : condition) {
-			these.add(filter);
+			filters.add(filter);
 		}
-
-		return new Condition(these);
+		return this;
 	}
 
 	public void remove(Filter filter) {
