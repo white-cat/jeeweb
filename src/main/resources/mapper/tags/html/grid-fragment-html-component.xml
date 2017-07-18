@@ -278,7 +278,7 @@
 		   }
 		   </#if>
 		   var baseUrl='${appPath}';
-		   var imageHtml = "<img "+extendStyle+"  <#if column.formatterClass??>class='${column.formatterClass}'</#if>  src='image/" + value + "' originalValue='" + value + "' />";
+		   var imageHtml = "<img "+extendStyle+"  <#if column.formatterClass??>class='${column.formatterClass}'</#if>  src='${appPath}/" + value + "' originalValue='" + value + "' />";
 	       return imageHtml
 	   </#if>
 	   <#if column.formatter??&&"label" == column.formatter>
