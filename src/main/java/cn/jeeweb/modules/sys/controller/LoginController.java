@@ -23,21 +23,24 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController extends BaseController {
 	@Autowired
 	private RetryLimitHashedCredentialsMatcher retryLimitHashedCredentialsMatcher;
-	
+
 	@RequestMapping(value = "/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletRequest response, Model model) {
 		// 我的电脑有缓存问题
 		Principal principal = UserUtils.getPrincipal(); // 如果已经登录，则跳转到管理首页
 		if (principal != null && !principal.isMobileLogin()) {
-			new ModelAndView("redirect:/admin");
+			return new ModelAndView("redirect:/admin");
 		}
 
 		String useruame = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
-		//boolean rememberMe = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
-	//	boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
+		// boolean rememberMe = WebUtils.isTrue(request,
+		// FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
+		// boolean mobile = WebUtils.isTrue(request,
+		// FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
 		String exception = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	//	String message = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_ERROR_PARAM);
-	//	useruame = "admin";
+		// String message = (String)
+		// request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_ERROR_PARAM);
+		// useruame = "admin";
 		// 是否开启验证码
 		if (RepeatAuthenticationException.class.getName().equals(exception)
 				|| retryLimitHashedCredentialsMatcher.isShowCaptcha(useruame)) { // 重复认证异常加入验证码。
