@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import javax.sql.DataSource;
 
@@ -20,7 +21,6 @@ import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
 import cn.jeeweb.modules.codegen.codegenerator.utils.CodeGenUtils;
 import cn.jeeweb.modules.codegen.codegenerator.utils.sql.SqlUtils;
 import cn.jeeweb.modules.codegen.dao.IGeneratorDao;
-import oracle.jdbc.driver.OracleConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.internal.SessionFactoryImpl;
@@ -79,18 +79,26 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 			String username = propertiesUtil.getString("connection.username");
 			String password = propertiesUtil.getString("connection.password");
 			String driverClassName = "com.mysql.jdbc.Driver";
+			Properties props = new Properties();
+			if (username != null) {
+				props.put("user", username);
+			}
+			if (password != null) {
+				props.put("password", password);
+			}
 			if (dbType.equals("sqlserver")) {
 				driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 			} else if (dbType.equals("mysql")) {
 				driverClassName = "com.mysql.jdbc.Driver";
 			} else if (dbType.equals("oracle")) {
 				driverClassName = "oracle.jdbc.driver.OracleDriver";
+				props.put("remarksReporting", "true");
 			} else {
 				return getDataSource().getConnection();
 			}
 			// 初始化JDBC驱动并让驱动加载到jvm中
 			Class.forName(driverClassName);
-			conn = DriverManager.getConnection(url, username, password);
+			conn = DriverManager.getConnection(url, props);
 			conn.setAutoCommit(true);
 			return conn;
 		} catch (SQLException e) {
@@ -117,7 +125,6 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 				/**
 				 * 设置连接属性,使得可获取到表的REMARK(备注)
 				 */
-				((OracleConnection) connection).setRemarksReporting(true);
 				resultSet = connection.getMetaData().getTables(null, propertiesUtil.getString("connection.username"),
 						null, types);
 			} else {
@@ -172,12 +179,6 @@ public class GeneratorDaoImpl extends CommonDaoImpl implements IGeneratorDao {
 			connection.setAutoCommit(true);
 			// 判断是否为MYSQL
 			String driverName = connection.getMetaData().getDriverName().toUpperCase();
-			if (driverName.contains("ORACLE")) {
-				/**
-				 * 设置连接属性,使得可获取到表的REMARK(备注)
-				 */
-				((OracleConnection) connection).setRemarksReporting(true);
-			}
 			// 获得列的信息
 			resultSet = connection.getMetaData().getColumns(null, null, tableName, null);
 			while (resultSet.next()) {

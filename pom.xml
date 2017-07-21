@@ -401,7 +401,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -409,89 +409,90 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 注释掉oracle、sqlserver，需要的自己添加 
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
 			<version>${sqlserver.version}</version>
 		</dependency>
-		<dependency>  
-		    <groupId>com.oracle</groupId>  
-		    <artifactId>ojdbc14</artifactId>  
-		    <version>${oracle.version}</version>  
-		</dependency>  
-		
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>${oracle.version}</version>
+		</dependency>-->
+
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<name>aliyun maven</name>
+			<layout>default</layout>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>apache-repo</id>
+			<name>apache Repository</name>
+			<url>https://repository.apache.org/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>java-repo</id>
+			<name>java Repository</name>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+		<repository>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.spring.io/release/</url>
+		</repository>
+		<repository>
+			<id>springsource-repo-snapshot</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.spring.io/snapshot/</url>
+		</repository>
+		<repository>
+			<id>cloudhopper</id>
+			<name>Repository for Cloudhopper</name>
+			<url>http://maven.cloudhopper.com/repos/third-party/</url>
+		</repository>
+		<repository>
+			<id>jboss-repo-releases</id>
+			<name>Jboss Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+		</repository>
+		<repository>
+			<id>maven-repo1</id>
+			<name>maven-repo1</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>sourceforge-releases</id>
+			<name>Sourceforge Releases</name>
+			<url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url>
+		</repository>
+	</repositories>
+	
 	<build>
-		<finalName>jeeweb</finalName>
+		<plugins>
+			<!-- compiler插件, 设定JDK版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<defaultGoal>compile</defaultGoal>
 	</build>
 </project>
 
-<repositories>
-	<repository>
-		<id>alimaven</id>
-		<name>aliyun maven</name>
-		<layout>default</layout>
-		<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-	</repository>
-	<repository>
-		<id>apache-repo</id>
-		<name>apache Repository</name>
-		<url>https://repository.apache.org/content/groups/public/</url>
-	</repository>
-	<repository>
-		<id>java-repo</id>
-		<name>java Repository</name>
-		<url>http://download.java.net/maven/2/</url>
-	</repository>
-	<repository>
-		<id>springsource-repo</id>
-		<name>SpringSource Repository</name>
-		<url>http://repo.spring.io/release/</url>
-	</repository>
-	<repository>
-		<id>springsource-repo-snapshot</id>
-		<name>SpringSource Repository</name>
-		<url>http://repo.spring.io/snapshot/</url>
-	</repository>
-	<repository>
-		<id>cloudhopper</id>
-		<name>Repository for Cloudhopper</name>
-		<url>http://maven.cloudhopper.com/repos/third-party/</url>
-	</repository>
-	<repository>
-		<id>jboss-repo-releases</id>
-		<name>Jboss Repository</name>
-		<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-	</repository>
-	<repository>
-		<id>central</id>
-		<name>Maven Repository Switchboard</name>
-		<url>http://repo.maven.apache.org/maven2</url>
-	</repository>
-	<repository>
-		<id>maven-repo1</id>
-		<name>maven-repo1</name>
-		<url>http://repo1.maven.org/maven2/</url>
-	</repository>
-	<repository>
-		<id>sourceforge-releases</id>
-		<name>Sourceforge Releases</name>
-		<url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url>
-	</repository>
-</repositories>
-<build>
-	<plugins>
-		<!-- compiler插件, 设定JDK版本 -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.1</version>
-			<configuration>
-				<source>${jdk.version}</source>
-				<target>${jdk.version}</target>
-				<showWarnings>true</showWarnings>
-			</configuration>
-		</plugin>
-	</plugins>
-	<defaultGoal>compile</defaultGoal>
-</build> 
