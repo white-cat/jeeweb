@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jeeweb.modules<#if moduleName?exists><#if moduleName!=''>.test</#if></#if>.mapper.TestTreeMapper" >
+
+	<sql id="Base_Column_List" >
+	   t.id <#if !column.isBaseType> AS 'id.id'</#if>
+	   t.name <#if !column.isBaseType> AS 'name.id'</#if>
+	   t.remarks <#if !column.isBaseType> AS 'remarks.id'</#if>
+	   t.create_by <#if !column.isBaseType> AS 'createBy.id'</#if>
+	   t.create_date <#if !column.isBaseType> AS 'createDate.id'</#if>
+	   t.update_by <#if !column.isBaseType> AS 'updateBy.id'</#if>
+	   t.update_date <#if !column.isBaseType> AS 'updateDate.id'</#if>
+	   t.del_flag <#if !column.isBaseType> AS 'delFlag.id'</#if>
+	   t.parent_id <#if !column.isBaseType> AS 'parentId.id'</#if>
+	   t.parent_ids <#if !column.isBaseType> AS 'parentIds.id'</#if>
+	</sql>
+	<sql id="parentJoins">
+		LEFT JOIN test_tree p ON p.id = t.parent_id
+	</sql>
+    <!-- 查找通过ID查找树信息 -->
+	<select id="selectByTreeId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from test_tree t
+		<include refid="parentJoins" />
+		where t.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查找树列表 -->
+	<select id="selectTreeList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from test_tree t
+		<include refid="parentJoins" />
+		<where>
+			${ew.sqlSegment}
+		</where>
+	</select>
+
+	<!-- 更新子树 -->
+	<update id="updateSunTreeParentIds">
+		update test_tree set parent_ids=
+		CONCAT(#{newParentIds},substring(parent_ids,
+		length(#{oldParentIds})+1,length(parent_ids)+1))
+		where parent_ids like concat(#{oldParentIds}, '%')
+	</update>
+	
+	<!-- 删除子树 -->
+	<delete id="deleteSunTree" parameterType="java.lang.String">
+		delete from test_tree
+		where parent_ids like concat(#{oldParentIds}, '%')
+	</delete>
+  
+</mapper>

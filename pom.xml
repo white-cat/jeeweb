@@ -56,6 +56,10 @@
 		<email.version>1.4</email.version>
 		<!-- Excel导入导出 -->
 		<poi.version>3.12</poi.version>
+		<!-- JDK版本 -->
+		<jdk.version>1.7</jdk.version>
+		<!-- 强制编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!-- web begin Spring MVC Test Framework 需要 servlet-api 3.0 以上 -->
