@@ -41,7 +41,7 @@
 		             <label class="Validform_checktip"></label>
 		         </td>
 		      </tr>
-		      <tr>
+		      <tr style="display:none;">
 		         <td  class=" active text-right">	
 		              <label>生成子模块名:</label>
 		         </td>

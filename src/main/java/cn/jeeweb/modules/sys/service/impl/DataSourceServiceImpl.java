@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sys.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.sys.entity.DataSourceEntity;
+import cn.jeeweb.modules.sys.entity.DataSource;
 import cn.jeeweb.modules.sys.service.IDataSourceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("dataSourceService")
-public class DataSourceServiceImpl  extends CommonServiceImpl<DataSourceEntity> implements  IDataSourceService {
+public class DataSourceServiceImpl  extends CommonServiceImpl<DataSource> implements  IDataSourceService {
 
 }

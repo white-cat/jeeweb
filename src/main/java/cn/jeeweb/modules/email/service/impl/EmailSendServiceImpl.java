@@ -4,7 +4,7 @@ import cn.jeeweb.core.disruptor.email.EmailEvent.EmailHandlerCallBack;
 import cn.jeeweb.core.disruptor.email.EmailHelper;
 import cn.jeeweb.core.utils.SpringContextHolder;
 import cn.jeeweb.core.utils.email.EmailResult;
-import cn.jeeweb.modules.email.entity.EmailTemplateEntity;
+import cn.jeeweb.modules.email.entity.EmailTemplate;
 import cn.jeeweb.modules.email.service.IEmailSendService;
 import cn.jeeweb.modules.email.service.IEmailTemplateService;
 
@@ -34,7 +34,7 @@ public class EmailSendServiceImpl implements IEmailSendService {
 
 	@Override
 	public void sendAsyncEmailByCode(String email, String code, EmailHandlerCallBack callBack, String... datas) {
-		EmailTemplateEntity emailTemplate = emailTemplateService.get("code", code);
+		EmailTemplate emailTemplate = emailTemplateService.get("code", code);
 		String templateSubject = emailTemplate.getTemplateSubject();
 		String templateContent = emailTemplate.getTemplateContent();
 		templateContent = StringEscapeUtils.unescapeHtml4(StringEscapeUtils.unescapeHtml4(templateContent));
@@ -44,7 +44,7 @@ public class EmailSendServiceImpl implements IEmailSendService {
 
 	@Override
 	public EmailResult sendSyncEmailByCode(String email, String code, String... datas) {
-		EmailTemplateEntity emailTemplate = emailTemplateService.get("code", code);
+		EmailTemplate emailTemplate = emailTemplateService.get("code", code);
 		String templateSubject = emailTemplate.getTemplateSubject();
 		String templateContent = emailTemplate.getTemplateContent();
 		templateContent = StringEscapeUtils.unescapeHtml4(StringEscapeUtils.unescapeHtml4(templateContent));

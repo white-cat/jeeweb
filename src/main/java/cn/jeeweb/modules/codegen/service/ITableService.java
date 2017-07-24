@@ -11,10 +11,10 @@ import cn.jeeweb.core.common.service.ICommonService;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
 import cn.jeeweb.modules.codegen.codegenerator.data.GeneratorInfo;
 import cn.jeeweb.modules.codegen.codegenerator.exception.GenerationException;
-import cn.jeeweb.modules.codegen.entity.TableEntity;
+import cn.jeeweb.modules.codegen.entity.Table;
 import cn.jeeweb.modules.sys.entity.Menu;
 
-public interface ITableService extends ICommonService<TableEntity> {
+public interface ITableService extends ICommonService<Table> {
 
 	/**
 	 * 获得表列表
@@ -30,7 +30,7 @@ public interface ITableService extends ICommonService<TableEntity> {
 	 * @description:代码生成
 	 * @return: void
 	 */
-	public void generateCode(TableEntity table, GeneratorInfo generatorInfo) throws IOException, GenerationException;
+	public void generateCode(Table table, GeneratorInfo generatorInfo) throws IOException, GenerationException;
 
 	/**
 	 * 代码生成
@@ -39,7 +39,7 @@ public interface ITableService extends ICommonService<TableEntity> {
 	 * @description:代码生成
 	 * @return: void
 	 */
-	public void createMenu(TableEntity table, Menu menu);
+	public void createMenu(Table table, Menu menu);
 
 	/**
 	 * 代码生成
@@ -48,7 +48,7 @@ public interface ITableService extends ICommonService<TableEntity> {
 	 * @description:代码生成
 	 * @return: void
 	 */
-	public void importDatabase(TableEntity table);
+	public void importDatabase(Table table);
 
 	public void dropTable(String tableid);
 
@@ -63,5 +63,5 @@ public interface ITableService extends ICommonService<TableEntity> {
 
 	public void removeById(Serializable id);
 
-	public List<TableEntity> findSubTable(String tablename);
+	public List<Table> findSubTable(String tablename);
 }

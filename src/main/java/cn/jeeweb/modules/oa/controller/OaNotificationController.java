@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
+import cn.jeeweb.modules.oa.entity.OaNotification;
 
 /**   
  * @Title: 通知公告
@@ -19,6 +19,6 @@ import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/oa/oanotification")
 @RequiresPathPermission("oa:oanotification")
-public class OaNotificationController extends BaseCRUDController<OaNotificationEntity, String> {
+public class OaNotificationController extends BaseCRUDController<OaNotification, String> {
 
 }

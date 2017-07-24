@@ -51,7 +51,7 @@
 			<!-- 是否JSP,1.JAVA,2.页面代码 -->
 			<code-type>1</code-type>
 			<!-- 关键字有,entityName -->
-			<name-format>[entityName]Entity.java</name-format>
+			<name-format>[entityName].java</name-format>
 		</generator>
 		<generator>
 			<!-- 注册关键字 -->

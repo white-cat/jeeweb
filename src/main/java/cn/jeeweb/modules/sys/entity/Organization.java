@@ -11,7 +11,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import cn.jeeweb.modules.common.entity.TreeEntity;
+
+import cn.jeeweb.core.common.entity.TreeEntity;
 
 /**
  * @Title:

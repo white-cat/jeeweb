@@ -27,11 +27,14 @@ public abstract class DataEntity<ID> extends AbstractEntity<ID> implements MarkD
 	private static final long serialVersionUID = 1L;
 
 	protected String remarks; // 备注
+
 	protected User createBy; // 创建者
 	protected Date createDate; // 创建日期
+
 	protected User updateBy; // 更新者
 	protected Date updateDate; // 更新日期
-	protected Boolean delFlag = Boolean.FALSE; // 删除标记（0：正常；1：删除 ）
+
+	protected String delFlag = DEL_FLAG_NORMAL; // 删除标记（0：正常；1：删除 ）
 	protected Boolean isDelete = Boolean.FALSE;
 
 	public DataEntity() {
@@ -80,11 +83,11 @@ public abstract class DataEntity<ID> extends AbstractEntity<ID> implements MarkD
 	}
 
 	@Column(name = "del_flag", length = 1, nullable = false)
-	public Boolean getDelFlag() {
+	public String getDelFlag() {
 		return delFlag;
 	}
 
-	public void setDelFlag(Boolean delFlag) {
+	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
 	}
 
@@ -106,9 +109,9 @@ public abstract class DataEntity<ID> extends AbstractEntity<ID> implements MarkD
 	public void markDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 		if (this.isDelete) {
-			delFlag = Boolean.TRUE;
+			delFlag = DEL_FLAG_DELETE;
 		} else {
-			delFlag = Boolean.FALSE;
+			delFlag = DEL_FLAG_NORMAL;
 		}
 	}
 

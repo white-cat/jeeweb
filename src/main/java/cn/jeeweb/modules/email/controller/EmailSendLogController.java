@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.email.entity.EmailSendLogEntity;
+import cn.jeeweb.modules.email.entity.EmailSendLog;
 
 /**   
  * @Title: 邮件发送日志
@@ -19,6 +19,6 @@ import cn.jeeweb.modules.email.entity.EmailSendLogEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/email/emailsendlog")
 @RequiresPathPermission("email:emailsendlog")
-public class EmailSendLogController extends BaseCRUDController<EmailSendLogEntity, String> {
+public class EmailSendLogController extends BaseCRUDController<EmailSendLog, String> {
 
 }

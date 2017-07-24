@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.oa.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
+import cn.jeeweb.modules.oa.entity.OaNotification;
 import cn.jeeweb.modules.oa.service.IOaNotificationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("oaNotificationService")
-public class OaNotificationServiceImpl  extends CommonServiceImpl<OaNotificationEntity> implements  IOaNotificationService {
+public class OaNotificationServiceImpl  extends CommonServiceImpl<OaNotification> implements  IOaNotificationService {
 
 }

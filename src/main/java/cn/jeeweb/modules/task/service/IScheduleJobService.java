@@ -3,7 +3,7 @@ package cn.jeeweb.modules.task.service;
 import org.quartz.SchedulerException;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
+import cn.jeeweb.modules.task.entity.ScheduleJob;
 
 /**
  * @Title: 任务
@@ -13,7 +13,7 @@ import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
  * @version V1.0
  *
  */
-public interface IScheduleJobService extends ICommonService<ScheduleJobEntity> {
+public interface IScheduleJobService extends ICommonService<ScheduleJob> {
 	/**
 	 * 
 	 * @title: initSchedule

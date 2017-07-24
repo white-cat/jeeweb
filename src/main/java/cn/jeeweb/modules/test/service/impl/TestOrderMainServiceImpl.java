@@ -1,11 +1,11 @@
 package cn.jeeweb.modules.test.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.test.entity.TestOrderMainEntity;
+import cn.jeeweb.modules.test.entity.TestOrderMain;
 import cn.jeeweb.modules.test.service.ITestOrderMainService;
-import cn.jeeweb.modules.test.entity.TestOrderTicketEntity;
+import cn.jeeweb.modules.test.entity.TestOrderTicket;
 import cn.jeeweb.modules.test.service.ITestOrderTicketService;
-import cn.jeeweb.modules.test.entity.TestOrderCustomerEntity;
+import cn.jeeweb.modules.test.entity.TestOrderCustomer;
 import cn.jeeweb.modules.test.service.ITestOrderCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,27 +22,27 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * @Title: 订单主表
  * @Description: 订单主表
  * @author jeeweb
- * @date 2017-06-30 16:31:40
+ * @date 2017-07-24 12:10:30
  * @version V1.0   
  *
  */
 @Transactional
 @Service("testOrderMainService")
-public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMainEntity> implements  ITestOrderMainService {
+public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMain> implements  ITestOrderMainService {
 	@Autowired
 	private ITestOrderTicketService testOrderTicketService;
 	@Autowired
 	private ITestOrderCustomerService testOrderCustomerService;
 	
 	@Override
-	public void save(TestOrderMainEntity testOrderMain) {
+	public void save(TestOrderMain testOrderMain) {
 		// 保存主表
 		super.save(testOrderMain);
 		// 保存机票信息
 		String testOrderTicketListJson = StringEscapeUtils
 				.unescapeHtml4(ServletUtils.getRequest().getParameter("testOrderTicketListJson"));
-		List<TestOrderTicketEntity> testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson, TestOrderTicketEntity.class);
-		for (TestOrderTicketEntity testOrderTicket : testOrderTicketList) {
+		List<TestOrderTicket> testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson, TestOrderTicket.class);
+		for (TestOrderTicket testOrderTicket : testOrderTicketList) {
 			// 保存字段列表
 			testOrderTicket.setOrder(testOrderMain);
 			testOrderTicketService.save(testOrderTicket);
@@ -50,8 +50,8 @@ public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMainEn
 		// 保存客户信息
 		String testOrderCustomerListJson = StringEscapeUtils
 				.unescapeHtml4(ServletUtils.getRequest().getParameter("testOrderCustomerListJson"));
-		List<TestOrderCustomerEntity> testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson, TestOrderCustomerEntity.class);
-		for (TestOrderCustomerEntity testOrderCustomer : testOrderCustomerList) {
+		List<TestOrderCustomer> testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson, TestOrderCustomer.class);
+		for (TestOrderCustomer testOrderCustomer : testOrderCustomerList) {
 			// 保存字段列表
 			testOrderCustomer.setOrder(testOrderMain);
 			testOrderCustomerService.save(testOrderCustomer);
@@ -59,35 +59,35 @@ public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMainEn
 	}
 	
 	@Override
-	public void update(TestOrderMainEntity testOrderMain) {
+	public void update(TestOrderMain testOrderMain) {
 		try {
 			// 获得以前的数据
-			List<TestOrderTicketEntity> oldTestOrderTicketList = testOrderTicketService.list("order", testOrderMain);
+			List<TestOrderTicket> oldTestOrderTicketList = testOrderTicketService.list("order", testOrderMain);
 			// 字段
 			String testOrderTicketListJson = StringEscapeUtils
 					.unescapeHtml4(ServletUtils.getRequest().getParameter("testOrderTicketListJson"));
-			List<TestOrderTicketEntity> testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson,
-					TestOrderTicketEntity.class);
+			List<TestOrderTicket> testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson,
+					TestOrderTicket.class);
 			// 获得以前的数据
-			List<TestOrderCustomerEntity> oldTestOrderCustomerList = testOrderCustomerService.list("order", testOrderMain);
+			List<TestOrderCustomer> oldTestOrderCustomerList = testOrderCustomerService.list("order", testOrderMain);
 			// 字段
 			String testOrderCustomerListJson = StringEscapeUtils
 					.unescapeHtml4(ServletUtils.getRequest().getParameter("testOrderCustomerListJson"));
-			List<TestOrderCustomerEntity> testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson,
-					TestOrderCustomerEntity.class);
+			List<TestOrderCustomer> testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson,
+					TestOrderCustomer.class);
 			// 更新主表
 			super.update(testOrderMain);
-			testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson, TestOrderTicketEntity.class);
+			testOrderTicketList = JSONObject.parseArray(testOrderTicketListJson, TestOrderTicket.class);
 			List<String> newsTestOrderTicketIdList = new ArrayList<String>();
 			// 保存或更新数据
-			for (TestOrderTicketEntity testOrderTicket : testOrderTicketList) {
+			for (TestOrderTicket testOrderTicket : testOrderTicketList) {
 				// 设置不变更的字段
 				if (StringUtils.isEmpty(testOrderTicket.getId())) {
 					// 保存字段列表
 					testOrderTicket.setOrder(testOrderMain);
 					testOrderTicketService.save(testOrderTicket);
 				} else {
-					TestOrderTicketEntity oldTicket = testOrderTicketService.get(testOrderTicket.getId());
+					TestOrderTicket oldTicket = testOrderTicketService.get(testOrderTicket.getId());
 					MyBeanUtils.copyBeanNotNull2Bean(testOrderTicket, oldTicket);
 					testOrderTicketService.update(oldTicket);
 				}
@@ -95,23 +95,23 @@ public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMainEn
 			}
 
 			// 删除老数据
-			for (TestOrderTicketEntity testOrderTicket : oldTestOrderTicketList) {
+			for (TestOrderTicket testOrderTicket : oldTestOrderTicketList) {
 				String testOrderTicketId = testOrderTicket.getId();
 				if (!newsTestOrderTicketIdList.contains(testOrderTicketId)) {
 					testOrderTicketService.deleteById(testOrderTicketId);
 				}
 			}
-			testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson, TestOrderCustomerEntity.class);
+			testOrderCustomerList = JSONObject.parseArray(testOrderCustomerListJson, TestOrderCustomer.class);
 			List<String> newsTestOrderCustomerIdList = new ArrayList<String>();
 			// 保存或更新数据
-			for (TestOrderCustomerEntity testOrderCustomer : testOrderCustomerList) {
+			for (TestOrderCustomer testOrderCustomer : testOrderCustomerList) {
 				// 设置不变更的字段
 				if (StringUtils.isEmpty(testOrderCustomer.getId())) {
 					// 保存字段列表
 					testOrderCustomer.setOrder(testOrderMain);
 					testOrderCustomerService.save(testOrderCustomer);
 				} else {
-					TestOrderCustomerEntity oldTicket = testOrderCustomerService.get(testOrderCustomer.getId());
+					TestOrderCustomer oldTicket = testOrderCustomerService.get(testOrderCustomer.getId());
 					MyBeanUtils.copyBeanNotNull2Bean(testOrderCustomer, oldTicket);
 					testOrderCustomerService.update(oldTicket);
 				}
@@ -119,7 +119,7 @@ public class TestOrderMainServiceImpl  extends CommonServiceImpl<TestOrderMainEn
 			}
 
 			// 删除老数据
-			for (TestOrderCustomerEntity testOrderCustomer : oldTestOrderCustomerList) {
+			for (TestOrderCustomer testOrderCustomer : oldTestOrderCustomerList) {
 				String testOrderCustomerId = testOrderCustomer.getId();
 				if (!newsTestOrderCustomerIdList.contains(testOrderCustomerId)) {
 					testOrderCustomerService.deleteById(testOrderCustomerId);

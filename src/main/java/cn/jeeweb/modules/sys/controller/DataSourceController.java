@@ -11,7 +11,7 @@ import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.modules.sys.data.SysDatabaseEnum;
-import cn.jeeweb.modules.sys.entity.DataSourceEntity;
+import cn.jeeweb.modules.sys.entity.DataSource;
 
 /**
  * @Title: 数据源
@@ -24,7 +24,7 @@ import cn.jeeweb.modules.sys.entity.DataSourceEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/sys/datasource")
 @RequiresPathPermission("sys:datasource")
-public class DataSourceController extends BaseCRUDController<DataSourceEntity, String> {
+public class DataSourceController extends BaseCRUDController<DataSource, String> {
 
 	@RequestMapping(value = "dataSourceParameter")
 	@ResponseBody

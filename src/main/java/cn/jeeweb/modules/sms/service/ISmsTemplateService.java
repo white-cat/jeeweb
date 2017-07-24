@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sms.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
+import cn.jeeweb.modules.sms.entity.SmsTemplate;
 
 /**
  * @Title: 短信模版
@@ -11,6 +11,6 @@ import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
  * @version V1.0
  *
  */
-public interface ISmsTemplateService extends ICommonService<SmsTemplateEntity> {
+public interface ISmsTemplateService extends ICommonService<SmsTemplate> {
 	
 }

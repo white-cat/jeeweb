@@ -39,7 +39,7 @@
 	}
 	.page-content {
 	    padding: 10px 10px 10px 10px;
-	    min-height: 700px;
+	    min-height: auto;
 	    clear: both;
 	}
 </style>

@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sys.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.sys.entity.UserLastOnlineEntity;
+import cn.jeeweb.modules.sys.entity.UserLastOnline;
 import cn.jeeweb.modules.sys.service.IUserLastOnlineService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("userLastOnlineService")
-public class UserLastOnlineServiceImpl  extends CommonServiceImpl<UserLastOnlineEntity> implements  IUserLastOnlineService {
+public class UserLastOnlineServiceImpl  extends CommonServiceImpl<UserLastOnline> implements  IUserLastOnlineService {
 
 }

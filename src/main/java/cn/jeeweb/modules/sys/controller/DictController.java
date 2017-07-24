@@ -13,7 +13,7 @@ import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.query.data.Queryable;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.modules.sys.entity.DictEntity;
-import cn.jeeweb.modules.sys.entity.DictGroupEntity;
+import cn.jeeweb.modules.sys.entity.DictGroup;
 import cn.jeeweb.modules.sys.service.IDictGroupService;
 
 @Controller
@@ -26,7 +26,7 @@ public class DictController extends BaseCRUDController<DictEntity, String> {
 	@Override
 	public void preList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String gid = request.getParameter("gid");
-		DictGroupEntity group = dictGroupService.get(gid);
+		DictGroup group = dictGroupService.get(gid);
 		model.addAttribute("group", group);
 	}
 

@@ -6,7 +6,7 @@ import cn.jeeweb.core.disruptor.email.EmailDao;
 import cn.jeeweb.core.disruptor.email.EmailData;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.core.utils.email.EmailResult;
-import cn.jeeweb.modules.email.entity.EmailSendLogEntity;
+import cn.jeeweb.modules.email.entity.EmailSendLog;
 import cn.jeeweb.modules.email.service.IEmailSendLogService;
 
 /**
@@ -33,7 +33,7 @@ public class EmailDaoIml implements EmailDao {
 
 	@Override
 	public void doSend(String eventId, EmailData emailData) {
-		EmailSendLogEntity emailSendLog = new EmailSendLogEntity();
+		EmailSendLog emailSendLog = new EmailSendLog();
 		emailSendLog.setId(eventId);
 		emailSendLog.setBusinessType(emailData.getBusinessType());
 		emailSendLog.setSubject(emailData.getSubject());
@@ -46,7 +46,7 @@ public class EmailDaoIml implements EmailDao {
 
 	@Override
 	public void doResult(String eventId, EmailData emailData, EmailResult emailResult) {
-		EmailSendLogEntity emailSendLog = emailSendLogService.get(eventId);
+		EmailSendLog emailSendLog = emailSendLogService.get(eventId);
 		emailSendLog.setMsg(emailResult.getMsg());
 		if (emailResult.isSuccess()) {
 			emailSendLog.setStatus("1");

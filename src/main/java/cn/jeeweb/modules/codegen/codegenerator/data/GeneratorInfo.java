@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import cn.jeeweb.core.utils.StringUtils;
-import cn.jeeweb.modules.codegen.entity.ColumnEntity;
-import cn.jeeweb.modules.codegen.entity.TableEntity;
+import cn.jeeweb.modules.codegen.entity.Column;
+import cn.jeeweb.modules.codegen.entity.Table;
 
 public class GeneratorInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,9 +25,9 @@ public class GeneratorInfo implements Serializable {
 	private String tableName = ""; // 表名
 	private String generatorType = "uuid";// 主键生成的类型
 	private List<AttributeInfo> attributeInfos;
-	private List<ColumnEntity> columns;
+	private List<Column> columns;
 	private List<String> importTypes;
-	private List<TableEntity> schedules;
+	private List<Table> schedules;
 
 	public String getPathName() {
 		return pathName;
@@ -152,11 +152,11 @@ public class GeneratorInfo implements Serializable {
 		this.generatorKeys = generatorKeys;
 	}
 
-	public List<ColumnEntity> getColumns() {
+	public List<Column> getColumns() {
 		return columns;
 	}
 
-	public void setColumns(List<ColumnEntity> columns) {
+	public void setColumns(List<Column> columns) {
 		this.columns = columns;
 	}
 
@@ -168,11 +168,11 @@ public class GeneratorInfo implements Serializable {
 		this.type = type;
 	}
 
-	public List<TableEntity> getSchedules() {
+	public List<Table> getSchedules() {
 		return schedules;
 	}
 
-	public void setSchedules(List<TableEntity> schedules) {
+	public void setSchedules(List<Table> schedules) {
 		this.schedules = schedules;
 	}
 

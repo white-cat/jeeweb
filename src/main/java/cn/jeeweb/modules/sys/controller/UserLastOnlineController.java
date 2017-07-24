@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.sys.entity.UserLastOnlineEntity;
+import cn.jeeweb.modules.sys.entity.UserLastOnline;
 
 /**   
  * @Title: 最后在线情况
@@ -18,6 +18,6 @@ import cn.jeeweb.modules.sys.entity.UserLastOnlineEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/sys/lastOnline")
 @RequiresPathPermission("sys:userlastonline")
-public class UserLastOnlineController extends BaseCRUDController<UserLastOnlineEntity, Long> {
+public class UserLastOnlineController extends BaseCRUDController<UserLastOnline, Long> {
 
 }

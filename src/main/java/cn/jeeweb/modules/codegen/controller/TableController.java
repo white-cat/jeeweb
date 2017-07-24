@@ -27,9 +27,9 @@ import cn.jeeweb.core.utils.ServletUtils;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.codegenerator.data.DbTableInfo;
 import cn.jeeweb.modules.codegen.codegenerator.data.GeneratorInfo;
-import cn.jeeweb.modules.codegen.entity.ColumnEntity;
-import cn.jeeweb.modules.codegen.entity.SchemeEntity;
-import cn.jeeweb.modules.codegen.entity.TableEntity;
+import cn.jeeweb.modules.codegen.entity.Column;
+import cn.jeeweb.modules.codegen.entity.Scheme;
+import cn.jeeweb.modules.codegen.entity.Table;
 import cn.jeeweb.modules.codegen.service.ISchemeService;
 import cn.jeeweb.modules.codegen.service.ITableService;
 import cn.jeeweb.modules.sys.entity.Menu;
@@ -38,7 +38,7 @@ import cn.jeeweb.modules.sys.service.IMenuService;
 @Controller
 @RequestMapping("${admin.url.prefix}/codegen/table")
 @RequiresPathPermission("codegen:table")
-public class TableController extends BaseCRUDController<TableEntity, String> {
+public class TableController extends BaseCRUDController<Table, String> {
 	@Autowired
 	private ITableService tableService;
 	@Autowired
@@ -50,7 +50,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 			"this" };
 
 	@Override
-	public void preEdit(TableEntity entity, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public void preEdit(Table entity, Model model, HttpServletRequest request, HttpServletResponse response) {
 		if (entity != null && !StringUtils.isEmpty(entity.getId()) && StringUtils.isEmpty(entity.getClassName())) {
 			String entityName = StringUtils.toUpperCaseFirstOne(StringUtils.underlineToCamel(entity.getTableName()));
 			entity.setClassName(entityName);
@@ -58,14 +58,14 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		// 查询表明
 		List<DbTableInfo> dbTableInfos = tableService.getTableNameList();
 		request.setAttribute("dbTableInfos", dbTableInfos);
-		List<ColumnEntity> columns = entity.getColumns();
+		List<Column> columns = entity.getColumns();
 		String columnsJson = JsonMapper.toJsonString(columns);
 		// String columnsJson=JSON.toJSONString(columns);
 		request.setAttribute("columns", columnsJson);
 		List<String> javaTypes = Arrays.asList(types);
 		String extendTypes = "";
 
-		for (ColumnEntity column : columns) {
+		for (Column column : columns) {
 			String javaType = column.getJavaType();
 			if (javaType.contains("|")) {
 				String[] innerJavaTypes = javaType.split("\\|");
@@ -80,31 +80,31 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 	}
 
 	@Override
-	public void preSave(TableEntity table, HttpServletRequest request, HttpServletResponse response) {
+	public void preSave(Table table, HttpServletRequest request, HttpServletResponse response) {
 		if (!StringUtils.isEmpty(table.getId())) {
-			TableEntity oldTable = commonService.get(table.getId());
+			Table oldTable = commonService.get(table.getId());
 			String[] fields = { "tableName", "remarks" };
 			if (!ObjectUtils.isEquals(oldTable, table, fields)) {
 				table.setSyncDatabase(Boolean.FALSE);
 			}
-			List<ColumnEntity> oldColumnList = oldTable.getColumns();
+			List<Column> oldColumnList = oldTable.getColumns();
 			// 字段
 			String columnListStr = StringEscapeUtils
 					.unescapeHtml4(ServletUtils.getRequest().getParameter("columnList"));
-			List<ColumnEntity> columnList = JSONObject.parseArray(columnListStr, ColumnEntity.class);
+			List<Column> columnList = JSONObject.parseArray(columnListStr, Column.class);
 			if (checkIsModify(oldColumnList, columnList)) {
 				table.setSyncDatabase(Boolean.FALSE);
 			}
 		}
 	}
 
-	public Boolean checkIsModify(List<ColumnEntity> oldColumnList, List<ColumnEntity> newColumnList) {
+	public Boolean checkIsModify(List<Column> oldColumnList, List<Column> newColumnList) {
 		if (oldColumnList.size() != newColumnList.size()) {
 			return Boolean.TRUE;
 		}
-		for (ColumnEntity columnEntity : newColumnList) {
+		for (Column columnEntity : newColumnList) {
 			Boolean isUpdate = Boolean.FALSE;
-			for (ColumnEntity oldColumnEntity : oldColumnList) {
+			for (Column oldColumnEntity : oldColumnList) {
 				if (columnEntity.getId().equals(oldColumnEntity.getId())) {
 					String[] fields = { "remarks", "columnName", "typeName", "columnSize", "parmaryKey", "importedKey",
 							"importedKey", "nullable", "columnDef", "decimalDigits", "javaType" };
@@ -125,11 +125,11 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 	@RequestMapping(value = "{id}/generateCode", method = RequestMethod.GET)
 	public String generateCode(@PathVariable("id") String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		TableEntity table = tableService.get(id);
+		Table table = tableService.get(id);
 		if (!table.getSyncDatabase()) {
 			return display("un_sync_database");
 		}
-		SchemeEntity scheme = schemeService.get("table.id", id);
+		Scheme scheme = schemeService.get("table.id", id);
 		if (scheme == null) {
 			String tableName = table.getTableName();
 			String remarks = table.getRemarks();
@@ -139,7 +139,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 			String pathName = propertiesUtil.getString("default.path.name");
 			String packageName = propertiesUtil.getString("default.package.name");
 			String functionAuthor = propertiesUtil.getString("default.function.author");
-			scheme = new SchemeEntity();
+			scheme = new Scheme();
 			scheme.setPathName(pathName);
 			scheme.setPackageName(packageName);
 			scheme.setEntityName(entityName);
@@ -157,16 +157,16 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 
 	@RequestMapping(value = "generateCode", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson generateCode(SchemeEntity scheme, GeneratorInfo generatorInfo, HttpServletRequest request,
+	public AjaxJson generateCode(Scheme scheme, GeneratorInfo generatorInfo, HttpServletRequest request,
 			HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("代码生成成功");
 		try {
 			String tableid = request.getParameter("tableid");
-			TableEntity table = tableService.get(tableid);
+			Table table = tableService.get(tableid);
 			scheme.setTableType(table.getTableType());
 			// FORM NULL不更新
-			SchemeEntity oldEntity = schemeService.get(scheme.getId());
+			Scheme oldEntity = schemeService.get(scheme.getId());
 			MyBeanUtils.copyBeanNotNull2Bean(scheme, oldEntity);
 			schemeService.update(oldEntity);
 			tableService.generateCode(table, generatorInfo);
@@ -182,13 +182,13 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 		// 查询表明
 		List<DbTableInfo> dbTableInfos = tableService.getTableNameList();
 		request.setAttribute("dbTableInfos", dbTableInfos);
-		request.setAttribute("data", new TableEntity());
+		request.setAttribute("data", new Table());
 		return display("import_database");
 	}
 
 	@RequestMapping(value = "/importDatabase", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson importDatabase(HttpServletRequest request, TableEntity table, HttpServletResponse response) {
+	public AjaxJson importDatabase(HttpServletRequest request, Table table, HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("数据库导入成功");
 		try {
@@ -237,7 +237,7 @@ public class TableController extends BaseCRUDController<TableEntity, String> {
 	@RequestMapping(value = "{id}/createMenu", method = RequestMethod.GET)
 	public String createMenu(@PathVariable("id") String id,HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("tableid", request.getParameter("id"));
-		SchemeEntity scheme = schemeService.get("table.id", id);
+		Scheme scheme = schemeService.get("table.id", id);
 		if (scheme == null || StringUtils.isEmpty(scheme.getModuleName())) {
 			return display("un_generate_code");
 		}

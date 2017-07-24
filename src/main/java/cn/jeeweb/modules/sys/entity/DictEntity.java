@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-
-import cn.jeeweb.core.common.entity.AbstractEntity;
+import cn.jeeweb.core.common.entity.DataEntity;
 
 import java.lang.String;
 import java.lang.Integer;
@@ -21,59 +22,29 @@ import java.lang.Integer;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class DictEntity extends AbstractEntity<String> {
-
-	/** 分组ID */
-	@Column(name = "gid", nullable = true, length = 32)
-	private String gid;
+public class DictEntity extends DataEntity<String> {
 	/** 主键 */
-
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	@Column(name = "id", nullable = false, length = 32)
 	private String id;
+	/** 分组ID */
+	private String gid;
 	/** 键值名称 */
-	@Column(name = "label", nullable = true, length = 100)
 	private String label;
 	/** 值 */
-	@Column(name = "value", nullable = true, length = 100)
 	private String value;
-	/** 描述 */
-	@Column(name = "remarks", nullable = true, length = 100)
-	private String remarks;
 	/** 排序 */
-	@Column(name = "sort", nullable = true, length = 10, scale = 0)
 	private Integer sort;
 
-	@ManyToOne
-	@JoinColumn(name = "GID", nullable = false, updatable = false, insertable = false)
-	private DictGroupEntity dictGroup;
-
-	/**
-	 * 获取 gid
-	 * 
-	 * @return: String 分组ID
-	 */
-	public String getGid() {
-		return this.gid;
-	}
-
-	/**
-	 * 设置 gid
-	 * 
-	 * @param: gid
-	 *             分组ID
-	 */
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
+	private DictGroup dictGroup;
 
 	/**
 	 * 获取 id
 	 * 
 	 * @return: String 主键
 	 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator")
+	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+	@Column(name = "id", nullable = false, length = 32)
 	public String getId() {
 		return this.id;
 	}
@@ -89,10 +60,31 @@ public class DictEntity extends AbstractEntity<String> {
 	}
 
 	/**
+	 * 获取 gid
+	 * 
+	 * @return: String 分组ID
+	 */
+	@Column(name = "gid", nullable = true, length = 32)
+	public String getGid() {
+		return this.gid;
+	}
+
+	/**
+	 * 设置 gid
+	 * 
+	 * @param: gid
+	 *             分组ID
+	 */
+	public void setGid(String gid) {
+		this.gid = gid;
+	}
+
+	/**
 	 * 获取 name
 	 * 
 	 * @return: String 键值名称
 	 */
+	@Column(name = "label", nullable = true, length = 100)
 	public String getLabel() {
 		return this.label;
 	}
@@ -112,6 +104,7 @@ public class DictEntity extends AbstractEntity<String> {
 	 * 
 	 * @return: String 值
 	 */
+	@Column(name = "value", nullable = true, length = 100)
 	public String getValue() {
 		return this.value;
 	}
@@ -127,29 +120,11 @@ public class DictEntity extends AbstractEntity<String> {
 	}
 
 	/**
-	 * 获取 remarks
-	 * 
-	 * @return: String 描述
-	 */
-	public String getRemarks() {
-		return this.remarks;
-	}
-
-	/**
-	 * 设置 remarks
-	 * 
-	 * @param: remarks
-	 *             描述
-	 */
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	/**
 	 * 获取 sort
 	 * 
 	 * @return: Integer 排序
 	 */
+	@Column(name = "sort", nullable = true, length = 10, scale = 0)
 	public Integer getSort() {
 		return this.sort;
 	}
@@ -164,14 +139,17 @@ public class DictEntity extends AbstractEntity<String> {
 		this.sort = sort;
 	}
 
-	public DictGroupEntity getDictGroup() {
+	@ManyToOne
+	@JoinColumn(name = "GID", nullable = false, updatable = false, insertable = false)
+	public DictGroup getDictGroup() {
 		return dictGroup;
 	}
 
-	public void setDictGroup(DictGroupEntity dictGroup) {
+	public void setDictGroup(DictGroup dictGroup) {
 		this.dictGroup = dictGroup;
 	}
-
+	
+    @Transient
 	public String getCode() {
 		if (dictGroup != null) {
 			return dictGroup.getCode();

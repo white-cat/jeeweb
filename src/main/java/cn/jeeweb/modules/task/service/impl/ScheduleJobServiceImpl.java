@@ -2,8 +2,7 @@ package cn.jeeweb.modules.task.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
 import cn.jeeweb.core.quartz.QuartzManager;
-import cn.jeeweb.core.quartz.data.ScheduleJob;
-import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
+import cn.jeeweb.modules.task.entity.ScheduleJob;
 import cn.jeeweb.modules.task.service.IScheduleJobService;
 import cn.jeeweb.modules.task.utils.ScheduleJobUtils;
 import java.io.Serializable;
@@ -22,16 +21,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("scheduleJobService")
-public class ScheduleJobServiceImpl extends CommonServiceImpl<ScheduleJobEntity> implements IScheduleJobService {
+public class ScheduleJobServiceImpl extends CommonServiceImpl<ScheduleJob> implements IScheduleJobService {
 	private QuartzManager quartzManager;
 
 	@Override
 	public void updateCron(String jobId) throws SchedulerException {
-		ScheduleJobEntity scheduleJobEntity = get(jobId);
+		ScheduleJob scheduleJobEntity = get(jobId);
 		if (scheduleJobEntity == null) {
 			return;
 		}
-		if (ScheduleJob.STATUS_RUNNING.equals(scheduleJobEntity.getJobStatus())) {
+		if (cn.jeeweb.core.quartz.data.ScheduleJob.STATUS_RUNNING.equals(scheduleJobEntity.getJobStatus())) {
 			quartzManager.updateJobCron(ScheduleJobUtils.entityToData(scheduleJobEntity));
 		}
 		update(scheduleJobEntity);
@@ -39,22 +38,22 @@ public class ScheduleJobServiceImpl extends CommonServiceImpl<ScheduleJobEntity>
 
 	@Override
 	public void changeStatus(String jobId, String cmd) throws SchedulerException {
-		ScheduleJobEntity scheduleJobEntity = get(jobId);
+		ScheduleJob scheduleJobEntity = get(jobId);
 		if (scheduleJobEntity == null) {
 			return;
 		}
 		if ("stop".equals(cmd)) {
 			quartzManager.deleteJob(ScheduleJobUtils.entityToData(scheduleJobEntity));
-			scheduleJobEntity.setJobStatus(ScheduleJob.STATUS_NOT_RUNNING);
+			scheduleJobEntity.setJobStatus(cn.jeeweb.core.quartz.data.ScheduleJob.STATUS_NOT_RUNNING);
 		} else if ("start".equals(cmd)) {
-			scheduleJobEntity.setJobStatus(ScheduleJob.STATUS_RUNNING);
+			scheduleJobEntity.setJobStatus(cn.jeeweb.core.quartz.data.ScheduleJob.STATUS_RUNNING);
 			quartzManager.addJob(ScheduleJobUtils.entityToData(scheduleJobEntity));
 		}
 		update(scheduleJobEntity);
 	}
 
 	@Override
-	public void delete(ScheduleJobEntity entity) {
+	public void delete(ScheduleJob entity) {
 		try {
 			quartzManager.deleteJob(ScheduleJobUtils.entityToData(entity));
 		} catch (SchedulerException e) {
@@ -72,8 +71,8 @@ public class ScheduleJobServiceImpl extends CommonServiceImpl<ScheduleJobEntity>
 	public void initSchedule() throws SchedulerException {
 		// 这里获取任务信息数据
 		quartzManager = new QuartzManager();
-		List<ScheduleJobEntity> jobList = list();
-		for (ScheduleJobEntity scheduleJobEntity : jobList) {
+		List<ScheduleJob> jobList = list();
+		for (ScheduleJob scheduleJobEntity : jobList) {
 			quartzManager.addJob(ScheduleJobUtils.entityToData(scheduleJobEntity));
 		}
 	}

@@ -5,7 +5,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.lang3.StringEscapeUtils;
 import cn.jeeweb.core.database.dynamic.dao.DynamicDBDao;
 import cn.jeeweb.core.utils.SpringContextHolder;
-import cn.jeeweb.modules.sys.entity.DataSourceEntity;
+import cn.jeeweb.modules.sys.entity.DataSource;
 import cn.jeeweb.modules.sys.service.IDataSourceService;
 
 /**
@@ -28,7 +28,7 @@ public class DynamicDBUtils {
 
 	public static DynamicDBDao getDynamicDBDao(String dbKey) {
 		DynamicDBDao dynamicDBDao = new DynamicDBDao();
-		DataSourceEntity dataSource = dataSourceService.get("dbKey", dbKey);
+		DataSource dataSource = dataSourceService.get("dbKey", dbKey);
 		if (dataSource == null) {
 			return null;
 		}
@@ -36,7 +36,7 @@ public class DynamicDBUtils {
 		return dynamicDBDao;
 	}
 
-	private static BasicDataSource getDataSource(DataSourceEntity dataSourceEntity) {
+	private static BasicDataSource getDataSource(DataSource dataSourceEntity) {
 		BasicDataSource dataSource = new BasicDataSource();
 		String driverClassName = dataSourceEntity.getDriverClass();
 		String url = StringEscapeUtils.unescapeHtml4(dataSourceEntity.getUrl());

@@ -8,8 +8,8 @@ import cn.jeeweb.core.disruptor.sms.SmsDao;
 import cn.jeeweb.core.disruptor.sms.SmsData;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.core.utils.sms.data.SmsResult;
-import cn.jeeweb.modules.sms.entity.SmsSendLogEntity;
-import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
+import cn.jeeweb.modules.sms.entity.SmsSendLog;
+import cn.jeeweb.modules.sms.entity.SmsTemplate;
 import cn.jeeweb.modules.sms.service.ISmsSendLogService;
 import cn.jeeweb.modules.sms.service.ISmsTemplateService;
 
@@ -39,11 +39,11 @@ public class SmsDaoIml implements SmsDao {
 
 	@Override
 	public void doSend(String eventId, SmsData smsData) {
-		SmsSendLogEntity smsSendLog = new SmsSendLogEntity();
+		SmsSendLog smsSendLog = new SmsSendLog();
 		smsSendLog.setId(eventId);
 		String templateId = smsData.getSmsTemplate().getTemplateId();
 		try {
-			SmsTemplateEntity smsTemplateEntity = smsTemplateService.get("templateId", templateId);
+			SmsTemplate smsTemplateEntity = smsTemplateService.get("templateId", templateId);
 			if (smsTemplateEntity != null) {
 				smsSendLog.setBusinessType(smsTemplateEntity.getBusinessType());
 				// smsSendLog.setCode(smsTemplateEntity.getCode());
@@ -64,7 +64,7 @@ public class SmsDaoIml implements SmsDao {
 
 	@Override
 	public void doResult(String eventId, SmsData smsData, SmsResult smsResult) {
-		SmsSendLogEntity smsSendLog = smsSendLogService.get(eventId);
+		SmsSendLog smsSendLog = smsSendLogService.get(eventId);
 		smsSendLog.setCode(smsResult.getCode());
 		smsSendLog.setMsg(smsResult.getMsg());
 		smsSendLog.setSmsid(smsResult.getSmsid());

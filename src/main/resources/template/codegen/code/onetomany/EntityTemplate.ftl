@@ -36,15 +36,15 @@ import ${importType};
 @DynamicUpdate(false)
 @DynamicInsert(false)
 @SuppressWarnings("serial")
-public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
+public class ${entityName?cap_first} extends AbstractEntity<String> {
 
     <#list attributeInfos as attributeInfo>
     /**${attributeInfo.remarks}*/
-	private <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name};
+	private <#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> ${attributeInfo.name};
 	</#list>
 	<#list schedules as schedule>
 	@JsonIgnore
-	private List<${schedule.className?cap_first}Entity> ${schedule.className?uncap_first}List = new ArrayList<${schedule.className?cap_first}Entity>();
+	private List<${schedule.className?cap_first}> ${schedule.className?uncap_first}List = new ArrayList<${schedule.className?cap_first}>();
 	</#list>
 	
 	<#list attributeInfos as attributeInfo>
@@ -75,7 +75,7 @@ public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
 	<#else>
 	@Column(name ="${attributeInfo.dbName}",nullable=<#if attributeInfo.nullable>true<#else>false</#if><#if attributeInfo.length?exists><#if attributeInfo.length != ''>,length=${attributeInfo.length}</#if></#if><#if attributeInfo.decimalDigits?exists><#if attributeInfo.decimalDigits != ''>,scale=${attributeInfo.decimalDigits}</#if></#if><#if attributeInfo.precision != ''>,precision=${attributeInfo.precision}</#if>)
 	</#if>
-	public <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
+	public <#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
 		return this.${attributeInfo.name};
 	}
 
@@ -83,7 +83,7 @@ public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
 	 * 设置  ${attributeInfo.name}
 	 *@param: ${attributeInfo.name}  ${attributeInfo.remarks}
 	 */
-	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
+	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
 		this.${attributeInfo.name} = ${attributeInfo.name};
 	}
 	</#list>
@@ -91,11 +91,11 @@ public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "${schedule.parentField}")
 	@Fetch(FetchMode.SELECT)
-	public List<${schedule.className?cap_first}Entity> get${schedule.className?cap_first}List() {
+	public List<${schedule.className?cap_first}> get${schedule.className?cap_first}List() {
 		return ${schedule.className?uncap_first}List;
 	}
 
-	public void set${schedule.className?cap_first}List(List<${schedule.className?cap_first}Entity> ${schedule.className?uncap_first}List) {
+	public void set${schedule.className?cap_first}List(List<${schedule.className?cap_first}> ${schedule.className?uncap_first}List) {
 		this.${schedule.className?uncap_first}List = ${schedule.className?uncap_first}List;
 	}
 	</#list>

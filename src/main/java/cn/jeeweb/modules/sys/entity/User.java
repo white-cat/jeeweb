@@ -4,10 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.GenericGenerator;
-
-import cn.jeeweb.core.common.entity.AbstractEntity;
-
+import cn.jeeweb.core.common.entity.DataEntity;
 import java.lang.String;
 
 /**
@@ -21,7 +21,7 @@ import java.lang.String;
 @Entity
 @Table(name = "sys_user", schema = "")
 @SuppressWarnings("serial")
-public class User extends AbstractEntity<String> {
+public class User extends DataEntity<String> {
 
 	/**
 	 * 是否锁定（1：正常；-1：删除；0：锁定；）
@@ -30,10 +30,6 @@ public class User extends AbstractEntity<String> {
 	public static final String STATUS_LOCKED = "0";
 	public static final String STATUS_NORMAL = "1";
 
-	/** id */
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
 	private String id;
 	// 姓名
 	private String username;
@@ -54,6 +50,28 @@ public class User extends AbstractEntity<String> {
 	 * 系统用户的状态
 	 */
 	private String status = STATUS_NORMAL;
+
+	/**
+	 * 获取 id
+	 *
+	 * @return: String id
+	 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator")
+	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+	public String getId() {
+		return this.id;
+	}
+
+	/**
+	 * 设置 id
+	 *
+	 * @param: id
+	 *             id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * 获取 username
@@ -102,25 +120,6 @@ public class User extends AbstractEntity<String> {
 	}
 
 	/**
-	 * 获取 id
-	 *
-	 * @return: String id
-	 */
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * 设置 id
-	 *
-	 * @param: id
-	 *             id
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
 	 * 获取 salt
 	 *
 	 * @return: String salt
@@ -138,7 +137,8 @@ public class User extends AbstractEntity<String> {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-
+	
+    @Transient
 	public String getCredentialsSalt() {
 		return username + salt;
 	}

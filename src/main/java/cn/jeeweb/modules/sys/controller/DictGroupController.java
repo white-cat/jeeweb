@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.sys.entity.DictGroupEntity;
+import cn.jeeweb.modules.sys.entity.DictGroup;
 import cn.jeeweb.modules.sys.utils.DictUtils;
 
 @Controller
 @RequestMapping("${admin.url.prefix}/sys/dict/group")
 @RequiresPathPermission("sys:dict")
-public class DictGroupController extends BaseCRUDController<DictGroupEntity, String> {
+public class DictGroupController extends BaseCRUDController<DictGroup, String> {
 
 	@RequestMapping(value = "/forceRefresh", method = RequestMethod.POST)
 	@ResponseBody

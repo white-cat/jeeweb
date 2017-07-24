@@ -28,8 +28,8 @@ import cn.jeeweb.modules.codegen.codegenerator.data.GeneratorInfo;
 import cn.jeeweb.modules.codegen.codegenerator.exception.GenerationException;
 import cn.jeeweb.modules.codegen.codegenerator.utils.CodeGenUtils;
 import cn.jeeweb.modules.codegen.dao.IGeneratorDao;
-import cn.jeeweb.modules.codegen.entity.ColumnEntity;
-import cn.jeeweb.modules.codegen.entity.TableEntity;
+import cn.jeeweb.modules.codegen.entity.Column;
+import cn.jeeweb.modules.codegen.entity.Table;
 import cn.jeeweb.modules.codegen.service.IColumnService;
 import cn.jeeweb.modules.codegen.service.ITableService;
 import cn.jeeweb.modules.sys.entity.Menu;
@@ -50,7 +50,7 @@ import cn.jeeweb.modules.sys.service.IMenuService;
  */
 @Transactional
 @Service("tableService")
-public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements ITableService {
+public class TableServiceImpl extends CommonServiceImpl<Table> implements ITableService {
 	@Autowired
 	private IGeneratorDao generatorDao;
 
@@ -72,35 +72,37 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	}
 
 	@Override
-	public void save(TableEntity table) {
+	public void save(Table table) {
 		table.setSyncDatabase(Boolean.FALSE);
 		// 保存主表
 		super.save(table);
 		// 字段
 		String columnListStr = StringEscapeUtils.unescapeHtml4(ServletUtils.getRequest().getParameter("columnList"));
-		List<ColumnEntity> columnList = JSONObject.parseArray(columnListStr, ColumnEntity.class);
-		for (ColumnEntity column : columnList) {
+		List<Column> columnList = JSONObject.parseArray(columnListStr, Column.class);
+		for (int i = 0; i < columnList.size(); i++) {
 			// 保存字段列表
+			Column column = columnList.get(i);
 			column.setTable(table);
+			column.setSort(i);
 			columnService.save(column);
 		}
 	}
 
 	@Override
-	public void update(TableEntity table) {
+	public void update(Table table) {
 		// 删除已经删除的数据
-		List<ColumnEntity> oldColumnList = columnService.list("table", table);
+		List<Column> oldColumnList = columnService.list("table", table);
 		// 字段
 		String columnListStr = StringEscapeUtils.unescapeHtml4(ServletUtils.getRequest().getParameter("columnList"));
-		List<ColumnEntity> columnList = JSONObject.parseArray(columnListStr, ColumnEntity.class);
+		List<Column> columnList = JSONObject.parseArray(columnListStr, Column.class);
 
 		// 更新主表
 		super.update(table);
-		columnList = JSONObject.parseArray(columnListStr, ColumnEntity.class);
+		columnList = JSONObject.parseArray(columnListStr, Column.class);
 		List<String> newsIdList = new ArrayList<String>();
 		int sort = 1;
 		// 保存或更新数据
-		for (ColumnEntity column : columnList) {
+		for (Column column : columnList) {
 			column.setSort(sort);
 			// 保存字段列表
 			if (StringUtils.isEmpty(column.getId()) || column.getId().contains("templateid")) {
@@ -116,7 +118,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		}
 
 		// 删除老数据
-		for (ColumnEntity column : oldColumnList) {
+		for (Column column : oldColumnList) {
 			String columnId = column.getId();
 			if (!newsIdList.contains(columnId)) {
 				columnService.deleteById(columnId);
@@ -135,7 +137,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	@Override
 	public void deleteById(Serializable id) {
 		// 删除已经删除的数据
-		TableEntity table = get(id);
+		Table table = get(id);
 		// 先刪除表
 		try {
 			generatorDao.dropTable(table.getTableName());
@@ -149,36 +151,36 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	@Override
 	public void removeById(Serializable id) {
 		// 删除已经删除的数据
-		TableEntity table = get(id);
-		List<ColumnEntity> columnList = table.getColumns();
+		Table table = get(id);
+		List<Column> columnList = table.getColumns();
 		// 保存或更新数据
-		for (ColumnEntity column : columnList) {
+		for (Column column : columnList) {
 			columnService.delete(column);
 		}
 		super.delete(table);
 	}
 
 	@Override
-	public void generateCode(TableEntity table, GeneratorInfo generatorInfo) throws IOException, GenerationException {
+	public void generateCode(Table table, GeneratorInfo generatorInfo) throws IOException, GenerationException {
 		generatorInfo.setTableName(table.getTableName());
 		table.setClassName(generatorInfo.getEntityName());
 		// generatorInfo.setGeneratorType(table.getTablePKType());
-		List<ColumnEntity> oldColumnList = table.getColumns();
+		List<Column> oldColumnList = table.getColumns();
 		List<AttributeInfo> attributeInfos = new ArrayList<AttributeInfo>();
-		for (ColumnEntity column : oldColumnList) {
+		for (Column column : oldColumnList) {
 			attributeInfos.add(new AttributeInfo(column));
 		}
 		generatorInfo.setType(table.getTableType());
 		generatorInfo.setColumns(oldColumnList);
 		generatorInfo.setAttributeInfos(attributeInfos);
 		// 查询附表
-		List<TableEntity> schedules = null;
+		List<Table> schedules = null;
 		if (table.getTableType().equals("2")) {
 			// 获得附表
 			schedules = findSubTable(table.getTableName());
-			for (TableEntity tableEntity : schedules) {
-				List<ColumnEntity> oldSubColumnList = tableEntity.getColumns();
-				for (ColumnEntity column : oldSubColumnList) {
+			for (Table tableEntity : schedules) {
+				List<Column> oldSubColumnList = tableEntity.getColumns();
+				for (Column column : oldSubColumnList) {
 					if (!StringUtils.isEmpty(column.getForeignTable())
 							&& column.getForeignTable().equals(table.getTableName())) {
 						tableEntity.setParentField(column.getJavaField());
@@ -192,17 +194,17 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		generatorManagor.process(generatorInfo);
 		// 查询附表
 		if (table.getTableType().equals("2")) {
-			for (TableEntity tableEntity : schedules) {
+			for (Table tableEntity : schedules) {
 				generatorInfo.setTableName(tableEntity.getTableName());
 				generatorInfo.setFunctionDesc(tableEntity.getRemarks());
 				generatorInfo.setEntityName(tableEntity.getClassName());
 				generatorInfo.setFunctionName(tableEntity.getRemarks());
-				List<ColumnEntity> oldSubColumnList = tableEntity.getColumns();
+				List<Column> oldSubColumnList = tableEntity.getColumns();
 				List<AttributeInfo> subAttributeInfos = new ArrayList<AttributeInfo>();
-				for (ColumnEntity column : oldSubColumnList) {
+				for (Column column : oldSubColumnList) {
 					if (!StringUtils.isEmpty(column.getForeignTable())
 							&& column.getForeignTable().equals(table.getTableName())) {
-						column.setJavaType(table.getClassName() + "Entity");
+						column.setJavaType(table.getClassName());
 						tableEntity.setParentField(column.getJavaField());
 						column.setImportedKey(Boolean.TRUE);
 					}
@@ -223,7 +225,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	}
 
 	@Override
-	public void importDatabase(TableEntity table) {
+	public void importDatabase(Table table) {
 		String tableName = table.getTableName();
 		table.setTitle(tableName);
 		table.setSyncDatabase(Boolean.TRUE);
@@ -231,7 +233,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 		super.save(table);
 		List<DbColumnInfo> dbColumnInfos = generatorDao.getDbColumnInfo(tableName);
 		for (int j = 0; j < dbColumnInfos.size(); j++) {
-			ColumnEntity column = new ColumnEntity(dbColumnInfos.get(j));
+			Column column = new Column(dbColumnInfos.get(j));
 			// 保存字段列表
 			column.setTable(table);
 			columnService.save(column);
@@ -240,7 +242,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	}
 
 	public void dropTable(String tableid) {
-		TableEntity table = get(tableid);
+		Table table = get(tableid);
 		try {
 			generatorDao.dropTable(table.getTableName());
 		} catch (Exception e) {
@@ -251,7 +253,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 
 	@Override
 	public void syncDatabase(String tableid) throws HibernateException, SQLException {
-		TableEntity table = get(tableid);
+		Table table = get(tableid);
 		String dbType = CodeGenUtils.getDbType();
 		Map<String, Object> root = new HashMap<String, Object>();
 		root.put("table", table);
@@ -265,7 +267,7 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	}
 
 	@Override
-	public void createMenu(TableEntity table, Menu menu) {
+	public void createMenu(Table table, Menu menu) {
 		String url = "";
 		String permission = "";
 		menu.setIsshow((short) 1);
@@ -276,9 +278,9 @@ public class TableServiceImpl extends CommonServiceImpl<TableEntity> implements 
 	}
 
 	@Override
-	public List<TableEntity> findSubTable(String tablename) {
+	public List<Table> findSubTable(String tablename) {
 		return listByHql(
-				"from TableEntity t  WHERE t.id in (SELECT table.id from ColumnEntity c WHERE c.foreignTable=?) and t.tableType='3'",
+				"from Table t  WHERE t.id in (SELECT table.id from Column c WHERE c.foreignTable=?) and t.tableType='3'",
 				tablename);
 	}
 

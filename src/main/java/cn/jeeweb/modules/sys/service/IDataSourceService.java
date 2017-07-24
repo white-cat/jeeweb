@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sys.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.sys.entity.DataSourceEntity;
+import cn.jeeweb.modules.sys.entity.DataSource;
 
 /**   
  * @Title: 数据源
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.sys.entity.DataSourceEntity;
  * @version V1.0   
  *
  */
-public interface IDataSourceService extends ICommonService<DataSourceEntity> {
+public interface IDataSourceService extends ICommonService<DataSource> {
 
 }
 

@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.codegen.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.codegen.entity.SchemeEntity;
+import cn.jeeweb.modules.codegen.entity.Scheme;
 import cn.jeeweb.modules.codegen.service.ISchemeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("schemeService")
-public class SchemeServiceImpl  extends CommonServiceImpl<SchemeEntity> implements  ISchemeService {
+public class SchemeServiceImpl  extends CommonServiceImpl<Scheme> implements  ISchemeService {
 
 }

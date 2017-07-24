@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.email.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.email.entity.EmailTemplateEntity;
+import cn.jeeweb.modules.email.entity.EmailTemplate;
 import cn.jeeweb.modules.email.service.IEmailTemplateService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("emailTemplateService")
-public class EmailTemplateServiceImpl  extends CommonServiceImpl<EmailTemplateEntity> implements  IEmailTemplateService {
+public class EmailTemplateServiceImpl  extends CommonServiceImpl<EmailTemplate> implements  IEmailTemplateService {
 
 }

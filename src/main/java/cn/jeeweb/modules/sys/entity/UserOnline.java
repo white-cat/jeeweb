@@ -2,7 +2,7 @@ package cn.jeeweb.modules.sys.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import cn.jeeweb.core.common.entity.AbstractEntity;
+import cn.jeeweb.core.common.entity.DataEntity;
 import cn.jeeweb.modules.sys.security.shiro.session.mgt.OnlineSession;
 import javax.persistence.*;
 import java.util.Date;
@@ -23,72 +23,60 @@ import java.util.Date;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "sys_user_online")
-public class UserOnline extends AbstractEntity<String> {
+public class UserOnline extends DataEntity<String> {
 
 	/**
 	 * 用户会话id ===> uid
 	 */
-	@Id
-	@GeneratedValue(generator = "assigned")
-	@GenericGenerator(name = "assigned", strategy = "assigned")
 	private String id;
 
 	// 当前登录的用户Id
-	@Column(name = "user_id")
 	private String userId;
 
-	@Column(name = "username")
 	private String username;
 
 	/**
 	 * 用户主机地址
 	 */
-	@Column(name = "host")
 	private String host;
 
 	/**
 	 * 用户登录时系统IP
 	 */
-	@Column(name = "system_host")
 	private String systemHost;
 
 	/**
 	 * 用户浏览器类型
 	 */
-	@Column(name = "user_agent")
 	private String userAgent;
 
 	/**
 	 * 在线状态
 	 */
-	@Column(name = "status")
-	@Enumerated(EnumType.STRING)
 	private OnlineSession.OnlineStatus status = OnlineSession.OnlineStatus.on_line;
 
 	/**
 	 * session创建时间
 	 */
-	@Column(name = "start_timestsamp")
 	private Date startTimestamp;
 	/**
 	 * session最后访问时间
 	 */
-	@Column(name = "last_access_time")
 	private Date lastAccessTime;
 
 	/**
 	 * 超时时间
 	 */
-	@Column(name = "online_timeout")
 	private Long timeout;
 
 	/**
 	 * 备份的当前用户会话
 	 */
-	@Column(name = "online_session")
-	@Type(type = "cn.jeeweb.core.repository.hibernate.type.ObjectSerializeUserType")
 	private OnlineSession session;
 
+	@Id
+	@GeneratedValue(generator = "assigned")
+	@GenericGenerator(name = "assigned", strategy = "assigned")
 	public String getId() {
 		return id;
 	}
@@ -97,6 +85,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.id = id;
 	}
 
+	@Column(name = "start_timestsamp")
 	public Date getStartTimestamp() {
 		return startTimestamp;
 	}
@@ -105,6 +94,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.startTimestamp = startTimestamp;
 	}
 
+	@Column(name = "last_access_time")
 	public Date getLastAccessTime() {
 		return lastAccessTime;
 	}
@@ -113,6 +103,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.lastAccessTime = lastAccessTime;
 	}
 
+	@Column(name = "online_timeout")
 	public Long getTimeout() {
 		return timeout;
 	}
@@ -121,6 +112,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.timeout = timeout;
 	}
 
+	@Column(name = "host")
 	public String getHost() {
 		return host;
 	}
@@ -129,6 +121,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.host = host;
 	}
 
+	@Column(name = "user_id")
 	public String getUserId() {
 		return userId;
 	}
@@ -137,6 +130,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.userId = userId;
 	}
 
+	@Column(name = "username")
 	public String getUsername() {
 		return username;
 	}
@@ -145,6 +139,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.username = username;
 	}
 
+	@Column(name = "user_agent")
 	public String getUserAgent() {
 		return userAgent;
 	}
@@ -153,6 +148,8 @@ public class UserOnline extends AbstractEntity<String> {
 		this.userAgent = userAgent;
 	}
 
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	public OnlineSession.OnlineStatus getStatus() {
 		return status;
 	}
@@ -161,6 +158,8 @@ public class UserOnline extends AbstractEntity<String> {
 		this.status = status;
 	}
 
+	@Column(name = "online_session")
+	@Type(type = "cn.jeeweb.core.repository.hibernate.type.ObjectSerializeUserType")
 	public OnlineSession getSession() {
 		return session;
 	}
@@ -169,6 +168,7 @@ public class UserOnline extends AbstractEntity<String> {
 		this.session = session;
 	}
 
+	@Column(name = "system_host")
 	public String getSystemHost() {
 		return systemHost;
 	}

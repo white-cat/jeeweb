@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.codegen.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.codegen.entity.SchemeEntity;
+import cn.jeeweb.modules.codegen.entity.Scheme;
 
 /**   
  * @Title: 生成方案
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.codegen.entity.SchemeEntity;
  * @version V1.0   
  *
  */
-public interface ISchemeService extends ICommonService<SchemeEntity> {
+public interface ISchemeService extends ICommonService<Scheme> {
 
 }
 

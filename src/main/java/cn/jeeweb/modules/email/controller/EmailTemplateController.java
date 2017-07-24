@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.email.entity.EmailTemplateEntity;
+import cn.jeeweb.modules.email.entity.EmailTemplate;
 
 /**   
  * @Title: 邮件发送模板
@@ -19,6 +19,6 @@ import cn.jeeweb.modules.email.entity.EmailTemplateEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/email/emailtemplate")
 @RequiresPathPermission("email:emailtemplate")
-public class EmailTemplateController extends BaseCRUDController<EmailTemplateEntity, String> {
+public class EmailTemplateController extends BaseCRUDController<EmailTemplate, String> {
 
 }

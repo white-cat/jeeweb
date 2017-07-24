@@ -10,12 +10,12 @@ public interface MarkDeleteable {
 	/**
 	 * 删除标记（0：正常；1：删除 ）
 	 */
-	public static final Boolean DEL_FLAG_NORMAL = Boolean.FALSE;
-	public static final Boolean DEL_FLAG_DELETE = Boolean.TRUE;
+	public static final String DEL_FLAG_NORMAL = "0";
+	public static final String DEL_FLAG_DELETE = "1";
 
-	public Boolean getDelFlag();
+	public String getDelFlag();
 
-	public void setDelFlag(Boolean delFlag);
+	public void setDelFlag(String delFlag);
 
 	/**
 	 * 这表数据是否需要标记删除

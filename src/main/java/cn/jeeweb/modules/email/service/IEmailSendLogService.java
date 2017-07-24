@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.email.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.email.entity.EmailSendLogEntity;
+import cn.jeeweb.modules.email.entity.EmailSendLog;
 
 /**   
  * @Title: 邮件发送日志
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.email.entity.EmailSendLogEntity;
  * @version V1.0   
  *
  */
-public interface IEmailSendLogService extends ICommonService<EmailSendLogEntity> {
+public interface IEmailSendLogService extends ICommonService<EmailSendLog> {
 
 }
 

@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sms.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.sms.entity.SmsSendLogEntity;
+import cn.jeeweb.modules.sms.entity.SmsSendLog;
 
 /**   
  * @Title: 短信发送日志
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.sms.entity.SmsSendLogEntity;
  * @version V1.0   
  *
  */
-public interface ISmsSendLogService extends ICommonService<SmsSendLogEntity> {
+public interface ISmsSendLogService extends ICommonService<SmsSendLog> {
 
 }
 

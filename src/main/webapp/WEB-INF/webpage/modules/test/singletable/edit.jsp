@@ -23,19 +23,19 @@
 						<label class="Validform_checktip"></label>
 					</td>
 					<td  class="width-15 active text-right">	
-		              <label>备注信息:</label>
+		              <label><font color="red">*</font>时间:</label>
 		            </td>
 					<td class="width-35">
-						<form:editor path="remarks" htmlEscape="false" class="form-control"      />
+						<form:input path="testdate" htmlEscape="false" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"       />
 						<label class="Validform_checktip"></label>
 					</td>
 				</tr>
 				<tr>
 					<td  class="width-15 active text-right">	
-		              <label><font color="red">*</font>时间:</label>
+		              <label>备注信息:</label>
 		            </td>
 					<td class="width-35">
-						<form:input path="testdate" htmlEscape="false" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"       />
+						<form:editor path="remarks" htmlEscape="false" class="form-control"      />
 						<label class="Validform_checktip"></label>
 					</td>
 					<td class="width-15 active text-right"></td>

@@ -35,7 +35,7 @@
 		              <label><font color="red">*</font>订单日期:</label>
 		            </td>
 					<td class="width-35">
-						<form:input path="orderdate" htmlEscape="false" datefmt="yyyy-MM-dd" class="form-control layer-date" placeholder="YYYY-MM-DD" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"       />
+						<form:input path="orderdate" htmlEscape="false" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"       />
 						<label class="Validform_checktip"></label>
 					</td>
 					<td class="width-15 active text-right"></td>

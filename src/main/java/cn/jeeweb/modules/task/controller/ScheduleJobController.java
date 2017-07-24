@@ -15,7 +15,7 @@ import cn.jeeweb.core.model.AjaxJson;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
 import cn.jeeweb.core.utils.MyBeanUtils;
 import cn.jeeweb.core.utils.ObjectUtils;
-import cn.jeeweb.modules.task.entity.ScheduleJobEntity;
+import cn.jeeweb.modules.task.entity.ScheduleJob;
 import cn.jeeweb.modules.task.service.IScheduleJobService;
 
 /**
@@ -29,14 +29,14 @@ import cn.jeeweb.modules.task.service.IScheduleJobService;
 @Controller
 @RequestMapping("${admin.url.prefix}/task/schedulejob")
 @RequiresPathPermission("task:schedulejob")
-public class ScheduleJobController extends BaseCRUDController<ScheduleJobEntity, String> {
+public class ScheduleJobController extends BaseCRUDController<ScheduleJob, String> {
 
 	@Autowired
 	private IScheduleJobService scheduleJobService;
 
 	@RequestMapping(value = "/changeJobStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson changeJobStatus(ScheduleJobEntity scheduleJob, HttpServletRequest request,
+	public AjaxJson changeJobStatus(ScheduleJob scheduleJob, HttpServletRequest request,
 			HttpServletResponse response) {
 		String cmd = request.getParameter("cmd");
 		AjaxJson ajaxJson = new AjaxJson();
@@ -58,7 +58,7 @@ public class ScheduleJobController extends BaseCRUDController<ScheduleJobEntity,
 
 	@RequestMapping(value = "/updateCron", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson updateCron(ScheduleJobEntity scheduleJob, HttpServletRequest request,
+	public AjaxJson updateCron(ScheduleJob scheduleJob, HttpServletRequest request,
 			HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("任务更新成功");
@@ -73,7 +73,7 @@ public class ScheduleJobController extends BaseCRUDController<ScheduleJobEntity,
 	
 	@RequestMapping(value = "/saveScheduleJob", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxJson saveScheduleJob(ScheduleJobEntity scheduleJob, HttpServletRequest request, HttpServletResponse response) {
+	public AjaxJson saveScheduleJob(ScheduleJob scheduleJob, HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson ajaxJson = new AjaxJson();
 		ajaxJson.success("保存成功");
 		if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
@@ -85,7 +85,7 @@ public class ScheduleJobController extends BaseCRUDController<ScheduleJobEntity,
 				commonService.save(scheduleJob);
 			} else {
 				// FORM NULL不更新
-				ScheduleJobEntity oldEntity = commonService.get(scheduleJob.getId());
+				ScheduleJob oldEntity = commonService.get(scheduleJob.getId());
 				MyBeanUtils.copyBeanNotNull2Bean(scheduleJob, oldEntity);
 				commonService.update(oldEntity);
 			}

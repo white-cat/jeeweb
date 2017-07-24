@@ -33,7 +33,7 @@ public class FreeMarkerUtils {
 
 	public static final int TEMPLATE_LOADING_FILE = 1;
 	public static final int TEMPLATE_LOADING_CLASS = 2;
-	public static final Locale LOCALE = Locale.US;
+	public static final Locale LOCALE = Locale.SIMPLIFIED_CHINESE;
 	public static final String ENCODING = "UTF-8";
 	public static Configuration configuration = null;
 
@@ -93,8 +93,6 @@ public class FreeMarkerUtils {
 		configuration.setLocale(LOCALE);
 		configuration.setEncoding(LOCALE, ENCODING);
 	}
-	
-	 
 
 	/**
 	 * 通过模版字符串的接下模版
@@ -108,8 +106,8 @@ public class FreeMarkerUtils {
 		try {
 			StringWriter result = new StringWriter();
 			Template t = new Template("name", new StringReader(templateString), new Configuration());
-			// 编码设置2  
-            t.setEncoding(ENCODING);  
+			// 编码设置2
+			t.setEncoding(ENCODING);
 			t.process(model, result);
 			return result.toString();
 		} catch (Exception e) {
@@ -128,7 +126,7 @@ public class FreeMarkerUtils {
 		Template template = null;
 		try {
 			template = configuration.getTemplate(name);
-			template.setEncoding(ENCODING);  
+			template.setEncoding(ENCODING);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -223,7 +221,6 @@ public class FreeMarkerUtils {
 	public void processConsole(String name, Map<String, Object> root) {
 		System.out.println(processToString(name, root));
 	}
-
 
 	public static void main(String[] args) {
 		Map<String, Object> root = new HashMap<String, Object>();

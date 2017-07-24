@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.oa.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
+import cn.jeeweb.modules.oa.entity.OaNotification;
 
 /**   
  * @Title: 通知公告
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
  * @version V1.0   
  *
  */
-public interface IOaNotificationService extends ICommonService<OaNotificationEntity> {
+public interface IOaNotificationService extends ICommonService<OaNotification> {
 
 }
 

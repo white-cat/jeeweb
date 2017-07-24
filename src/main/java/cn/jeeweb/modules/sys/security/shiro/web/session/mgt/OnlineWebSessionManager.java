@@ -135,7 +135,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
 					log.error("batch delete db session error.", e);
 				}
 			}
-			page = userOnlineService.findExpiredUserOnlineList(expiredDate, 0, 100);
+			//page = userOnlineService.findExpiredUserOnlineList(expiredDate, 0, 100);
 		}
 
 		if (log.isInfoEnabled()) {

@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sys.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.sys.entity.UserLastOnlineEntity;
+import cn.jeeweb.modules.sys.entity.UserLastOnline;
 
 /**   
  * @Title: 最后在线情况
@@ -11,7 +11,7 @@ import cn.jeeweb.modules.sys.entity.UserLastOnlineEntity;
  * @version V1.0   
  *
  */
-public interface IUserLastOnlineService extends ICommonService<UserLastOnlineEntity> {
+public interface IUserLastOnlineService extends ICommonService<UserLastOnline> {
 
 }
 

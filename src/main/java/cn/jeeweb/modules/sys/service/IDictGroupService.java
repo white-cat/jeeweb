@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sys.service;
 
 import cn.jeeweb.core.common.service.ICommonService;
-import cn.jeeweb.modules.sys.entity.DictGroupEntity;
+import cn.jeeweb.modules.sys.entity.DictGroup;
 
 /**
  * @Title:
@@ -11,6 +11,6 @@ import cn.jeeweb.modules.sys.entity.DictGroupEntity;
  * @version V1.0
  *
  */
-public interface IDictGroupService extends ICommonService<DictGroupEntity> {
+public interface IDictGroupService extends ICommonService<DictGroup> {
 
 }

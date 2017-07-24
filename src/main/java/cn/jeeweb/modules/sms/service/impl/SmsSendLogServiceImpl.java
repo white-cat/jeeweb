@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sms.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.sms.entity.SmsSendLogEntity;
+import cn.jeeweb.modules.sms.entity.SmsSendLog;
 import cn.jeeweb.modules.sms.service.ISmsSendLogService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("smsSendLogService")
-public class SmsSendLogServiceImpl  extends CommonServiceImpl<SmsSendLogEntity> implements  ISmsSendLogService {
+public class SmsSendLogServiceImpl  extends CommonServiceImpl<SmsSendLog> implements  ISmsSendLogService {
 
 }

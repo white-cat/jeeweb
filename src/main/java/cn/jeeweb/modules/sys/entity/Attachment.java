@@ -10,11 +10,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import cn.jeeweb.core.common.entity.AbstractEntity;
-
+import cn.jeeweb.core.common.entity.DataEntity;
 import java.lang.String;
 import java.util.Date;
 
@@ -23,12 +20,8 @@ import java.util.Date;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class Attachment extends AbstractEntity<String> {
+public class Attachment extends DataEntity<String> {
 
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	@Column(name = "id", nullable = false, length = 32)
 	private String id;
 
 	private String filename; // 文件名称
@@ -38,23 +31,24 @@ public class Attachment extends AbstractEntity<String> {
 	private Long filesize;// 文件大小
 
 	private String fileext;// 文件扩展名
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "USERID", nullable = false)
-	private User user; //用戶ID
 
-	private Date uploadtime; //上传时间
-	
+	private User user; // 用戶ID
+
+	private Date uploadtime; // 上传时间
+
 	private String uploadip;// 上传的ID
-	
-	private String status;//状态
+
+	private String status;// 状态
 
 	/**
 	 * 获取 id
 	 * 
 	 * @return: String 主键
 	 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator")
+	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+	@Column(name = "id", nullable = false, length = 32)
 	public String getId() {
 		return this.id;
 	}
@@ -76,7 +70,7 @@ public class Attachment extends AbstractEntity<String> {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	
+
 	public String getFilepath() {
 		return filepath;
 	}
@@ -101,8 +95,9 @@ public class Attachment extends AbstractEntity<String> {
 		this.fileext = fileext;
 	}
 
-	 
-	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "USERID", nullable = false)
 	public User getUser() {
 		return user;
 	}

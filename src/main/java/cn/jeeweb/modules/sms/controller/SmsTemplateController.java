@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.jeeweb.core.common.controller.BaseCRUDController;
 import cn.jeeweb.core.security.shiro.authz.annotation.RequiresPathPermission;
-import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
+import cn.jeeweb.modules.sms.entity.SmsTemplate;
 
 /**   
  * @Title: 短信模版
@@ -19,6 +19,6 @@ import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
 @Controller
 @RequestMapping("${admin.url.prefix}/sms/smstemplate")
 @RequiresPathPermission("sms:smstemplate")
-public class SmsTemplateController extends BaseCRUDController<SmsTemplateEntity, String> {
+public class SmsTemplateController extends BaseCRUDController<SmsTemplate, String> {
 
 }

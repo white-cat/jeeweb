@@ -6,7 +6,7 @@ import cn.jeeweb.core.utils.BeanUtils;
 import cn.jeeweb.core.utils.StringUtils;
 import cn.jeeweb.modules.codegen.codegenerator.utils.type.DbTypeConvert;
 import cn.jeeweb.modules.codegen.codegenerator.utils.type.data.Type;
-import cn.jeeweb.modules.codegen.entity.ColumnEntity;
+import cn.jeeweb.modules.codegen.entity.Column;
 
 public class AttributeInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class AttributeInfo implements Serializable {
 
 	}
 
-	public AttributeInfo(ColumnEntity column) {
+	public AttributeInfo(Column column) {
 		this.name = column.getJavaField();
 		this.dbName = column.getColumnName();
 		this.type = column.getJavaType();

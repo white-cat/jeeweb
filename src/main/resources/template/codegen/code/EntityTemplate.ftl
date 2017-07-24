@@ -30,11 +30,11 @@ import ${importType};
 @DynamicUpdate(false)
 @DynamicInsert(false)
 @SuppressWarnings("serial")
-public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
+public class ${entityName?cap_first} extends AbstractEntity<String> {
 
     <#list attributeInfos as attributeInfo>
     /**${attributeInfo.remarks}*/
-	private <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name};
+	private <#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> ${attributeInfo.name};
 	</#list>
 	<#list attributeInfos as attributeInfo>
 	/**
@@ -64,7 +64,7 @@ public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
 	<#else>
 	@Column(name ="${attributeInfo.dbName}",nullable=<#if attributeInfo.nullable>true<#else>false</#if><#if attributeInfo.length?exists><#if attributeInfo.length != ''>,length=${attributeInfo.length}</#if></#if><#if attributeInfo.decimalDigits?exists><#if attributeInfo.decimalDigits != ''>,scale=${attributeInfo.decimalDigits}</#if></#if><#if attributeInfo.precision != ''>,precision=${attributeInfo.precision}</#if>)
 	</#if>
-	public <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
+	public <#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
 		return this.${attributeInfo.name};
 	}
 
@@ -72,7 +72,7 @@ public class ${entityName?cap_first}Entity extends AbstractEntity<String> {
 	 * 设置  ${attributeInfo.name}
 	 *@param: ${attributeInfo.name}  ${attributeInfo.remarks}
 	 */
-	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
+	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
 		this.${attributeInfo.name} = ${attributeInfo.name};
 	}
 	</#list>

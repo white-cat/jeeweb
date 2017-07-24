@@ -4,8 +4,7 @@ import cn.jeeweb.core.disruptor.sms.SmsEvent.SmsHandlerCallBack;
 import cn.jeeweb.core.disruptor.sms.SmsHelper;
 import cn.jeeweb.core.utils.SpringContextHolder;
 import cn.jeeweb.core.utils.sms.data.SmsResult;
-import cn.jeeweb.core.utils.sms.data.SmsTemplate;
-import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
+import cn.jeeweb.modules.sms.entity.SmsTemplate;
 import cn.jeeweb.modules.sms.service.ISmsSendService;
 import cn.jeeweb.modules.sms.service.ISmsTemplateService;
 
@@ -34,19 +33,19 @@ public class SmsSendServiceImpl implements ISmsSendService {
 
 	@Override
 	public void sendAsyncSmsByCode(String phone, String code, SmsHandlerCallBack callBack, String... datas) {
-		SmsTemplateEntity smsTemplate = smsTemplateService.get("code", code);
+		SmsTemplate smsTemplate = smsTemplateService.get("code", code);
 		String templateContent = smsTemplate.getTemplateContent();
 		String templateId = smsTemplate.getTemplateId();
-		SmsTemplate template = SmsTemplate.newTemplate(templateId, templateContent);
+		cn.jeeweb.core.utils.sms.data.SmsTemplate template = cn.jeeweb.core.utils.sms.data.SmsTemplate.newTemplate(templateId, templateContent);
 		SpringContextHolder.getBean(SmsHelper.class).sendAsyncSms(phone, template, callBack, datas);
 	}
 
 	@Override
 	public SmsResult sendSyncSmsByCode(String phone, String code, String... datas) {
-		SmsTemplateEntity smsTemplate = smsTemplateService.get("code", code);
+		SmsTemplate smsTemplate = smsTemplateService.get("code", code);
 		String templateContent = smsTemplate.getTemplateContent();
 		String templateId = smsTemplate.getTemplateId();
-		SmsTemplate template = SmsTemplate.newTemplate(templateId, templateContent);
+		cn.jeeweb.core.utils.sms.data.SmsTemplate template = cn.jeeweb.core.utils.sms.data.SmsTemplate.newTemplate(templateId, templateContent);
 		return SpringContextHolder.getBean(SmsHelper.class).sendSyncSms(phone, template, datas);
 	}
 
@@ -57,13 +56,13 @@ public class SmsSendServiceImpl implements ISmsSendService {
 
 	@Override
 	public void sendAsyncSmsByContent(String phone, String content, SmsHandlerCallBack callBack, String... datas) {
-		SmsTemplate template = SmsTemplate.newTemplateByContent(content);
+		cn.jeeweb.core.utils.sms.data.SmsTemplate template = cn.jeeweb.core.utils.sms.data.SmsTemplate.newTemplateByContent(content);
 		SpringContextHolder.getBean(SmsHelper.class).sendAsyncSms(phone, template, callBack, datas);
 	}
 
 	@Override
 	public SmsResult sendSyncSmsByContent(String phone, String content, String... datas) {
-		SmsTemplate template = SmsTemplate.newTemplateByContent(content);
+		cn.jeeweb.core.utils.sms.data.SmsTemplate template = cn.jeeweb.core.utils.sms.data.SmsTemplate.newTemplateByContent(content);
 		return SpringContextHolder.getBean(SmsHelper.class).sendSyncSms(phone, template, datas);
 	}
 

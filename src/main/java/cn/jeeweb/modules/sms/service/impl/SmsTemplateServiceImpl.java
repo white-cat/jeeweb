@@ -1,7 +1,7 @@
 package cn.jeeweb.modules.sms.service.impl;
 
 import cn.jeeweb.core.common.service.impl.CommonServiceImpl;
-import cn.jeeweb.modules.sms.entity.SmsTemplateEntity;
+import cn.jeeweb.modules.sms.entity.SmsTemplate;
 import cn.jeeweb.modules.sms.service.ISmsTemplateService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,5 +16,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("smsTemplateService")
-public class SmsTemplateServiceImpl extends CommonServiceImpl<SmsTemplateEntity> implements ISmsTemplateService {
+public class SmsTemplateServiceImpl extends CommonServiceImpl<SmsTemplate> implements ISmsTemplateService {
 }

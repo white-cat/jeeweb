@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.jeeweb.core.utils.CookieUtils;
 import cn.jeeweb.core.utils.JeewebPropertiesUtil;
 import cn.jeeweb.core.utils.StringUtils;
-import cn.jeeweb.modules.oa.entity.OaNotificationEntity;
+import cn.jeeweb.modules.oa.entity.OaNotification;
 import cn.jeeweb.modules.oa.service.IOaNotificationService;
 import cn.jeeweb.modules.sys.utils.UserUtils;
 
@@ -31,7 +31,7 @@ public class IndexController {
 		model.addAttribute("menus", UserUtils.getMenuList());
 		// 加载通知公告
 		int oaNotificationCount = oaNotificationService.count(Restrictions.eq("status", "1"));
-		List<OaNotificationEntity> oaNotifications = oaNotificationService.listByCriterion(1, 5,
+		List<OaNotification> oaNotifications = oaNotificationService.listByCriterion(1, 5,
 				Restrictions.eq("status", "1"));
 		model.addAttribute("oaNotificationCount", oaNotificationCount);
 		model.addAttribute("oaNotifications", oaNotifications);

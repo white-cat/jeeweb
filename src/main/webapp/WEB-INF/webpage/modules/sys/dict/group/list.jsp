@@ -12,8 +12,8 @@
 	<grid:column label="sys.common.opt"  name="opt" formatter="button" width="100"/>
 	<grid:button title="sys.dict.group.adddict"  groupname="opt" function="rowDialogDetailRefresh" outclass="btn-primary"  innerclass="fa-plus" url="${adminPath}/sys/dict?gid=\"+row.id+\"" />
 	<grid:button  groupname="opt" function="delete"  />
-    <grid:column label="sys.dict.group.name"  name="name"  query="true"  />
-    <grid:column label="sys.dict.group.code"  name="code"  query="true"  />
+    <grid:column label="sys.dict.group.name"  name="name"  query="true" condition="like"  />
+    <grid:column label="sys.dict.group.code"  name="code"  query="true"   condition="like"/>
     
 	<grid:toolbar   function="create"  />
 	<grid:toolbar   function="update"    />

@@ -15,7 +15,7 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import cn.jeeweb.modules.common.entity.TreeEntity;
+import cn.jeeweb.core.common.entity.TreeEntity;
 
 <#list importTypes as importType>
 import ${importType};
@@ -34,9 +34,9 @@ import ${importType};
 @DynamicUpdate(false)
 @DynamicInsert(false)
 @SuppressWarnings("serial")
-public class ${entityName?cap_first}Entity extends TreeEntity {
+public class ${entityName?cap_first} extends TreeEntity {
   
-    private ${entityName?cap_first}Entity parent;
+    private ${entityName?cap_first} parent;
 	/**
 	 * 是否有叶子节点
 	 */
@@ -65,11 +65,11 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name = "parent_id", nullable = true, updatable = false, insertable = false)
-	public ${entityName?cap_first}Entity getParent() {
+	public ${entityName?cap_first} getParent() {
 		return parent;
 	}
 
-	public void setParent(${entityName?cap_first}Entity parent) {
+	public void setParent(${entityName?cap_first} parent) {
 		this.parent = parent;
 	}
 	
@@ -81,7 +81,7 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	<#else>
 	@Column(name ="${attributeInfo.dbName}",nullable=<#if attributeInfo.nullable>true<#else>false</#if><#if attributeInfo.length?exists><#if attributeInfo.length != ''>,length=${attributeInfo.length}</#if></#if><#if attributeInfo.decimalDigits?exists><#if attributeInfo.decimalDigits != ''>,scale=${attributeInfo.decimalDigits}</#if></#if><#if attributeInfo.precision != ''>,precision=${attributeInfo.precision}</#if>)
 	</#if>
-	public <#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
+	public <#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> get${attributeInfo.name?cap_first}(){
 		return this.${attributeInfo.name};
 	}
 
@@ -89,7 +89,7 @@ public class ${entityName?cap_first}Entity extends TreeEntity {
 	 * 设置  ${attributeInfo.name}
 	 *@param: ${attributeInfo.name}  ${attributeInfo.remarks}
 	 */
-	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}Entity<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
+	public void set${attributeInfo.name?cap_first}(<#if attributeInfo.type=='this'>${entityName?cap_first}<#else>${attributeInfo.type}</#if> ${attributeInfo.name}){
 		this.${attributeInfo.name} = ${attributeInfo.name};
 	}
 	</#if>

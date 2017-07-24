@@ -12,11 +12,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import cn.jeeweb.core.common.entity.AbstractEntity;
-
 import java.lang.String;
 import java.util.Date;
 import java.util.Map;
