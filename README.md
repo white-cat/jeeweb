@@ -5,6 +5,7 @@ JeeWeb敏捷开发平台
 * 	官方论坛： [http://bbs.jeeweb.cn](http://bbs.jeeweb.cn)
 * 	项目演示： [https://demo.jeeweb.cn](https://demo.jeeweb.cn)
 * 开源中国项目地址： [http://git.oschina.net/dataact/jeeweb](http://git.oschina.net/dataact/jeeweb)
+* Mybatis版本： [https://github.com/white-cat/jeeweb-mybatis](https://github.com/white-cat/jeeweb-mybatis)
 * Myeclipse非Maven版本快盘下载： [https://pan.baidu.com/s/1hrFKF2k](https://pan.baidu.com/s/1hrFKF2k)
 
 简介
