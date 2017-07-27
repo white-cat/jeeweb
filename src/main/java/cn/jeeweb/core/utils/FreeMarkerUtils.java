@@ -1,8 +1,10 @@
 package cn.jeeweb.core.utils;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -33,7 +35,7 @@ public class FreeMarkerUtils {
 
 	public static final int TEMPLATE_LOADING_FILE = 1;
 	public static final int TEMPLATE_LOADING_CLASS = 2;
-	public static final Locale LOCALE = Locale.SIMPLIFIED_CHINESE;
+	public static final Locale LOCALE = Locale.US;
 	public static final String ENCODING = "UTF-8";
 	public static Configuration configuration = null;
 
@@ -159,10 +161,10 @@ public class FreeMarkerUtils {
 	 *            保存文件路径
 	 */
 	public void processToFile(String name, Map<String, Object> rootMap, String outFile) {
-		FileWriter writer = null;
+		Writer writer = null;
 		try {
 			// 通过一个文件输出流，就可以写到相应的文件中
-			writer = new FileWriter(new File(outFile));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), ENCODING));
 			process(name, rootMap, writer);
 		} catch (IOException e) {
 			e.printStackTrace();
